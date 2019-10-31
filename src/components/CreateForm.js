@@ -1,6 +1,7 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import { addHabit } from "../actions";
+import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 
 class CreateForm extends React.Component {
@@ -96,10 +97,12 @@ class CreateForm extends React.Component {
             }}
           />
         </div>
-        <button type="submit" onClick={this.handleSubmit}></button>
+        <button type="submit" onClick={this.handleSubmit}>
+          Submit
+        </button>
       </div>
     );
   }
 }
 
-export default CreateForm;
+export default connect()(CreateForm);
