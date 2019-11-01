@@ -1,14 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import HabitCard from "./HabitCard";
-import { flattenHabits, getHabitIds } from "../utils";
+import { getHabitIds } from "../utils";
 
 class Home extends React.Component {
   habitList() {
     return this.props.habitIds.map(id => {
-      return <HabitCard key={id} habitId={id} />;
+      return (
+        <div>
+          <HabitCard key={id} id={id} />
+          <Link to={`/${id}/edit`}>Edit</Link>
+          <button />
+        </div>
+      );
     });
   }
+
+  onClick = event => {
+    event.preventDefault();
+  };
 
   render() {
     return <div>{this.habitList()}</div>;

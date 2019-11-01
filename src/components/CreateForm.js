@@ -38,7 +38,6 @@ class CreateForm extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div stye={{ textAlign: "center" }}>
         <div>
