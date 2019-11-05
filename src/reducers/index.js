@@ -6,9 +6,9 @@ const initialState = {
     0: {
       title: "Floss",
       goal: "Stop my ongoing periodontis and save my teeth",
-      startDate: new Date(),
-      endDate: new Date(),
-      streak: [],
+      startDate: new Date("November 1, 2019"),
+      endDate: new Date("November 30, 2019"),
+      streak: [true, true, true, true, false],
       accountabilityPartner: {
         name: "Tom",
         email: "tom@tom.com"

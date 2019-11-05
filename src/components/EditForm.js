@@ -34,6 +34,7 @@ class EditForm extends React.Component {
     event.preventDefault();
     const id = this.props.match.params.id;
     const habit = {
+      ...this.props.habit,
       title: this.state.title,
       goal: this.state.goal,
       startDate: this.state.startDate,

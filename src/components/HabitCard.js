@@ -2,8 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 
 class HabitCard extends React.Component {
+  renderStreak(streak) {
+    return streak.map(check => {
+      return <input type="checkbox" checked={check} />;
+    });
+  }
+
   render() {
-    const { title, goal } = this.props.habit;
+    const { title, goal, streak } = this.props.habit;
     const { name, email } = this.props.habit.accountabilityPartner;
 
     const endDateToString = () => {
@@ -28,6 +34,7 @@ class HabitCard extends React.Component {
         </div>
         <div>
           {startDateToString()}
+          {this.renderStreak(streak)}
           {endDateToString()}
         </div>
         <div>

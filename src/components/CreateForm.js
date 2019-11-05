@@ -41,6 +41,7 @@ class CreateForm extends React.Component {
       goal: this.state.goal,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
+      streak: [false],
       accountabilityPartner: this.state.accountabilityPartner
     };
     this.props.dispatch(addHabit(habit));
