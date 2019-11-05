@@ -28,10 +28,15 @@ export function reducer(state = initialState, action) {
       };
     }
     case DELETE_HABIT: {
-      return {
+      console.log(action);
+      let id = action.value;
+      let newHabits = removeKey(state.habits, id);
+      let newState = {
         ...state,
-        habits: removeKey(state.habits, action.value.id)
+        habits: newHabits
       };
+      console.log(state, newState);
+      return newState;
     }
     default: {
       return state;
@@ -44,7 +49,7 @@ export function reducer(state = initialState, action) {
 function removeKey(obj, key) {
   let objectKeys = Object.keys(obj);
   let filteredKeys = objectKeys.filter(objectKey => key !== objectKey);
-  filteredKeys.reduce((accObj, objectKey) => {
+  return filteredKeys.reduce((accObj, objectKey) => {
     return { ...accObj, [objectKey]: obj[objectKey] };
   }, {});
 }

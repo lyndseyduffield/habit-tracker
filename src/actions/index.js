@@ -21,7 +21,7 @@ export const editHabit = (habit, id) => {
   return action;
 };
 
-export const deleteTodo = id => {
+export const deleteHabit = id => {
   const action = {
     type: DELETE_HABIT,
     value: id
