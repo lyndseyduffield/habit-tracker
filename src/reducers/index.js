@@ -4,13 +4,15 @@ const initialState = {
   lastId: 0,
   habits: {
     0: {
-      title: "Floss yoooo",
-      goal: "",
-      startDate: "",
-      endDate: "",
+      title: "Floss",
+      goal: "Stop my ongoing periodontis and save my teeth",
+      startDate: new Date(),
+      endDate: new Date(),
       streak: [],
-      name: "",
-      email: ""
+      accountabilityPartner: {
+        name: "Tom",
+        email: "tom@tom.com"
+      }
     }
   }
 };

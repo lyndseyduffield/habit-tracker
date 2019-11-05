@@ -12,14 +12,25 @@ class CreateForm extends React.Component {
       goal: "",
       startDate: new Date(),
       endDate: new Date(),
-      name: "",
-      email: ""
+      accountabilityPartner: {
+        name: "",
+        email: ""
+      }
     };
   }
 
   handleChange = (key, value) => {
     this.setState({
       [key]: value
+    });
+  };
+
+  handleAccountabilityPartnerChange = (key, value) => {
+    this.setState({
+      accountabilityPartner: {
+        ...this.state.accountabilityPartner,
+        [key]: value
+      }
     });
   };
 
@@ -30,8 +41,7 @@ class CreateForm extends React.Component {
       goal: this.state.goal,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
-      name: this.state.name,
-      email: this.state.email
+      accountabilityPartner: this.state.accountabilityPartner
     };
     this.props.dispatch(addHabit(habit));
     this.props.history.push("/");
@@ -82,17 +92,23 @@ class CreateForm extends React.Component {
           <input
             type="text"
             placeholder="their name"
-            value={this.state.value}
+            value={this.state.accountabilityPartner.name}
             onChange={event => {
-              this.handleChange("name", event.target.value);
+              this.handleAccountabilityPartnerChange(
+                "name",
+                event.target.value
+              );
             }}
           />
           <input
             type="text"
             placeholder="their email"
-            value={this.state.email}
+            value={this.state.accountabilityPartner.email}
             onChange={event => {
-              this.handleChange("email", event.target.value);
+              this.handleAccountabilityPartnerChange(
+                "email",
+                event.target.value
+              );
             }}
           />
         </div>

@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 class HabitCard extends React.Component {
   render() {
-    const { title, goal, name, email } = this.props.habit;
+    const { title, goal } = this.props.habit;
+    const { name, email } = this.props.habit.accountabilityPartner;
 
     const endDateToString = () => {
       if (this.props.habit.endDate) {
