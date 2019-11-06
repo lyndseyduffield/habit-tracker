@@ -5,8 +5,16 @@ import Home from "./Home";
 import CreateForm from "./CreateForm";
 import EditForm from "./EditForm";
 import HabitCard from "./HabitCard";
+import { connect } from "react-redux";
+import { setState } from "../actions";
+import { readState } from "../reducers";
 
 class App extends React.Component {
+  componentDidMount() {
+    let state = readState();
+    this.props.dispatch(setState(state));
+  }
+
   render() {
     return (
       <Router history={history}>
@@ -21,4 +29,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect()(App);
