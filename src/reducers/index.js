@@ -1,4 +1,10 @@
-import { ADD_HABIT, EDIT_HABIT, SET_STATE, DELETE_HABIT } from "../actions";
+import {
+  ADD_HABIT,
+  EDIT_HABIT,
+  SET_STATE,
+  DELETE_HABIT,
+  UPDATE_STREAK
+} from "../actions";
 
 const initialState = {
   lastId: 0,
@@ -6,6 +12,12 @@ const initialState = {
 };
 
 const STATE_KEY = "state";
+
+// Write redux state to local storage
+// TODO: Make this middleware to remove effects
+const writeState = state => {
+  window.localStorage.setItem(STATE_KEY, JSON.stringify(state));
+};
 
 // Retrieve Redux state from local storage
 export const readState = () => {
@@ -20,8 +32,18 @@ export const readState = () => {
       // habit properly
       const decodedHabits = ids.reduce((acc, id) => {
         const habit = state.habits[id];
+        const currentStreakLength = habit.streak.length;
+        const correctStreakLength = getDaysToToday(new Date(habit.startDate));
+        const streakDiff = correctStreakLength - currentStreakLength;
+
+        let newStreak = habit.streak;
+        for (let i = 1; i <= streakDiff; i++) {
+          newStreak.push(false);
+        }
+
         const newHabit = {
           ...habit,
+          streak: newStreak,
           startDate: new Date(habit.startDate),
           endDate: new Date(habit.endDate)
         };
@@ -38,10 +60,12 @@ export const readState = () => {
   }
 };
 
-// Write redux state to local storage
-// TODO: Make this middleware to remove effects
-const writeState = state => {
-  window.localStorage.setItem(STATE_KEY, JSON.stringify(state));
+// Given a date, will return number of days difference from that date and today's date
+const getDaysToToday = date => {
+  const diffTime = Math.abs(new Date() - date);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  console.log(diffDays);
+  return diffDays + 1;
 };
 
 export function reducer(state = initialState, action) {
@@ -74,6 +98,24 @@ export function reducer(state = initialState, action) {
         ...state,
         habits: removeKey(state.habits, id)
       };
+      writeState(newState);
+      return newState;
+    }
+    case UPDATE_STREAK: {
+      const { id, check } = action.value;
+      const habit = state.habits[id];
+
+      let streak = habit.streak;
+      streak[streak.length - 1] = check;
+
+      const newState = {
+        ...state,
+        habits: {
+          ...state.habits,
+          [id]: { ...habit, streak }
+        }
+      };
+
       writeState(newState);
       return newState;
     }

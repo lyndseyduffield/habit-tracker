@@ -2,6 +2,7 @@ export const ADD_HABIT = "ADD_HABIT";
 export const EDIT_HABIT = "EDIT_HABIT";
 export const DELETE_HABIT = "DELETE_HABIT";
 export const SET_STATE = "SET_STATE";
+export const UPDATE_STREAK = "UPDATE_STREAK";
 
 export const addHabit = habit => {
   const action = {
@@ -34,6 +35,17 @@ export const setState = state => {
   const action = {
     type: SET_STATE,
     value: state
+  };
+  return action;
+};
+
+export const updateStreak = (id, check) => {
+  const action = {
+    type: UPDATE_STREAK,
+    value: {
+      id,
+      check
+    }
   };
   return action;
 };

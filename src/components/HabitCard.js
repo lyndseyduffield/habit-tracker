@@ -1,30 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
+import { updateStreak } from "../actions";
 
 class HabitCard extends React.Component {
   renderStreak(streak) {
-    return streak.map(check => {
-      return <input type="checkbox" checked={check} />;
+    let lastItem = streak.length - 1;
+    return streak.map((check, index) => {
+      if (index === lastItem) {
+        return (
+          <input
+            key={index}
+            type="checkbox"
+            onChange={event => this.handleStreakClick(event)}
+          />
+        );
+      } else {
+        return (
+          <input key={index} type="checkbox" disabled={true} checked={check} />
+        );
+      }
     });
   }
 
+  handleStreakClick = event => {
+    const id = this.props.id || this.props.match.params.id;
+    const check = event.target.checked;
+    this.props.dispatch(updateStreak(id, check));
+  };
+
   render() {
-    const { title, goal, streak } = this.props.habit;
+    const { title, goal, streak, startDate, endDate } = this.props.habit;
     const { name, email } = this.props.habit.accountabilityPartner;
-
-    const endDateToString = () => {
-      if (this.props.habit.endDate) {
-        const endDate = this.props.habit.endDate.toDateString();
-        return endDate;
-      }
-    };
-
-    const startDateToString = () => {
-      if (this.props.habit.startDate) {
-        const startDate = this.props.habit.startDate.toDateString();
-        return startDate;
-      }
-    };
+    const endDateToString = endDate ? endDate.toDateString() : null;
+    const startDateToString = startDate ? startDate.toDateString() : null;
 
     return (
       <div>
@@ -33,10 +41,10 @@ class HabitCard extends React.Component {
           <p>{goal}</p>
         </div>
         <div>
-          {startDateToString()}
-          {this.renderStreak(streak)}
-          {endDateToString()}
+          {startDateToString}
+          {endDateToString}
         </div>
+        <div>{this.renderStreak(streak)}</div>
         <div>
           <h3>Accountability Partner</h3>
           <p>name: {name}</p>
