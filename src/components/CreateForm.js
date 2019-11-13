@@ -1,118 +1,95 @@
 import React, { useState } from "react";
+import useForm from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { addHabit } from "../actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 
+const TextField = ({ name, placeholder, register }) => {
+  return (
+    <input type="text" placeholder={placeholder} name={name} ref={register} />
+  );
+};
+
 const CreateForm = props => {
-  const initialState = {
-    title: "",
-    goal: "",
+  const [state, setState] = useState({
     startDate: new Date(),
-    endDate: new Date(),
-    accountabilityPartner: {
-      name: "",
-      email: ""
-    }
-  };
+    endDate: new Date()
+  });
 
-  const [state, setState] = useState(initialState);
+  const { register, handleSubmit, setValue } = useForm();
 
-  // "Methods"
-  const handleChange = (key, value) => {
-    setState({
-      ...state,
-      [key]: value
-    });
-  };
+  React.useEffect(() => {
+    register({ name: "startDate" });
+    register({ name: "endDate" });
+    setValue("startDate", new Date());
+    setValue("endDate", new Date());
+  }, [register, setValue]);
 
-  const handleAccountabilityPartnerChange = (key, value) => {
-    setState({
-      ...state,
-      accountabilityPartner: {
-        ...state.accountabilityPartner,
-        [key]: value
-      }
-    });
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
+  const onSubmit = data => {
     const habit = {
-      title: state.title,
-      goal: state.goal,
-      startDate: state.startDate,
-      endDate: state.endDate,
-      streak: [false],
-      accountabilityPartner: state.accountabilityPartner
+      ...data,
+      streak: [false]
     };
     props.dispatch(addHabit(habit));
     props.history.push("/");
   };
 
+  const onDatePickerChange = (key, date) => {
+    setValue(key, date);
+    setState({ ...state, [key]: date });
+  };
+
   // Rendering
   return (
-    <div stye={{ textAlign: "center" }}>
+    <form style={{ textAlign: "center" }} onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label>Habit</label>
-        <input
-          type="text"
-          placeholder="your new habit"
-          value={state.title}
-          onChange={event => {
-            handleChange("title", event.target.value);
-          }}
+        <TextField
+          name="title"
+          placeholder="Your new habit"
+          register={register}
         />
         <label>Goal</label>
-        <input
-          type="text"
-          placeholder="why do you want to create this new habit?"
-          value={state.goal}
-          onChange={event => {
-            handleChange("goal", event.target.value);
-          }}
+        <TextField
+          name="goal"
+          placeholder="What is your goal?"
+          register={register}
         />
       </div>
+
       <div>
         <label>Start Date</label>
         <DatePicker
           selected={state.startDate}
           onChange={date => {
-            handleChange("startDate", date);
+            onDatePickerChange("startDate", date);
           }}
         />
         <label>End Date</label>
         <DatePicker
           selected={state.endDate}
           onChange={date => {
-            handleChange("endDate", date);
+            onDatePickerChange("endDate", date);
           }}
         />
       </div>
       <div>
         <h3>Accountability Partner</h3>
         <label>Name</label>
-        <input
-          type="text"
-          placeholder="their name"
-          value={state.accountabilityPartner.name}
-          onChange={event => {
-            handleAccountabilityPartnerChange("name", event.target.value);
-          }}
+        <TextField
+          name="accountabilityPartner.name"
+          placeholder="Your accountability partner's name"
+          register={register}
         />
-        <input
-          type="text"
-          placeholder="their email"
-          value={state.accountabilityPartner.email}
-          onChange={event => {
-            handleAccountabilityPartnerChange("email", event.target.value);
-          }}
+        <TextField
+          name="accountabilityPartner.email"
+          placeholder="Their email"
+          register={register}
         />
       </div>
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
-    </div>
+      <input type="submit" />
+    </form>
   );
 };
 
