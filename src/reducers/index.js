@@ -64,7 +64,6 @@ export const readState = () => {
 const getDaysToToday = date => {
   const diffTime = Math.abs(new Date() - date);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  console.log(diffDays);
   return diffDays + 1;
 };
 
