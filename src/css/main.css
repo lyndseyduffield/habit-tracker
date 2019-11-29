@@ -1,0 +1,67 @@
+:root {
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+
+  --form-width: 860px;
+}
+
+body {
+  background-color: #ccc;
+}
+
+.form-container {
+  max-width: var(--form-width);
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* this styles the text field for react datepicker with bulma's input styles
+because react datepicker doesn't provide a way to style the input field */
+
+.react-datepicker__input-container input {
+  box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+  max-width: 100%;
+  width: 100%;
+  background-color: #fff;
+  color: #363636;
+  align-items: center;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: calc(0.75em - 1px);
+  padding-right: calc(0.75em - 1px);
+  padding-top: calc(0.5em - 1px);
+  position: relative;
+  vertical-align: top;
+}
+
+.margin-top {
+  margin-top: 25px;
+}
+
+.flex-item {
+  display: flex;
+}
+
+.flex-element {
+  flex: 1 0 0;
+}
+
+/* .dark-card-color {
+  background-color: #cdcacc;
+} */
+
+.light-card-color {
+  background-color: #eee5e9;
+}
+
+.checkbox-margin {
+  margin: 6px;
+}

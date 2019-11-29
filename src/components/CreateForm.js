@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import { addHabit } from "../actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
+import "../css/main.css";
 
 const CreateForm = props => {
   const [state, setState] = useState({
@@ -47,9 +48,9 @@ const CreateForm = props => {
 
   // Rendering
   return (
-    <form class="container" onSubmit={handleSubmit(onSubmit)}>
+    <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
       <div class="field">
-        <label class="label">Habit</label>
+        <label class="label is-large">Habit</label>
         <div class="control">
           <input
             class="input"
@@ -73,30 +74,36 @@ const CreateForm = props => {
           />
         </div>
       </div>
-      <div class="field is-grouped">
-        <label class="label">Start Date</label>
-        <div class="control">
-          <DatePicker
-            class="dropdown"
-            minDate={new Date()}
-            selected={state.startDate}
-            onChange={date => {
-              onDatePickerChange("startDate", date);
-            }}
-          />
-        </div>
-        <label class="label">End Date</label>
-        <div class="control">
-          <DatePicker
-            minDate={state.startDate}
-            selected={state.endDate}
-            onChange={date => {
-              onDatePickerChange("endDate", date);
-            }}
-          />
+      <div class="field is-grouped is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label">Start Date</label>
+            <div class="control">
+              <DatePicker
+                class="dropdown"
+                minDate={new Date()}
+                selected={state.startDate}
+                onChange={date => {
+                  onDatePickerChange("startDate", date);
+                }}
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">End Date</label>
+            <div class="control">
+              <DatePicker
+                minDate={state.startDate}
+                selected={state.endDate}
+                onChange={date => {
+                  onDatePickerChange("endDate", date);
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
-      <h3 class="label is-large">Accountability Partner</h3>
+      <h3 class="label is-large margin-top">Accountability Partner</h3>
       <div class="field">
         <label class="label">Name</label>
         <div class="control">
@@ -142,7 +149,7 @@ const CreateForm = props => {
           )}{" "}
         </p>
       </div>
-      <div class="control">
+      <div class="control margin-top">
         <button class="button is-link">Submit</button>
       </div>
     </form>
