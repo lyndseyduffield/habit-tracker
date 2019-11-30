@@ -63,7 +63,7 @@ export const readState = () => {
 // Given a date, will return number of days difference from that date and today's date
 const getDaysToToday = date => {
   const diffTime = Math.abs(new Date() - date);
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
   return diffDays + 1;
 };
 
