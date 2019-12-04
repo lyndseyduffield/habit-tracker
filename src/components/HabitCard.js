@@ -31,8 +31,10 @@ class HabitCard extends React.Component {
   render() {
     const { title, goal, streak, startDate, endDate } = this.props.habit;
     const { name, email } = this.props.habit.accountabilityPartner;
-    const endDateToString = endDate ? endDate.toDateString() : null;
-    const startDateToString = startDate ? startDate.toDateString() : null;
+    const endDateToString = endDate ? endDate.format("MMMM Do, YYYY") : null;
+    const startDateToString = startDate
+      ? startDate.format("MMMM Do, YYYY")
+      : null;
 
     return (
       <div>

@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
   ADD_HABIT,
   EDIT_HABIT,
@@ -32,23 +33,47 @@ export const readState = () => {
       // habit properly
       const decodedHabits = ids.reduce((acc, id) => {
         const habit = state.habits[id];
+        const startDate = moment(habit.startDate, moment.ISO_8601).startOf();
+        const endDate = moment(habit.endDate, moment.ISO_8601).startOf();
+        const now = moment().startOf();
+
+        // We need to replace the old streak in case time has passed since the last
+        // "user login" occurred
+        let newStreak = habit.streak;
+
+        // If the habit hasn't started yet, then the streak should be empty
+        if (startDate.isAfter(now, "day")) {
+          newStreak = [];
+        }
+
+        /*
         const currentStreakLength = habit.streak.length;
         const correctStreakLength = getStreakLength(
           new Date(habit.startDate),
           new Date(habit.endDate)
         );
         const streakDiff = correctStreakLength - currentStreakLength;
-
         let newStreak = habit.streak;
-        for (let i = 1; i <= streakDiff; i++) {
-          newStreak.push(false);
+
+        if (streakDiff > 0) {
+          for (let i = 1; i <= streakDiff; i++) {
+            newStreak.push(false);
+          }
+        } else if (streakDiff < 0) {
+          let newLength = habit.streak.length - Math.abs(streakDiff);
+          console.log("newLength", newLength);
+          newStreak = newStreak.slice(0, newLength);
+        } else if (habit.startDate < new Date()) {
+          newStreak = [];
         }
+
+        */
 
         const newHabit = {
           ...habit,
           streak: newStreak,
-          startDate: new Date(habit.startDate),
-          endDate: new Date(habit.endDate)
+          startDate,
+          endDate
         };
         return { ...acc, [id]: newHabit };
       }, {});
@@ -65,6 +90,11 @@ export const readState = () => {
 
 // Given a date, will return number of days difference from that date and today's date until it reached the end date (max difference)
 const getStreakLength = (startDate, endDate) => {
+  // check whether the end date is later or todays date is later and take the earlier of the two
+
+  // then, get the difference in days between the start date and ^^^
+
+  // return it + 1 to include the start date as a count
   let diffTime;
   if (new Date() < endDate) {
     diffTime = Math.abs(new Date() - startDate);
