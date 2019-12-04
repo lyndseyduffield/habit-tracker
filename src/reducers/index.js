@@ -33,7 +33,10 @@ export const readState = () => {
       const decodedHabits = ids.reduce((acc, id) => {
         const habit = state.habits[id];
         const currentStreakLength = habit.streak.length;
-        const correctStreakLength = getDaysToToday(new Date(habit.startDate));
+        const correctStreakLength = getStreakLength(
+          new Date(habit.startDate),
+          new Date(habit.endDate)
+        );
         const streakDiff = correctStreakLength - currentStreakLength;
 
         let newStreak = habit.streak;
@@ -60,9 +63,14 @@ export const readState = () => {
   }
 };
 
-// Given a date, will return number of days difference from that date and today's date
-const getDaysToToday = date => {
-  const diffTime = Math.abs(new Date() - date);
+// Given a date, will return number of days difference from that date and today's date until it reached the end date (max difference)
+const getStreakLength = (startDate, endDate) => {
+  let diffTime;
+  if (new Date() < endDate) {
+    diffTime = Math.abs(new Date() - startDate);
+  } else {
+    diffTime = Math.abs(endDate - startDate);
+  }
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
   return diffDays + 1;
 };
