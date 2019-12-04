@@ -49,10 +49,10 @@ class HabitCard extends React.Component {
     return (
       <div class="section">
         <div class="card">
-          <header class="card-header dark-card-color">
+          <header class="card-header">
             <p class="card-header-title">{title}</p>
           </header>
-          <div class="card-content light-card-color">
+          <div class="card-content">
             <div class="content flex-item">
               <div class="flex-element">
                 <h3>Goal</h3>
@@ -65,15 +65,15 @@ class HabitCard extends React.Component {
               </div>
             </div>
           </div>
-          <div class="card-content light-card-color">
+          <div class="card-content">
             <div class="content">
               {startDateToString} - {endDateToString}
             </div>
           </div>
-          <div class="card-content light-card-color">
+          <div class="card-content">
             <div class="content">{this.renderStreak(streak)}</div>
           </div>
-          <footer class="card-footer dark-card-color">
+          <footer class="card-footer">
             <Link
               class="card-footer-item is-dark"
               to={`/${this.props.id}/edit`}

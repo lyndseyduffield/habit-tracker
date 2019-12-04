@@ -20,7 +20,7 @@ class App extends React.Component {
   render() {
     return (
       <Router history={history}>
-        <nav class="navbar">
+        <nav class="navbar has-shadow">
           <div class="navbar-brand">
             <div class="navbar-item">
               <strong>HabitTracker</strong>

@@ -1,14 +1,15 @@
 :root {
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 32px;
+  --space-unit: 1em;
 
-  --form-width: 860px;
-}
+  --spacing-xxs: calc(0.25 * var(--space-unit));
+  --spacing-xs: calc(0.5 * var(--space-unit));
+  --spacing-sm: calc(0.75 * var(--space-unit));
+  --spacing-md: calc(1.25 * var(--space-unit));
+  --spacing-lg: calc(2 * var(--space-unit));
+  --spacing-xl: calc(3.25 * var(--space-unit));
+  --spacing-xxl: calc(5.25 * var(--space-unit));
 
-body {
-  background-color: #ccc;
+  --form-width: calc(var(--spacing-xxl) * 10);
 }
 
 .form-container {
@@ -52,14 +53,6 @@ because react datepicker doesn't provide a way to style the input field */
 
 .flex-element {
   flex: 1 0 0;
-}
-
-/* .dark-card-color {
-  background-color: #cdcacc;
-} */
-
-.light-card-color {
-  background-color: #eee5e9;
 }
 
 .checkbox-margin {
