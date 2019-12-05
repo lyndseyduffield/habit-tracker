@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 import { updateStreak } from "../actions";
 
 class HabitCard extends React.Component {
-  renderStreak(streak) {
+  renderStreak(streak, endDate, startDate) {
+    const fullStreakLength = endDate.diff(startDate, "days");
     if (streak.length <= 0) {
       return <div>This habit hasn't started yet, YA LOSER</div>;
     } else {
       let lastItem = streak.length - 1;
       return streak.map((check, index) => {
-        if (index === lastItem) {
+        if (index === lastItem && lastItem < fullStreakLength) {
           return (
             <input
               key={index}
@@ -55,7 +56,7 @@ class HabitCard extends React.Component {
           {startDateToString}
           {endDateToString}
         </div>
-        <div>{this.renderStreak(streak)}</div>
+        <div>{this.renderStreak(streak, endDate, startDate)}</div>
         <div>
           <h3>Accountability Partner</h3>
           <p>name: {name}</p>
