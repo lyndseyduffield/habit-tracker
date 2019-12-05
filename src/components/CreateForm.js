@@ -1,9 +1,11 @@
+import moment from "moment";
 import React, { useState } from "react";
 import useForm from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { addHabit } from "../actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
+import { updateHabitStreak } from "../utils";
 
 const CreateForm = props => {
   const [state, setState] = useState({
@@ -21,10 +23,14 @@ const CreateForm = props => {
   }, [register, setValue]);
 
   const onSubmit = data => {
-    const habit = {
+    const startDate = moment(data.startDate);
+    const endDate = moment(data.endDate);
+    const habit = updateHabitStreak({
       ...data,
-      streak: [false]
-    };
+      startDate,
+      endDate,
+      streak: []
+    });
     props.dispatch(addHabit(habit));
     props.history.push("/");
   };

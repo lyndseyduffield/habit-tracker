@@ -1,9 +1,11 @@
+import moment from "moment";
 import React, { useState } from "react";
 import useForm from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { editHabit } from "../actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
+import { updateHabitStreak } from "../utils";
 
 const EditForm = props => {
   const [state, setState] = useState({
@@ -19,25 +21,35 @@ const EditForm = props => {
 
   React.useEffect(() => {
     if (props.habit) {
-      setValue("startDate", props.habit.startDate);
-      setValue("endDate", props.habit.endDate);
+      const startDate = props.habit.startDate.toDate();
+      const endDate = props.habit.endDate.toDate();
+      setValue("startDate", startDate);
+      setValue("endDate", endDate);
+      setState({ startDate, endDate });
     }
-  }, [setValue, props]);
+  }, [setValue, props.habit]);
 
   const handleDatePickerChange = (key, date) => {
-    setValue(key, date);
-    setState({
-      ...state,
-      [key]: date
-    });
+    if (key === "startDate" && date > state.endDate) {
+      setValue("startDate", date);
+      setValue("endDate", date);
+      setState({ startDate: date, endDate: date });
+    } else {
+      setValue(key, date);
+      setState({ ...state, [key]: date });
+    }
   };
 
   const onSubmit = data => {
     const id = props.match.params.id;
-    const habit = {
+    const startDate = moment(data.startDate);
+    const endDate = moment(data.endDate);
+    const habit = updateHabitStreak({
       ...props.habit,
-      ...data
-    };
+      ...data,
+      startDate,
+      endDate
+    });
     props.dispatch(editHabit(habit, id));
     props.history.push("/");
   };
@@ -73,7 +85,8 @@ const EditForm = props => {
         <label class="label">Start Date</label>
         <div class="control">
           <DatePicker
-            selected={props.habit && props.habit.startDate}
+            minDate={new Date()}
+            selected={state.startDate}
             onChange={date => {
               handleDatePickerChange("startDate", date);
             }}
@@ -82,7 +95,8 @@ const EditForm = props => {
         <label class="label">End Date</label>
         <div class="control">
           <DatePicker
-            selected={props.habit && props.habit.endDate}
+            minDate={state.startDate}
+            selected={state.endDate}
             onChange={date => {
               handleDatePickerChange("endDate", date);
             }}

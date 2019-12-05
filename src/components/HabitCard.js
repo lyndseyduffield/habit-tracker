@@ -4,22 +4,31 @@ import { updateStreak } from "../actions";
 
 class HabitCard extends React.Component {
   renderStreak(streak) {
-    let lastItem = streak.length - 1;
-    return streak.map((check, index) => {
-      if (index === lastItem) {
-        return (
-          <input
-            key={index}
-            type="checkbox"
-            onChange={event => this.handleStreakClick(event)}
-          />
-        );
-      } else {
-        return (
-          <input key={index} type="checkbox" disabled={true} checked={check} />
-        );
-      }
-    });
+    if (streak.length <= 0) {
+      return <div>This habit hasn't started yet, YA LOSER</div>;
+    } else {
+      let lastItem = streak.length - 1;
+      return streak.map((check, index) => {
+        if (index === lastItem) {
+          return (
+            <input
+              key={index}
+              type="checkbox"
+              onChange={event => this.handleStreakClick(event)}
+            />
+          );
+        } else {
+          return (
+            <input
+              key={index}
+              type="checkbox"
+              disabled={true}
+              checked={check}
+            />
+          );
+        }
+      });
+    }
   }
 
   handleStreakClick = event => {
