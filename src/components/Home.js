@@ -29,8 +29,21 @@ class Home extends React.Component {
     this.props.dispatch(deleteHabit(id));
   };
 
+  renderEmpty = () => {
+    return (
+      <div>
+        <h1>Create a New Habit!</h1>
+        <Link to="/new">Get to it!</Link>
+      </div>
+    );
+  };
+
   render() {
-    return <div>{this.habitList()}</div>;
+    if (this.props.habitIds.length === 0) {
+      return this.renderEmpty();
+    } else {
+      return this.habitList();
+    }
   }
 }
 
