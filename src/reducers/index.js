@@ -1,3 +1,5 @@
+import moment from "moment";
+import { updateHabitStreak } from "../utils";
 import {
   ADD_HABIT,
   EDIT_HABIT,
@@ -31,22 +33,21 @@ export const readState = () => {
       // Create a new habits object by decoding the date fields for each
       // habit properly
       const decodedHabits = ids.reduce((acc, id) => {
-        const habit = state.habits[id];
-        const currentStreakLength = habit.streak.length;
-        const correctStreakLength = getDaysToToday(new Date(habit.startDate));
-        const streakDiff = correctStreakLength - currentStreakLength;
+        const parsedHabit = state.habits[id];
 
-        let newStreak = habit.streak;
-        for (let i = 1; i <= streakDiff; i++) {
-          newStreak.push(false);
-        }
+        // The date fields have been parsed from strings but have not yet
+        // been parsed into moment date objects
+        const startDate = moment(parsedHabit.startDate, moment.ISO_8601);
+        const endDate = moment(parsedHabit.endDate, moment.ISO_8601);
 
-        const newHabit = {
-          ...habit,
-          streak: newStreak,
-          startDate: new Date(habit.startDate),
-          endDate: new Date(habit.endDate)
-        };
+        // We have to verify that the streak is correct for the habit in
+        // the case that time has passed since the last page load
+        const newHabit = updateHabitStreak({
+          ...parsedHabit,
+          startDate,
+          endDate
+        });
+
         return { ...acc, [id]: newHabit };
       }, {});
 
@@ -58,13 +59,6 @@ export const readState = () => {
     console.log("Failed to read state from local storage");
     return initialState;
   }
-};
-
-// Given a date, will return number of days difference from that date and today's date
-const getDaysToToday = date => {
-  const diffTime = Math.abs(new Date() - date);
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays + 1;
 };
 
 export function reducer(state = initialState, action) {
@@ -84,9 +78,10 @@ export function reducer(state = initialState, action) {
       return newState;
     }
     case EDIT_HABIT: {
+      const habit = action.value.habit;
       const newState = {
         ...state,
-        habits: { ...state.habits, [action.value.id]: action.value.habit }
+        habits: { ...state.habits, [action.value.id]: habit }
       };
       writeState(newState);
       return newState;

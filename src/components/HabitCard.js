@@ -6,27 +6,33 @@ import { deleteHabit } from "../actions";
 import "../css/main.css";
 
 class HabitCard extends React.Component {
-  renderStreak(streak) {
-    console.log(streak);
-    let lastItem = streak.length - 1;
-    return streak.map((check, index) => {
-      if (index === lastItem) {
-        return (
-          <label key={index} class="checkbox is-large checkbox-margin">
+  renderStreak(streak, endDate, startDate) {
+    const fullStreakLength = endDate.diff(startDate, "days");
+    if (streak.length <= 0) {
+      return <div>This habit hasn't started yet, YA LOSER</div>;
+    } else {
+      let lastItem = streak.length - 1;
+      return streak.map((check, index) => {
+        if (index === lastItem && lastItem < fullStreakLength) {
+          return (
             <input
+              key={index}
               type="checkbox"
               onChange={event => this.handleStreakClick(event)}
             />
-          </label>
-        );
-      } else {
-        return (
-          <label key={index} class="checkbox is-large checkbox-margin">
-            <input type="checkbox" disabled={true} checked={check} />
-          </label>
-        );
-      }
-    });
+          );
+        } else {
+          return (
+            <input
+              key={index}
+              type="checkbox"
+              disabled={true}
+              checked={check}
+            />
+          );
+        }
+      });
+    }
   }
 
   handleStreakClick = event => {
@@ -43,8 +49,10 @@ class HabitCard extends React.Component {
   render() {
     const { title, goal, streak, startDate, endDate } = this.props.habit;
     const { name, email } = this.props.habit.accountabilityPartner;
-    const endDateToString = endDate ? endDate.toDateString() : null;
-    const startDateToString = startDate ? startDate.toDateString() : null;
+    const endDateToString = endDate ? endDate.format("MMMM Do, YYYY") : null;
+    const startDateToString = startDate
+      ? startDate.format("MMMM Do, YYYY")
+      : null;
 
     return (
       <div class="section">
@@ -71,7 +79,9 @@ class HabitCard extends React.Component {
             </div>
           </div>
           <div class="card-content">
-            <div class="content">{this.renderStreak(streak)}</div>
+            <div class="content">
+              {this.renderStreak(streak, endDate, startDate)}
+            </div>
           </div>
           <footer class="card-footer">
             <Link
