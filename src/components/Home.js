@@ -17,9 +17,16 @@ class Home extends React.Component {
 
   renderEmpty = () => {
     return (
-      <div>
-        <h1>Create a New Habit!</h1>
-        <Link to="/new">Get to it!</Link>
+      <div class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Create a New Habit!</h1>
+            <div></div>
+            <Link to="/new" class="subtitle button banner-button">
+              Get to it
+            </Link>
+          </div>
+        </div>
       </div>
     );
   };

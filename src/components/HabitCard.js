@@ -14,7 +14,17 @@ class HabitCard extends React.Component {
     } else {
       let lastItem = streak.length - 1;
       return streak.map((check, index) => {
-        if (index === lastItem && lastItem < fullStreakLength) {
+        if (streak.length === 1) {
+          return (
+            <Checkbox>
+              <input
+                key={index}
+                type="checkbox"
+                onChange={event => this.handleStreakClick(event)}
+              />
+            </Checkbox>
+          );
+        } else if (index === lastItem && lastItem < fullStreakLength) {
           return (
             <Checkbox>
               <input

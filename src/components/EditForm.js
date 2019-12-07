@@ -81,26 +81,32 @@ const EditForm = props => {
           />
         </div>
       </div>
-      <div class="field is-grouped">
-        <label class="label">Start Date</label>
-        <div class="control">
-          <DatePicker
-            minDate={new Date()}
-            selected={state.startDate}
-            onChange={date => {
-              handleDatePickerChange("startDate", date);
-            }}
-          />
-        </div>
-        <label class="label">End Date</label>
-        <div class="control">
-          <DatePicker
-            minDate={state.startDate}
-            selected={state.endDate}
-            onChange={date => {
-              handleDatePickerChange("endDate", date);
-            }}
-          />
+      <div class="field is-grouped is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label">Start Date</label>
+            <div class="control">
+              <DatePicker
+                minDate={new Date()}
+                selected={state.startDate}
+                onChange={date => {
+                  handleDatePickerChange("startDate", date);
+                }}
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">End Date</label>
+            <div class="control">
+              <DatePicker
+                minDate={state.startDate}
+                selected={state.endDate}
+                onChange={date => {
+                  handleDatePickerChange("endDate", date);
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
       <h3 class="label is-large margin-top">Accountability Partner</h3>
