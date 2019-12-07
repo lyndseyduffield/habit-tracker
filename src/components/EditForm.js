@@ -55,9 +55,9 @@ const EditForm = props => {
   };
 
   return (
-    <form class="container" onSubmit={handleSubmit(onSubmit)}>
+    <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
       <div class="field">
-        <label class="label">Habit</label>
+        <label class="label is-large">Habit</label>
         <div class="control">
           <input
             class="input"
@@ -67,13 +67,13 @@ const EditForm = props => {
             ref={register({ required: true })}
           />
         </div>
-        <p class="help is-danger">{errors.title && "A title is required"}</p>
+        {errors.title && <p class="help is-danger">"A title is required"</p>}
       </div>
       <div class="field">
         <label class="label">Goal</label>
         <div class="control">
-          <input
-            class="input"
+          <textarea
+            class="textarea"
             type="text"
             name="goal"
             defaultValue={props.habit && props.habit.goal}
@@ -81,31 +81,36 @@ const EditForm = props => {
           />
         </div>
       </div>
-      <div class="field is-grouped">
-        <label class="label">Start Date</label>
-        <div class="control">
-          <DatePicker
-            minDate={new Date()}
-            selected={state.startDate}
-            onChange={date => {
-              handleDatePickerChange("startDate", date);
-            }}
-          />
-        </div>
-        <label class="label">End Date</label>
-        <div class="control">
-          <DatePicker
-            minDate={state.startDate}
-            selected={state.endDate}
-            onChange={date => {
-              handleDatePickerChange("endDate", date);
-            }}
-          />
+      <div class="field is-grouped is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label">Start Date</label>
+            <div class="control">
+              <DatePicker
+                minDate={new Date()}
+                selected={state.startDate}
+                onChange={date => {
+                  handleDatePickerChange("startDate", date);
+                }}
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">End Date</label>
+            <div class="control">
+              <DatePicker
+                minDate={state.startDate}
+                selected={state.endDate}
+                onChange={date => {
+                  handleDatePickerChange("endDate", date);
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
-
-      <h3 class="label is-large">Accountability Partner</h3>
-      <div class="field is-grouped">
+      <h3 class="label is-large margin-top">Accountability Partner</h3>
+      <div class="field">
         <label class="label">Name</label>
         <div class="control">
           <input
@@ -123,13 +128,15 @@ const EditForm = props => {
             <span>{errors["accountabilityPartner.name"].message}</span>
           ) : (
             ""
-          )}{" "}
+          )}
         </p>
+      </div>
+      <div class="field">
         <label class="label">Email</label>
         <div class="control">
           <input
             class="input"
-            type="text'"
+            type="text"
             name="accountabilityPartner.email"
             defaultValue={
               props.habit && props.habit.accountabilityPartner.email
@@ -150,7 +157,7 @@ const EditForm = props => {
           )}
         </p>
       </div>
-      <div class="control">
+      <div class="control margin-top">
         <button class="button is-link">Submit</button>
       </div>
     </form>
