@@ -11,7 +11,7 @@
 
   --form-width: calc(var(--spacing-xxl) * 10);
 
-  --color-teal: #a0d2db;
+  --color-blue: #bff0ff;
   --color-myrtle: #216869;
 }
 
@@ -27,7 +27,7 @@
 }
 
 html {
-  background: var(--color-teal);
+  background: var(--color-blue);
 }
 
 /* this styles the text field for react datepicker with bulma's input styles
