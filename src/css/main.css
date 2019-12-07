@@ -10,12 +10,19 @@
   --spacing-xxl: calc(5.25 * var(--space-unit));
 
   --form-width: calc(var(--spacing-xxl) * 10);
+
+  --color-teal: #a0d2db;
+  --color-myrtle: #216869;
 }
 
 .form-container {
   max-width: var(--form-width);
   margin: 0 auto;
   padding: var(--spacing-lg);
+}
+
+html {
+  background: var(--color-teal);
 }
 
 /* this styles the text field for react datepicker with bulma's input styles
@@ -57,4 +64,134 @@ because react datepicker doesn't provide a way to style the input field */
 
 .checkbox-margin {
   margin: 6px;
+}
+
+.card-element-background {
+  background: #f7f7f7;
+}
+
+.card-border {
+  border-radius: 10%;
+}
+
+.header-font {
+  font-size: 2.5rem;
+}
+
+/* Checkbox Styles */
+
+.checkbox-label {
+  display: inline-block;
+  position: relative;
+  margin-bottom: var(--spacing-md);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 24px;
+  height: 24px;
+  width: 52px;
+  clear: both;
+}
+
+.checkbox-disabled {
+  background-color: #ddd !important;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 48px;
+  width: 48px;
+  background-color: #ededed;
+  border-radius: 5px;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  border: 2px solid #ffffff;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom {
+  background-color: #ededed;
+  border-radius: 5px;
+  -webkit-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+}
+
+.checkbox-label .checkbox-custom::after {
+  position: absolute;
+  content: "";
+  left: 12px;
+  top: 12px;
+  height: 0px;
+  width: 0px;
+  border-radius: 5px;
+  border: solid #009bff;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(0deg) scale(0);
+  -ms-transform: rotate(0deg) scale(0);
+  transform: rotate(0deg) scale(0);
+  opacity: 1;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+  opacity: 1;
+  left: 16px;
+  top: 3px;
+  width: 13px;
+  height: 32px;
+  border: solid var(--color-myrtle);
+  border-width: 0 5px 6px 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+/* For Ripple Effect */
+.checkbox-label .checkbox-custom::before {
+  position: absolute;
+  content: "";
+  left: 10px;
+  top: 10px;
+  width: 0px;
+  height: 0px;
+  border-radius: 5px;
+  border: 2px solid #dedede;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::before {
+  left: -3px;
+  top: -3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  -webkit-transform: scale(3);
+  -ms-transform: scale(3);
+  transform: scale(3);
+  opacity: 0;
+  z-index: 999;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
 }

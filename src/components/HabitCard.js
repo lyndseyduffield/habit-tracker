@@ -1,4 +1,5 @@
 import React from "react";
+import Checkbox from "./Checkbox.js";
 import { connect } from "react-redux";
 import { updateStreak } from "../actions";
 import { Link } from "react-router-dom";
@@ -15,20 +16,24 @@ class HabitCard extends React.Component {
       return streak.map((check, index) => {
         if (index === lastItem && lastItem < fullStreakLength) {
           return (
-            <input
-              key={index}
-              type="checkbox"
-              onChange={event => this.handleStreakClick(event)}
-            />
+            <Checkbox>
+              <input
+                key={index}
+                type="checkbox"
+                onChange={event => this.handleStreakClick(event)}
+              />
+            </Checkbox>
           );
         } else {
           return (
-            <input
-              key={index}
-              type="checkbox"
-              disabled={true}
-              checked={check}
-            />
+            <Checkbox disabled={true}>
+              <input
+                key={index}
+                type="checkbox"
+                disabled={true}
+                checked={check}
+              />
+            </Checkbox>
           );
         }
       });
@@ -56,9 +61,9 @@ class HabitCard extends React.Component {
 
     return (
       <div class="section">
-        <div class="card">
-          <header class="card-header">
-            <p class="card-header-title">{title}</p>
+        <div class="card card-border">
+          <header class="card-header card-element-background">
+            <p class="card-header-title header-font">{title}</p>
           </header>
           <div class="card-content">
             <div class="content flex-item">
@@ -83,7 +88,7 @@ class HabitCard extends React.Component {
               {this.renderStreak(streak, endDate, startDate)}
             </div>
           </div>
-          <footer class="card-footer">
+          <footer class="card-footer card-element-background">
             <Link
               class="card-footer-item is-dark"
               to={`/${this.props.id}/edit`}

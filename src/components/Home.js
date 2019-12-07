@@ -26,9 +26,9 @@ class Home extends React.Component {
 
   render() {
     if (this.props.habitIds.length === 0) {
-      return this.renderEmpty();
+      return <div class="container">{this.renderEmpty()}</div>;
     } else {
-      return this.habitList();
+      return <div class="container">{this.habitList()}</div>;
     }
   }
 }
