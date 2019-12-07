@@ -67,7 +67,7 @@ const EditForm = props => {
             ref={register({ required: true })}
           />
         </div>
-        <p class="help is-danger">{errors.title && "A title is required"}</p>
+        {errors.title && <p class="help is-danger">"A title is required"</p>}
       </div>
       <div class="field">
         <label class="label">Goal</label>
@@ -128,7 +128,7 @@ const EditForm = props => {
             <span>{errors["accountabilityPartner.name"].message}</span>
           ) : (
             ""
-          )}{" "}
+          )}
         </p>
       </div>
       <div class="field">
@@ -154,7 +154,7 @@ const EditForm = props => {
             <span>{errors["accountabilityPartner.email"].message}</span>
           ) : (
             ""
-          )}{" "}
+          )}
         </p>
       </div>
       <div class="control margin-top">

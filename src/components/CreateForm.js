@@ -47,12 +47,6 @@ const CreateForm = props => {
     }
   };
 
-  console.log(errors);
-
-  // { startDate, endDate } -> Date -> Effect
-  // Check if the start date is before the end date and if not then update ... ... ..
-
-  // Rendering
   return (
     <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
       <div class="field">
@@ -66,7 +60,7 @@ const CreateForm = props => {
             ref={register({ required: true })}
           />
         </div>
-        <p class="help is-danger">{errors.title && "A title is required"}</p>
+        {errors.title && <p class="help is-danger">"A title is required"</p>}
       </div>
       <div class="field">
         <label class="label">Goal</label>
@@ -123,13 +117,11 @@ const CreateForm = props => {
             })}
           />
         </div>
-        <p class="help is-danger">
-          {errors["accountabilityPartner.name"] ? (
+        {errors["accountabilityPartner.name"] && (
+          <p class="help is-danger">
             <span>{errors["accountabilityPartner.name"].message}</span>
-          ) : (
-            ""
-          )}{" "}
-        </p>
+          </p>
+        )}
       </div>
       <div class="field">
         <label class="label">Email</label>
@@ -147,13 +139,11 @@ const CreateForm = props => {
             })}
           />
         </div>
-        <p class="help is-danger">
-          {errors["accountabilityPartner.email"] ? (
+        {errors["accountabilityPartner.email"] && (
+          <p class="help is-danger">
             <span>{errors["accountabilityPartner.email"].message}</span>
-          ) : (
-            ""
-          )}{" "}
-        </p>
+          </p>
+        )}
       </div>
       <div class="control margin-top">
         <button class="button is-link">Submit</button>
