@@ -3,34 +3,48 @@ import Checkbox from "./Checkbox.js";
 import { connect } from "react-redux";
 import { updateStreak } from "../actions";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import { deleteHabit } from "../actions";
 import "../css/main.css";
 
 class HabitCard extends React.Component {
   renderStreak(streak, endDate, startDate) {
-    const fullStreakLength = endDate.diff(startDate, "days");
-    if (streak.length <= 0) {
+    // If there is no streak then the habit has not yet begun
+    if (streak.length === 0) {
       return <div>This habit hasn't started yet, YA LOSER</div>;
-    } else {
-      let lastItem = streak.length - 1;
+    }
+
+    // If now is after the end date then the habit has already ended. If the
+    // habit has already ended then the entire streak should be disabled.
+    const now = moment().startOf("day");
+    if (now.isAfter(endDate, "days")) {
       return streak.map((check, index) => {
-        if (streak.length === 1) {
+        return (
+          <Checkbox disabled={true}>
+            <input
+              key={index}
+              type="checkbox"
+              disabled={true}
+              checked={check}
+            />
+          </Checkbox>
+        );
+      });
+    }
+
+    // Otherwise, the streak is non-empty and is active, so all days in the
+    // streak should be disabled except for the last one.
+    else {
+      const lastIndex = streak.length - 1;
+      return streak.map((check, index) => {
+        if (index === lastIndex) {
           return (
             <Checkbox>
               <input
                 key={index}
                 type="checkbox"
                 onChange={event => this.handleStreakClick(event)}
-              />
-            </Checkbox>
-          );
-        } else if (index === lastItem && lastItem < fullStreakLength) {
-          return (
-            <Checkbox>
-              <input
-                key={index}
-                type="checkbox"
-                onChange={event => this.handleStreakClick(event)}
+                checked={check}
               />
             </Checkbox>
           );
