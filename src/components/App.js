@@ -1,6 +1,5 @@
 import React from "react";
-import history from "../history";
-import { Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import { Link } from "react-router-dom";
 import CreateForm from "./CreateForm";
@@ -19,7 +18,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router history={history}>
+      <Router basename="/habit-tracker">
         <nav class="navbar has-shadow">
           <div class="navbar-brand">
             <div class="navbar-item">
