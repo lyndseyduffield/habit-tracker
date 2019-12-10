@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import useForm from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { addHabit } from "../actions";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/main.css";
@@ -48,107 +49,128 @@ const CreateForm = props => {
   };
 
   return (
-    <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
-      <div class="field">
-        <label class="label is-large">Habit</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            name="title"
-            placeholder="Your new habit"
-            ref={register({ required: true })}
-          />
-        </div>
-        {errors.title && <p class="help is-danger">"A title is required"</p>}
-      </div>
-      <div class="field">
-        <label class="label">Goal</label>
-        <div class="control">
-          <textarea
-            class="textarea"
-            type="text"
-            name="goal"
-            placeholder="What is your goal?"
-            ref={register}
-          />
-        </div>
-      </div>
-      <div class="field is-grouped is-horizontal">
-        <div class="field-body">
-          <div class="field">
-            <label class="label">Start Date</label>
-            <div class="control">
-              <DatePicker
-                class="dropdown"
-                minDate={new Date()}
-                selected={state.startDate}
-                onChange={date => {
-                  onDatePickerChange("startDate", date);
-                }}
-              />
-            </div>
+    <div>
+      <nav class="navbar has-shadow">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <strong>HabitTracker</strong>
           </div>
-          <div class="field">
-            <label class="label">End Date</label>
-            <div class="control">
-              <DatePicker
-                minDate={state.startDate}
-                selected={state.endDate}
-                onChange={date => {
-                  onDatePickerChange("endDate", date);
-                }}
-              />
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <Link to="/new" class="button is-light">
+                <strong>New Habit</strong>
+              </Link>
+              <Link to="/" class="button is-light">
+                Home
+              </Link>
             </div>
           </div>
         </div>
-      </div>
-      <h3 class="label is-large margin-top">Accountability Partner</h3>
-      <div class="field">
-        <label class="label">Name</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            name="accountabilityPartner.name"
-            placeholder="Your accountability partner's name"
-            ref={register({
-              maxLength: { value: 40, message: "This name is too long" }
-            })}
-          />
+      </nav>
+      <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
+        <div class="field">
+          <label class="label is-large">Habit</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              name="title"
+              placeholder="Your new habit"
+              ref={register({ required: true })}
+            />
+          </div>
+          {errors.title && <p class="help is-danger">"A title is required"</p>}
         </div>
-        {errors["accountabilityPartner.name"] && (
-          <p class="help is-danger">
-            <span>{errors["accountabilityPartner.name"].message}</span>
-          </p>
-        )}
-      </div>
-      <div class="field">
-        <label class="label">Email</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            name="accountabilityPartner.email"
-            placeholder="Their email"
-            ref={register({
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Please enter a valid email"
-              }
-            })}
-          />
+        <div class="field">
+          <label class="label">Goal</label>
+          <div class="control">
+            <textarea
+              class="textarea"
+              type="text"
+              name="goal"
+              placeholder="What is your goal?"
+              ref={register}
+            />
+          </div>
         </div>
-        {errors["accountabilityPartner.email"] && (
-          <p class="help is-danger">
-            <span>{errors["accountabilityPartner.email"].message}</span>
-          </p>
-        )}
-      </div>
-      <div class="control margin-top">
-        <button class="button is-link">Submit</button>
-      </div>
-    </form>
+        <div class="field is-grouped is-horizontal">
+          <div class="field-body">
+            <div class="field">
+              <label class="label">Start Date</label>
+              <div class="control">
+                <DatePicker
+                  class="dropdown"
+                  minDate={new Date()}
+                  selected={state.startDate}
+                  onChange={date => {
+                    onDatePickerChange("startDate", date);
+                  }}
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">End Date</label>
+              <div class="control">
+                <DatePicker
+                  minDate={state.startDate}
+                  selected={state.endDate}
+                  onChange={date => {
+                    onDatePickerChange("endDate", date);
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 class="label is-large margin-top">Accountability Partner</h3>
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              name="accountabilityPartner.name"
+              placeholder="Your accountability partner's name"
+              ref={register({
+                maxLength: { value: 40, message: "This name is too long" }
+              })}
+            />
+          </div>
+          {errors["accountabilityPartner.name"] && (
+            <p class="help is-danger">
+              <span>{errors["accountabilityPartner.name"].message}</span>
+            </p>
+          )}
+        </div>
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              name="accountabilityPartner.email"
+              placeholder="Their email"
+              ref={register({
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Please enter a valid email"
+                }
+              })}
+            />
+          </div>
+          {errors["accountabilityPartner.email"] && (
+            <p class="help is-danger">
+              <span>{errors["accountabilityPartner.email"].message}</span>
+            </p>
+          )}
+        </div>
+        <div class="control margin-top">
+          <button class="button is-link">Submit</button>
+        </div>
+      </form>
+    </div>
   );
 };
 

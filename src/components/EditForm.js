@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { useState } from "react";
 import useForm from "react-hook-form";
 import DatePicker from "react-datepicker";
+import { Link } from "react-router-dom";
 import { editHabit } from "../actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
@@ -55,112 +56,135 @@ const EditForm = props => {
   };
 
   return (
-    <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
-      <div class="field">
-        <label class="label is-large">Habit</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            name="title"
-            defaultValue={props.habit && props.habit.title}
-            ref={register({ required: true })}
-          />
-        </div>
-        {errors.title && <p class="help is-danger">"A title is required"</p>}
-      </div>
-      <div class="field">
-        <label class="label">Goal</label>
-        <div class="control">
-          <textarea
-            class="textarea"
-            type="text"
-            name="goal"
-            defaultValue={props.habit && props.habit.goal}
-            ref={register}
-          />
-        </div>
-      </div>
-      <div class="field is-grouped is-horizontal">
-        <div class="field-body">
-          <div class="field">
-            <label class="label">Start Date</label>
-            <div class="control">
-              <DatePicker
-                minDate={new Date()}
-                selected={state.startDate}
-                onChange={date => {
-                  handleDatePickerChange("startDate", date);
-                }}
-              />
-            </div>
+    <div>
+      <nav class="navbar has-shadow">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <strong>HabitTracker</strong>
           </div>
-          <div class="field">
-            <label class="label">End Date</label>
-            <div class="control">
-              <DatePicker
-                minDate={state.startDate}
-                selected={state.endDate}
-                onChange={date => {
-                  handleDatePickerChange("endDate", date);
-                }}
-              />
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <Link to="/new" class="button is-light">
+                <strong>New Habit</strong>
+              </Link>
+              <Link to="/" class="button is-light">
+                Home
+              </Link>
             </div>
           </div>
         </div>
-      </div>
-      <h3 class="label is-large margin-top">Accountability Partner</h3>
-      <div class="field">
-        <label class="label">Name</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            name="accountabilityPartner.name"
-            defaultValue={props.habit && props.habit.accountabilityPartner.name}
-            ref={register({
-              maxLength: { value: 40, message: "This name is too long" }
-            })}
-          />
+      </nav>
+      <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
+        <div class="field">
+          <label class="label is-large">Habit</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              name="title"
+              defaultValue={props.habit && props.habit.title}
+              ref={register({ required: true })}
+            />
+          </div>
+          {errors.title && <p class="help is-danger">"A title is required"</p>}
         </div>
-        <p class="help is-danger">
-          {errors["accountabilityPartner.name"] ? (
-            <span>{errors["accountabilityPartner.name"].message}</span>
-          ) : (
-            ""
-          )}
-        </p>
-      </div>
-      <div class="field">
-        <label class="label">Email</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            name="accountabilityPartner.email"
-            defaultValue={
-              props.habit && props.habit.accountabilityPartner.email
-            }
-            ref={register({
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Please enter a valid email"
+        <div class="field">
+          <label class="label">Goal</label>
+          <div class="control">
+            <textarea
+              class="textarea"
+              type="text"
+              name="goal"
+              defaultValue={props.habit && props.habit.goal}
+              ref={register}
+            />
+          </div>
+        </div>
+        <div class="field is-grouped is-horizontal">
+          <div class="field-body">
+            <div class="field">
+              <label class="label">Start Date</label>
+              <div class="control">
+                <DatePicker
+                  minDate={new Date()}
+                  selected={state.startDate}
+                  onChange={date => {
+                    handleDatePickerChange("startDate", date);
+                  }}
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">End Date</label>
+              <div class="control">
+                <DatePicker
+                  minDate={state.startDate}
+                  selected={state.endDate}
+                  onChange={date => {
+                    handleDatePickerChange("endDate", date);
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 class="label is-large margin-top">Accountability Partner</h3>
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              name="accountabilityPartner.name"
+              defaultValue={
+                props.habit && props.habit.accountabilityPartner.name
               }
-            })}
-          />
+              ref={register({
+                maxLength: { value: 40, message: "This name is too long" }
+              })}
+            />
+          </div>
+          <p class="help is-danger">
+            {errors["accountabilityPartner.name"] ? (
+              <span>{errors["accountabilityPartner.name"].message}</span>
+            ) : (
+              ""
+            )}
+          </p>
         </div>
-        <p class="help is-danger">
-          {errors["accountabilityPartner.email"] ? (
-            <span>{errors["accountabilityPartner.email"].message}</span>
-          ) : (
-            ""
-          )}
-        </p>
-      </div>
-      <div class="control margin-top">
-        <button class="button is-link">Submit</button>
-      </div>
-    </form>
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              name="accountabilityPartner.email"
+              defaultValue={
+                props.habit && props.habit.accountabilityPartner.email
+              }
+              ref={register({
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Please enter a valid email"
+                }
+              })}
+            />
+          </div>
+          <p class="help is-danger">
+            {errors["accountabilityPartner.email"] ? (
+              <span>{errors["accountabilityPartner.email"].message}</span>
+            ) : (
+              ""
+            )}
+          </p>
+        </div>
+        <div class="control margin-top">
+          <button class="button is-link">Submit</button>
+        </div>
+      </form>
+    </div>
   );
 };
 
