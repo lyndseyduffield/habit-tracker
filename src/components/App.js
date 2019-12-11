@@ -11,6 +11,17 @@ import { readState } from "../reducers";
 import "../css/main.css";
 
 class App extends React.Component {
+  state = {
+    collapsed: false
+  };
+
+  toggleCollapse = event => {
+    event.preventDefault();
+    this.setState(prevState => ({
+      collapsed: !prevState.collapsed
+    }));
+  };
+
   componentDidMount() {
     let state = readState();
     this.props.dispatch(setState(state));
@@ -19,9 +30,16 @@ class App extends React.Component {
   render() {
     return (
       <Router basename="/habit-tracker">
-        <NavBar />
+        <NavBar
+          collapsed={this.state.collapsed}
+          toggleCollapse={this.toggleCollapse}
+        />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/"
+            component={() => <Home collapsed={this.state.collapsed} />}
+          />
           <Route path="/new" component={CreateForm} />
           <Route path="/:id/edit" component={EditForm} />
           <Route path="/:id/show" component={HabitCard} />

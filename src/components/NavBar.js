@@ -2,19 +2,8 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 
 class NavBar extends React.Component {
-  state = {
-    collapsed: false
-  };
-
-  toggleView = event => {
-    event.preventDefault();
-    this.setState(prevState => ({
-      collapsed: !prevState.collapsed
-    }));
-  };
-
   changeViewButton = () => {
-    if (this.state.collapsed) {
+    if (this.props.collapsed) {
       return <strong>Expand View</strong>;
     } else {
       return <strong>Collapse View</strong>;
@@ -37,7 +26,7 @@ class NavBar extends React.Component {
                   <strong>New Habit</strong>
                 </Link>
                 <div
-                  onClick={event => this.toggleView(event)}
+                  onClick={event => this.props.toggleCollapse(event)}
                   class="button is-light"
                 >
                   {this.changeViewButton()}

@@ -75,9 +75,10 @@ class HabitCard extends React.Component {
     this.props.dispatch(deleteHabit(id));
   };
 
-  render() {
+  renderExpanded() {
     const { title, goal, streak, startDate, endDate } = this.props.habit;
     const { name, email } = this.props.habit.accountabilityPartner;
+
     const endDateToString = endDate ? endDate.format("MMMM Do, YYYY") : null;
     const startDateToString = startDate
       ? startDate.format("MMMM Do, YYYY")
@@ -132,6 +133,32 @@ class HabitCard extends React.Component {
         </div>
       </div>
     );
+  }
+
+  renderCollapsed() {
+    const { streak: oldStreak, title, endDate } = this.props.habit;
+
+    let newStreak = oldStreak;
+
+    if (newStreak.length >= 7) {
+      const startOfWeek = newStreak.length - 7;
+      const endOfWeek = newStreak.length;
+      newStreak = newStreak.slice(startOfWeek, endOfWeek);
+    }
+
+    return (
+      <div>
+        <div class="compact-card">
+          <div class="compact-card-header">{title}</div>
+          <div>{this.renderStreak(newStreak, endDate)}</div>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    const { collapsed } = this.props;
+    return collapsed ? this.renderCollapsed() : this.renderExpanded();
   }
 }
 
