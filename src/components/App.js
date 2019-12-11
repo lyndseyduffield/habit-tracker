@@ -4,6 +4,7 @@ import Home from "./Home";
 import CreateForm from "./CreateForm";
 import EditForm from "./EditForm";
 import HabitCard from "./HabitCard";
+import NavBar from "./NavBar";
 import { connect } from "react-redux";
 import { setState } from "../actions";
 import { readState } from "../reducers";
@@ -18,6 +19,7 @@ class App extends React.Component {
   render() {
     return (
       <Router basename="/habit-tracker">
+        <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/new" component={CreateForm} />

@@ -2,7 +2,6 @@ import moment from "moment";
 import React, { useState } from "react";
 import useForm from "react-hook-form";
 import DatePicker from "react-datepicker";
-import { Link } from "react-router-dom";
 import { editHabit } from "../actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
@@ -57,25 +56,6 @@ const EditForm = props => {
 
   return (
     <div>
-      <nav class="navbar has-shadow">
-        <div class="navbar-brand">
-          <div class="navbar-item">
-            <strong>HabitTracker</strong>
-          </div>
-        </div>
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <Link to="/new" class="button is-light">
-                <strong>New Habit</strong>
-              </Link>
-              <Link to="/" class="button is-light">
-                Home
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
       <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
         <div class="field">
           <label class="label is-large">Habit</label>

@@ -58,53 +58,8 @@ class Home extends React.Component {
     }
   };
 
-  changeViewButton = () => {
-    if (this.state.collapsed) {
-      return <strong>Expand View</strong>;
-    } else {
-      return <strong>Collapse View</strong>;
-    }
-  };
-
-  toggleView = event => {
-    event.preventDefault();
-    this.setState(prevState => ({
-      collapsed: !prevState.collapsed
-    }));
-  };
-
   render() {
-    console.log(this.state);
-    return (
-      <div>
-        <nav class="navbar has-shadow">
-          <div class="navbar-brand">
-            <div class="navbar-item">
-              <strong>HabitTracker</strong>
-            </div>
-          </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <Link to="/new" class="button is-light">
-                  <strong>New Habit</strong>
-                </Link>
-                <div
-                  onClick={event => this.toggleView(event)}
-                  class="button is-light"
-                >
-                  {this.changeViewButton()}
-                </div>
-                <Link to="/" class="button is-light">
-                  Home
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
-        {this.renderDisplay()}
-      </div>
-    );
+    return <div>{this.renderDisplay()}</div>;
   }
 }
 
