@@ -55,116 +55,112 @@ const EditForm = props => {
   };
 
   return (
-    <div>
-      <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
-        <div class="field">
-          <label class="label is-large">Habit</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              name="title"
-              defaultValue={props.habit && props.habit.title}
-              ref={register({ required: true })}
-            />
-          </div>
-          {errors.title && <p class="help is-danger">"A title is required"</p>}
+    <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
+      <div class="field">
+        <label class="label is-large">Habit</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            name="title"
+            defaultValue={props.habit && props.habit.title}
+            ref={register({ required: true })}
+          />
         </div>
-        <div class="field">
-          <label class="label">Goal</label>
-          <div class="control">
-            <textarea
-              class="textarea"
-              type="text"
-              name="goal"
-              defaultValue={props.habit && props.habit.goal}
-              ref={register}
-            />
-          </div>
+        {errors.title && <p class="help is-danger">"A title is required"</p>}
+      </div>
+      <div class="field">
+        <label class="label">Goal</label>
+        <div class="control">
+          <textarea
+            class="textarea"
+            type="text"
+            name="goal"
+            defaultValue={props.habit && props.habit.goal}
+            ref={register}
+          />
         </div>
-        <div class="field is-grouped is-horizontal">
-          <div class="field-body">
-            <div class="field">
-              <label class="label">Start Date</label>
-              <div class="control">
-                <DatePicker
-                  minDate={new Date()}
-                  selected={state.startDate}
-                  onChange={date => {
-                    handleDatePickerChange("startDate", date);
-                  }}
-                />
-              </div>
+      </div>
+      <div class="field is-grouped is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label">Start Date</label>
+            <div class="control">
+              <DatePicker
+                minDate={new Date()}
+                selected={state.startDate}
+                onChange={date => {
+                  handleDatePickerChange("startDate", date);
+                }}
+              />
             </div>
-            <div class="field">
-              <label class="label">End Date</label>
-              <div class="control">
-                <DatePicker
-                  minDate={state.startDate}
-                  selected={state.endDate}
-                  onChange={date => {
-                    handleDatePickerChange("endDate", date);
-                  }}
-                />
-              </div>
+          </div>
+          <div class="field">
+            <label class="label">End Date</label>
+            <div class="control">
+              <DatePicker
+                minDate={state.startDate}
+                selected={state.endDate}
+                onChange={date => {
+                  handleDatePickerChange("endDate", date);
+                }}
+              />
             </div>
           </div>
         </div>
-        <h3 class="label is-large margin-top">Accountability Partner</h3>
-        <div class="field">
-          <label class="label">Name</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              name="accountabilityPartner.name"
-              defaultValue={
-                props.habit && props.habit.accountabilityPartner.name
+      </div>
+      <h3 class="label is-large margin-top">Accountability Partner</h3>
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            name="accountabilityPartner.name"
+            defaultValue={props.habit && props.habit.accountabilityPartner.name}
+            ref={register({
+              maxLength: { value: 40, message: "This name is too long" }
+            })}
+          />
+        </div>
+        <p class="help is-danger">
+          {errors["accountabilityPartner.name"] ? (
+            <span>{errors["accountabilityPartner.name"].message}</span>
+          ) : (
+            ""
+          )}
+        </p>
+      </div>
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            name="accountabilityPartner.email"
+            defaultValue={
+              props.habit && props.habit.accountabilityPartner.email
+            }
+            ref={register({
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Please enter a valid email"
               }
-              ref={register({
-                maxLength: { value: 40, message: "This name is too long" }
-              })}
-            />
-          </div>
-          <p class="help is-danger">
-            {errors["accountabilityPartner.name"] ? (
-              <span>{errors["accountabilityPartner.name"].message}</span>
-            ) : (
-              ""
-            )}
-          </p>
+            })}
+          />
         </div>
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              name="accountabilityPartner.email"
-              defaultValue={
-                props.habit && props.habit.accountabilityPartner.email
-              }
-              ref={register({
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Please enter a valid email"
-                }
-              })}
-            />
-          </div>
-          <p class="help is-danger">
-            {errors["accountabilityPartner.email"] ? (
-              <span>{errors["accountabilityPartner.email"].message}</span>
-            ) : (
-              ""
-            )}
-          </p>
-        </div>
-        <div class="control margin-top">
-          <button class="button is-link">Submit</button>
-        </div>
-      </form>
-    </div>
+        <p class="help is-danger">
+          {errors["accountabilityPartner.email"] ? (
+            <span>{errors["accountabilityPartner.email"].message}</span>
+          ) : (
+            ""
+          )}
+        </p>
+      </div>
+      <div class="control margin-top">
+        <button class="button is-link">Submit</button>
+      </div>
+    </form>
   );
 };
 
