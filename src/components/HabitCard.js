@@ -8,10 +8,10 @@ import { deleteHabit } from "../actions";
 import "../css/main.css";
 
 class HabitCard extends React.Component {
-  renderStreak(streak, endDate, startDate) {
+  renderStreak(streak, endDate) {
     // If there is no streak then the habit has not yet begun
     if (streak.length === 0) {
-      return <div>This habit hasn't started yet, YA LOSER</div>;
+      return <div>This habit hasn't started yet!</div>;
     }
 
     // If now is after the end date then the habit has already ended. If the
@@ -75,9 +75,10 @@ class HabitCard extends React.Component {
     this.props.dispatch(deleteHabit(id));
   };
 
-  render() {
+  renderExpanded() {
     const { title, goal, streak, startDate, endDate } = this.props.habit;
     const { name, email } = this.props.habit.accountabilityPartner;
+
     const endDateToString = endDate ? endDate.format("MMMM Do, YYYY") : null;
     const startDateToString = startDate
       ? startDate.format("MMMM Do, YYYY")
@@ -108,8 +109,8 @@ class HabitCard extends React.Component {
             </div>
           </div>
           <div class="card-content">
-            <div class="content">
-              {this.renderStreak(streak, endDate, startDate)}
+            <div class="content streak">
+              {this.renderStreak(streak, endDate)}
             </div>
           </div>
           <footer class="card-footer card-element-background">
@@ -132,6 +133,32 @@ class HabitCard extends React.Component {
         </div>
       </div>
     );
+  }
+
+  renderCollapsed() {
+    const { streak: oldStreak, title, endDate } = this.props.habit;
+
+    let newStreak = oldStreak;
+
+    if (newStreak.length >= 7) {
+      const startOfWeek = newStreak.length - 7;
+      const endOfWeek = newStreak.length;
+      newStreak = newStreak.slice(startOfWeek, endOfWeek);
+    }
+
+    return (
+      <div>
+        <div class="compact-card">
+          <div class="compact-card-header">{title}</div>
+          <div>{this.renderStreak(newStreak, endDate)}</div>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    const { collapsed } = this.props;
+    return collapsed ? this.renderCollapsed() : this.renderExpanded();
   }
 }
 

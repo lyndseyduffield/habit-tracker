@@ -9,7 +9,7 @@ class Home extends React.Component {
     return this.props.habitIds.map(id => {
       return (
         <div key={id}>
-          <HabitCard id={id} />
+          <HabitCard collapsed={this.props.collapsed} id={id} />
         </div>
       );
     });
