@@ -31,17 +31,12 @@ class Home extends React.Component {
     );
   };
 
-  renderDisplay = () => {
+  render() {
     if (this.props.habitIds.length === 0) {
       return <div class="container">{this.renderEmpty()}</div>;
     } else {
       return <div class="container">{this.habitList()}</div>;
     }
-  };
-
-  render() {
-    console.log(this.props);
-    return <div>{this.renderDisplay()}</div>;
   }
 }
 
