@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { getHabitIds } from "../utils";
 
 class NavBar extends React.Component {
   buttonLabel = () => {
@@ -11,7 +13,9 @@ class NavBar extends React.Component {
   };
 
   render() {
-    const showView = this.props.location.pathname === "/";
+    console.log(this.props);
+    const showView =
+      this.props.location.pathname === "/" && this.props.habitIds.length > 0;
     return (
       <nav class="navbar has-shadow">
         <div class="navbar-brand">
@@ -44,4 +48,10 @@ class NavBar extends React.Component {
   }
 }
 
-export default withRouter(NavBar);
+const mapStateToProps = state => {
+  return {
+    habitIds: getHabitIds(state.habits)
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(NavBar));
