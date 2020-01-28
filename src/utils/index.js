@@ -1,5 +1,8 @@
 import moment from "moment";
 
+// Expects an object with numeric keys where each key
+// is the id of a particular habit. Produces an array
+// of habit ids as strings.
 export const getHabitIds = habitsObj => {
   return habitsObj ? Object.keys(habitsObj) : [];
 };
