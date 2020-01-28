@@ -1,5 +1,7 @@
 # HabitTracker
 
+![](https://github.com/lyndseyduffield/habit-tracker/workflows/Habit%20Tracker%20CI/badge.svg)
+
 HabitTracker is a React/Redux application that runs in the browser using local storage as its database -- so each user's data is their own (private). Users can:  
 
 * Add meaningful habits that they hope to implemet in their lives.
