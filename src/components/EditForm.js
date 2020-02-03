@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import { editHabit } from "../actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
-import { updateHabitStreak } from "../utils";
+import { updateHabitStreak } from "../utils/streak";
 
 const EditForm = props => {
   const [state, setState] = useState({

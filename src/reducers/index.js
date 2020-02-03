@@ -1,5 +1,6 @@
 import moment from "moment";
-import { updateHabitStreak, removeKey } from "../utils";
+import { removeKey } from "../utils";
+import { updateHabitStreak } from "../utils/streak";
 import {
   ADD_HABIT,
   EDIT_HABIT,

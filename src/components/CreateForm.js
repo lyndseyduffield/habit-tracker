@@ -6,7 +6,7 @@ import { addHabit } from "../actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/main.css";
-import { updateHabitStreak } from "../utils";
+import { updateHabitStreak } from "../utils/streak";
 
 const CreateForm = props => {
   const [state, setState] = useState({
