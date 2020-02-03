@@ -1,5 +1,5 @@
 import moment from "moment";
-import { updateHabitStreak } from "../utils";
+import { updateHabitStreak, removeKey } from "../utils";
 import {
   ADD_HABIT,
   EDIT_HABIT,
@@ -117,14 +117,4 @@ export function reducer(state = initialState, action) {
       return state;
     }
   }
-}
-
-// Removes a top-level key from an object, if it exists.
-// Immutable.
-function removeKey(obj, key) {
-  let objectKeys = Object.keys(obj);
-  let filteredKeys = objectKeys.filter(objectKey => key !== objectKey);
-  return filteredKeys.reduce((accObj, objectKey) => {
-    return { ...accObj, [objectKey]: obj[objectKey] };
-  }, {});
 }

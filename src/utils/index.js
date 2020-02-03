@@ -7,16 +7,6 @@ export const getHabitIds = habitsObj => {
   return habitsObj ? Object.keys(habitsObj) : [];
 };
 
-export const flattenHabits = habitsObj => {
-  let ids = getHabitIds(habitsObj);
-  return ids.map(id => {
-    return {
-      id,
-      title: habitsObj[id]["title"]
-    };
-  });
-};
-
 // Given a habit, returns a new habit with a verified streak, updated if
 // necessary.
 export const updateHabitStreak = habit => {
@@ -61,3 +51,13 @@ const getStreakLength = (now, startDate, endDate) => {
     return endDate.diff(startDate, "days") + 1;
   }
 };
+
+// Removes a top-level key from an object, if it exists.
+// Immutable.
+export function removeKey(obj, key) {
+  let objectKeys = Object.keys(obj);
+  let filteredKeys = objectKeys.filter(objectKey => key !== objectKey);
+  return filteredKeys.reduce((accObj, objectKey) => {
+    return { ...accObj, [objectKey]: obj[objectKey] };
+  }, {});
+}

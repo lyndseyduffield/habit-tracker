@@ -3,52 +3,26 @@ import Checkbox from "./Checkbox.js";
 import { connect } from "react-redux";
 import { updateStreak } from "../actions";
 import { Link } from "react-router-dom";
-import moment from "moment";
+import {
+  NO_STREAK,
+  DISABLED_STREAK,
+  ACTIVE_STREAK,
+  streakStatus
+} from "../utils/streak";
 import { deleteHabit } from "../actions";
 import "../css/main.css";
+import moment from "moment";
 
 class HabitCard extends React.Component {
   renderStreak(streak, endDate) {
-    // If there is no streak then the habit has not yet begun
-    if (streak.length === 0) {
-      return <div>This habit hasn't started yet!</div>;
-    }
-
-    // If now is after the end date then the habit has already ended. If the
-    // habit has already ended then the entire streak should be disabled.
     const now = moment().startOf("day");
-    if (now.isAfter(endDate, "days")) {
-      return streak.map((check, index) => {
-        return (
-          <Checkbox disabled={true}>
-            <input
-              key={index}
-              type="checkbox"
-              disabled={true}
-              checked={check}
-            />
-          </Checkbox>
-        );
-      });
-    }
+    const status = streakStatus(streak, endDate, now);
 
-    // Otherwise, the streak is non-empty and is active, so all days in the
-    // streak should be disabled except for the last one.
-    else {
-      const lastIndex = streak.length - 1;
-      return streak.map((check, index) => {
-        if (index === lastIndex) {
-          return (
-            <Checkbox>
-              <input
-                key={index}
-                type="checkbox"
-                onChange={event => this.handleStreakClick(event)}
-                checked={check}
-              />
-            </Checkbox>
-          );
-        } else {
+    switch (status) {
+      case NO_STREAK:
+        return <div>This habit hasn't started yet!</div>;
+      case DISABLED_STREAK: {
+        return streak.map((check, index) => {
           return (
             <Checkbox disabled={true}>
               <input
@@ -59,8 +33,39 @@ class HabitCard extends React.Component {
               />
             </Checkbox>
           );
-        }
-      });
+        });
+      }
+      case ACTIVE_STREAK: {
+        const lastIndex = streak.length - 1;
+        return streak.map((check, index) => {
+          if (index === lastIndex) {
+            return (
+              <Checkbox>
+                <input
+                  key={index}
+                  type="checkbox"
+                  onChange={event => this.handleStreakClick(event)}
+                  checked={check}
+                />
+              </Checkbox>
+            );
+          } else {
+            return (
+              <Checkbox disabled={true}>
+                <input
+                  key={index}
+                  type="checkbox"
+                  disabled={true}
+                  checked={check}
+                />
+              </Checkbox>
+            );
+          }
+        });
+      }
+      default: {
+        console.log("Oops! Something went wrong");
+      }
     }
   }
 
