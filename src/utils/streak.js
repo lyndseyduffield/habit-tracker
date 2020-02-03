@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export const NO_STREAK = "NO_STREAK";
 export const DISABLED_STREAK = "DISABLED_STREAK";
 export const ACTIVE_STREAK = "ACTIVE_STREAK";
