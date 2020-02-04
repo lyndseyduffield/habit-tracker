@@ -35,6 +35,12 @@ export const readState = () => {
 };
 
 export function reducer(state = initialState, action) {
+  return reduce(state, action);
+}
+
+// Used to create the main and test reducers, but should not be
+// used on its own.
+export function reduce(state, action) {
   switch (action.type) {
     // Use to load the state from local storage when the application
     // starts, but not to set individual habits
