@@ -9,16 +9,24 @@ const decodedState = {
       title: "hjasfhjv",
       goal: "asdf",
       accountabilityPartner: { name: "", email: "" },
-      startDate: moment("2020-01-28T08:00:00.000Z", moment.ISO_8601),
-      endDate: moment("2020-02-01T08:00:00.000Z", moment.ISO_8601),
+      startDate: moment("2020-01-28T08:00:00.000Z", moment.ISO_8601).startOf(
+        "day"
+      ),
+      endDate: moment("2020-02-01T08:00:00.000Z", moment.ISO_8601).startOf(
+        "day"
+      ),
       streak: [true, false, false, false, false]
     },
     4: {
       title: "ertwet",
       goal: "",
       accountabilityPartner: { name: "", email: "" },
-      startDate: moment("2020-02-15T08:00:00.000Z", moment.ISO_8601),
-      endDate: moment("2020-02-20T08:00:00.000Z", moment.ISO_8601),
+      startDate: moment("2020-02-15T08:00:00.000Z", moment.ISO_8601).startOf(
+        "day"
+      ),
+      endDate: moment("2020-02-20T08:00:00.000Z", moment.ISO_8601).startOf(
+        "day"
+      ),
       streak: []
     }
   }
