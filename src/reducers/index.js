@@ -25,36 +25,8 @@ const writeState = state => {
 // Retrieve Redux state from local storage
 export const readState = () => {
   try {
-    let state = JSON.parse(window.localStorage.getItem(STATE_KEY));
-    if (state === {}) {
-      return initialState;
-    } else {
-      const ids = state.habits ? Object.keys(state.habits) : [];
-
-      // Create a new habits object by decoding the date fields for each
-      // habit properly
-      const decodedHabits = ids.reduce((acc, id) => {
-        const parsedHabit = state.habits[id];
-
-        // The date fields have been parsed from strings but have not yet
-        // been parsed into moment date objects
-        const startDate = moment(parsedHabit.startDate, moment.ISO_8601);
-        const endDate = moment(parsedHabit.endDate, moment.ISO_8601);
-
-        // We have to verify that the streak is correct for the habit in
-        // the case that time has passed since the last page load
-        const newHabit = updateHabitStreak({
-          ...parsedHabit,
-          startDate,
-          endDate
-        });
-
-        return { ...acc, [id]: newHabit };
-      }, {});
-
-      // Return the state with parsed habits
-      return { ...state, habits: decodedHabits };
-    }
+    let stateJson = JSON.parse(window.localStorage.getItem(STATE_KEY));
+    return decodeState(stateJson);
   } catch {
     /* eslint-disable-next-line no-console */
     console.log("Failed to read state from local storage");
@@ -119,3 +91,35 @@ export function reducer(state = initialState, action) {
     }
   }
 }
+
+export const decodeState = stateJson => {
+  if (stateJson === {}) {
+    return initialState;
+  } else {
+    const ids = stateJson.habits ? Object.keys(stateJson.habits) : [];
+
+    // Create a new habits object by decoding the date fields for each
+    // habit properly
+    const decodedHabits = ids.reduce((acc, id) => {
+      const parsedHabit = stateJson.habits[id];
+
+      // The date fields have been parsed from strings but have not yet
+      // been parsed into moment date objects
+      const startDate = moment(parsedHabit.startDate, moment.ISO_8601);
+      const endDate = moment(parsedHabit.endDate, moment.ISO_8601);
+
+      // We have to verify that the streak is correct for the habit in
+      // the case that time has passed since the last page load
+      const newHabit = updateHabitStreak({
+        ...parsedHabit,
+        startDate,
+        endDate
+      });
+
+      return { ...acc, [id]: newHabit };
+    }, {});
+
+    // Return the state with parsed habits
+    return { ...stateJson, habits: decodedHabits };
+  }
+};

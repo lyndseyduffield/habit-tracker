@@ -1,4 +1,5 @@
 import {
+  updateStreak,
   getStreakLength,
   streakStatus,
   NO_STREAK,
@@ -28,4 +29,32 @@ it("gets the correct streak length", () => {
   expect(getStreakLength(now, past, future)).toEqual(7);
   expect(getStreakLength(now, past, past)).toEqual(1);
   expect(getStreakLength(now, future, future)).toEqual(0);
+});
+
+it("updates the streak if the user hasn't logged in for a few days", () => {
+  const now = moment("20200203").startOf("day");
+  const startDate = moment("20200128").startOf("day");
+  const startDateFuture = moment("20200204").startOf("day");
+  const endDate = moment("20200205").startOf("day");
+  const endDatePast = moment("20200201").startOf("day");
+  const streak = [true, true, true, false, true];
+  const futureStreak = [];
+
+  expect(updateStreak(startDate, endDate, streak, now)).toEqual([
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    false
+  ]);
+  expect(updateStreak(startDate, endDatePast, streak, now)).toEqual([
+    true,
+    true,
+    true,
+    false,
+    true
+  ]);
+  expect(updateStreak(startDateFuture, endDate, futureStreak, now)).toEqual([]);
 });

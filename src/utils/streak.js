@@ -26,20 +26,27 @@ export const streakStatus = (streak, endDate, now) => {
 // Given a habit, returns a new habit with a verified streak, updated if
 // necessary.
 export const updateHabitStreak = habit => {
-  const startDate = habit.startDate.startOf("day");
-  const endDate = habit.endDate.startOf("day");
   const now = moment().startOf("day");
+  let newStreak = updateStreak(
+    habit.startDate.startOf("day"),
+    habit.endDate.startOf("day"),
+    habit.streak,
+    now
+  );
+  return { ...habit, streak: newStreak };
+};
 
+export const updateStreak = (startDate, endDate, streak, now) => {
   // We need to replace the old streak in case time has passed since the last
   // "user login" occurred
-  let newStreak = habit.streak;
+  let newStreak = streak;
 
   // If the habit hasn't started yet, then the streak should be empty
   if (startDate.isAfter(now, "day")) {
     newStreak = [];
   } else {
     // figure out the correct streak length and current streak length
-    const currentLength = habit.streak.length;
+    const currentLength = streak.length;
     const correctLength = getStreakLength(now, startDate, endDate);
 
     // figure out if the current streak length is too long, too short, or is correct
@@ -53,7 +60,7 @@ export const updateHabitStreak = habit => {
     }
   }
 
-  return { ...habit, streak: newStreak };
+  return newStreak;
 };
 
 // Given a date, will return number of days difference from that date and
