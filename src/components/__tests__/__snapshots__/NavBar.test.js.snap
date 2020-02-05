@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the navbar correctly 1`] = `
+<nav
+  class="navbar has-shadow"
+>
+  <div
+    class="navbar-brand"
+  >
+    <div
+      class="navbar-item"
+    >
+      <strong>
+        HabitTracker
+      </strong>
+    </div>
+  </div>
+  <div
+    class="navbar-end"
+  >
+    <div
+      class="navbar-item"
+    >
+      <div
+        class="buttons"
+      >
+        <a
+          class="button is-light"
+          href="/new"
+          onClick={[Function]}
+        >
+          <strong>
+            New Habit
+          </strong>
+        </a>
+        <div
+          class="button is-light"
+          onClick={[Function]}
+        >
+          <strong>
+            Collapse View
+          </strong>
+        </div>
+        <a
+          class="button is-light"
+          href="/"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+`;

@@ -54,6 +54,15 @@ const EditForm = props => {
     props.history.push("/");
   };
 
+  console.log(
+    "match--",
+    props.match,
+    "params--",
+    props.match.params,
+    "id--",
+    props.match.params.id
+  );
+
   return (
     <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
       <div class="field">
