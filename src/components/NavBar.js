@@ -19,9 +19,9 @@ class NavBar extends React.Component {
     return (
       <nav class="navbar has-shadow">
         <div class="navbar-brand">
-          <div class="navbar-item">
+          <Link to="/" class="navbar-item">
             <strong>HabitTracker</strong>
-          </div>
+          </Link>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
