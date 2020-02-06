@@ -9,8 +9,8 @@ import { updateHabitStreak } from "../utils/streak";
 
 const EditForm = props => {
   const [state, setState] = useState({
-    startDate: new Date(),
-    endDate: new Date()
+    startDate: props.now,
+    endDate: props.now
   });
   const { register, handleSubmit, setValue, errors } = useForm();
 
@@ -96,7 +96,7 @@ const EditForm = props => {
             <label class="label">Start Date</label>
             <div class="control">
               <DatePicker
-                minDate={new Date()}
+                minDate={props.now}
                 selected={state.startDate}
                 onChange={date => {
                   handleDatePickerChange("startDate", date);

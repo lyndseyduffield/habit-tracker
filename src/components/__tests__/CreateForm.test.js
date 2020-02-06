@@ -11,7 +11,7 @@ it("renders the create form correctly", () => {
   const tree = renderer
     .create(
       <Provider store={store}>
-        <CreateForm />
+        <CreateForm now={new Date("02/04/2020")} />
       </Provider>
     )
     .toJSON();

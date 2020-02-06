@@ -12,6 +12,7 @@ it("renders the edit form correctly", () => {
     .create(
       <Provider store={store}>
         <EditForm
+          now={new Date("02/04/2020")}
           match={{
             path: "/:id/edit",
             url: "/4/edit",
