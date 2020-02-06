@@ -9,8 +9,8 @@ import { updateHabitStreak } from "../utils/streak";
 
 const EditForm = props => {
   const [state, setState] = useState({
-    startDate: new Date(),
-    endDate: new Date()
+    startDate: props.now,
+    endDate: props.now
   });
   const { register, handleSubmit, setValue, errors } = useForm();
 
@@ -54,6 +54,15 @@ const EditForm = props => {
     props.history.push("/");
   };
 
+  console.log(
+    "match--",
+    props.match,
+    "params--",
+    props.match.params,
+    "id--",
+    props.match.params.id
+  );
+
   return (
     <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
       <div class="field">
@@ -87,7 +96,7 @@ const EditForm = props => {
             <label class="label">Start Date</label>
             <div class="control">
               <DatePicker
-                minDate={new Date()}
+                minDate={props.now}
                 selected={state.startDate}
                 onChange={date => {
                   handleDatePickerChange("startDate", date);
