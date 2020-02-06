@@ -10,8 +10,8 @@ import { updateHabitStreak } from "../utils/streak";
 
 const CreateForm = props => {
   const [state, setState] = useState({
-    startDate: new Date(),
-    endDate: new Date()
+    startDate: props.now,
+    endDate: props.now
   });
 
   const { register, handleSubmit, setValue, errors } = useForm();
@@ -19,9 +19,9 @@ const CreateForm = props => {
   React.useEffect(() => {
     register({ name: "startDate" });
     register({ name: "endDate" });
-    setValue("startDate", new Date());
-    setValue("endDate", new Date());
-  }, [register, setValue]);
+    setValue("startDate", props.now);
+    setValue("endDate", props.now);
+  }, [register, setValue, props]);
 
   const onSubmit = data => {
     const startDate = moment(data.startDate);
@@ -81,7 +81,7 @@ const CreateForm = props => {
             <div class="control">
               <DatePicker
                 class="dropdown"
-                minDate={new Date()}
+                minDate={props.now}
                 selected={state.startDate}
                 onChange={date => {
                   onDatePickerChange("startDate", date);

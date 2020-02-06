@@ -13,7 +13,6 @@ class NavBar extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const showView =
       this.props.location.pathname === "/" && this.props.habitIds.length > 0;
     return (
@@ -54,4 +53,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(NavBar));
+export const ConnectedNavBar = connect(mapStateToProps)(NavBar);
+
+export default withRouter(ConnectedNavBar);

@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the habit card correctly 1`] = `
+<div
+  class="section"
+>
+  <div
+    class="card card-border"
+  >
+    <header
+      class="card-header card-element-background"
+    >
+      <p
+        class="card-header-title header-font"
+      >
+        ertwet
+      </p>
+    </header>
+    <div
+      class="card-content"
+    >
+      <div
+        class="content flex-item"
+      >
+        <div
+          class="flex-element"
+        >
+          <h3>
+            Goal
+          </h3>
+          <p>
+            
+          </p>
+        </div>
+        <div
+          class="flex-element"
+        >
+          <h3>
+            Accountability Partner
+          </h3>
+          <p>
+            name: 
+            
+          </p>
+          <p>
+            email: 
+            
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="card-content"
+    >
+      <div
+        class="content"
+      >
+        February 15th, 2020
+         - 
+        February 20th, 2020
+      </div>
+    </div>
+    <div
+      class="card-content"
+    >
+      <div
+        class="content streak"
+      >
+        <div>
+          This habit hasn't started yet!
+        </div>
+      </div>
+    </div>
+    <footer
+      class="card-footer card-element-background"
+    >
+      <a
+        class="card-footer-item is-dark"
+        href="/undefined/edit"
+        onClick={[Function]}
+      >
+        <strong>
+          Edit
+        </strong>
+      </a>
+      <a
+        class="card-footer-item is-dark"
+        href="/"
+        onClick={[Function]}
+      >
+        <strong>
+          Delete
+        </strong>
+      </a>
+    </footer>
+  </div>
+</div>
+`;

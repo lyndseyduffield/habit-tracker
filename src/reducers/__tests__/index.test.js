@@ -1,6 +1,17 @@
-import { decodeState } from "../index";
+import { decodeState, reduce } from "../index";
 import testState from "./testState.json";
 import moment from "moment";
+
+// Use to create mock stores for testing purposes. Use:
+//
+// ```js
+// const store = createStore(testReducer)
+// ...
+// <Provider store={store}><MyTestConnectedComponent /></Provider>
+// ```
+export function testReducer(state = decodedState, action) {
+  return reduce(state, action);
+}
 
 const decodedState = {
   lastId: 4,

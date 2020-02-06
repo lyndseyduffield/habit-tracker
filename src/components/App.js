@@ -40,8 +40,14 @@ class App extends React.Component {
             path="/"
             component={() => <Home collapsed={this.state.collapsed} />}
           />
-          <Route path="/new" component={CreateForm} />
-          <Route path="/:id/edit" component={EditForm} />
+          <Route
+            path="/new"
+            component={() => <CreateForm now={new Date()} />}
+          />
+          <Route
+            path="/:id/edit"
+            component={() => <EditForm now={new Date()} />}
+          />
           <Route path="/:id/show" component={HabitCard} />
         </Switch>
       </Router>
