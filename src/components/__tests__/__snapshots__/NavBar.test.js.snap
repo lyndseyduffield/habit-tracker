@@ -7,13 +7,15 @@ exports[`renders the navbar correctly 1`] = `
   <div
     class="navbar-brand"
   >
-    <div
+    <a
       class="navbar-item"
+      href="/"
+      onClick={[Function]}
     >
       <strong>
         HabitTracker
       </strong>
-    </div>
+    </a>
   </div>
   <div
     class="navbar-end"
