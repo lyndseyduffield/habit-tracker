@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Home";
-import CreateForm from "./CreateForm";
-import EditForm from "./EditForm";
+//import CreateForm from "./CreateForm";
+import Form from "./Form";
 import HabitCard from "./HabitCard";
 import NavBar from "./NavBar";
 import { connect } from "react-redux";
@@ -38,15 +38,17 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            component={() => <Home collapsed={this.state.collapsed} />}
+            render={props => (
+              <Home {...props} collapsed={this.state.collapsed} />
+            )}
           />
           <Route
             path="/new"
-            component={() => <CreateForm now={new Date()} />}
+            render={props => <Form {...props} now={new Date()} />}
           />
           <Route
             path="/:id/edit"
-            component={() => <EditForm now={new Date()} />}
+            render={props => <Form {...props} now={new Date()} />}
           />
           <Route path="/:id/show" component={HabitCard} />
         </Switch>

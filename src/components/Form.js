@@ -2,12 +2,12 @@ import moment from "moment";
 import React, { useState } from "react";
 import useForm from "react-hook-form";
 import DatePicker from "react-datepicker";
-import { editHabit } from "../actions";
+import { editHabit, addHabit } from "../actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateHabitStreak } from "../utils/streak";
 
-const EditForm = props => {
+const Form = props => {
   const [state, setState] = useState({
     startDate: props.now,
     endDate: props.now
@@ -26,8 +26,11 @@ const EditForm = props => {
       setValue("startDate", startDate);
       setValue("endDate", endDate);
       setState({ startDate, endDate });
+    } else {
+      setValue("startDate", props.now);
+      setValue("endDate", props.now);
     }
-  }, [setValue, props.habit]);
+  }, [setValue, props]);
 
   const handleDatePickerChange = (key, date) => {
     if (key === "startDate" && date > state.endDate) {
@@ -41,27 +44,32 @@ const EditForm = props => {
   };
 
   const onSubmit = data => {
-    const id = props.match.params.id;
-    const startDate = moment(data.startDate);
-    const endDate = moment(data.endDate);
-    const habit = updateHabitStreak({
-      ...props.habit,
-      ...data,
-      startDate,
-      endDate
-    });
-    props.dispatch(editHabit(habit, id));
+    if (props.habit) {
+      const id = props.match.params.id;
+      const startDate = moment(data.startDate);
+      const endDate = moment(data.endDate);
+      const habit = updateHabitStreak({
+        ...props.habit,
+        ...data,
+        startDate,
+        endDate
+      });
+      props.dispatch(editHabit(habit, id));
+    } else {
+      const startDate = moment(data.startDate);
+      const endDate = moment(data.endDate);
+      const habit = updateHabitStreak({
+        ...data,
+        startDate,
+        endDate,
+        streak: []
+      });
+      props.dispatch(addHabit(habit));
+    }
     props.history.push("/");
   };
 
-  console.log(
-    "match--",
-    props.match,
-    "params--",
-    props.match.params,
-    "id--",
-    props.match.params.id
-  );
+  console.log(props);
 
   return (
     <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
@@ -72,7 +80,8 @@ const EditForm = props => {
             class="input"
             type="text"
             name="title"
-            defaultValue={props.habit && props.habit.title}
+            defaultValue={props.habit ? props.habit.title : ""}
+            placeholder="Your new habit."
             ref={register({ required: true })}
           />
         </div>
@@ -85,7 +94,8 @@ const EditForm = props => {
             class="textarea"
             type="text"
             name="goal"
-            defaultValue={props.habit && props.habit.goal}
+            defaultValue={props.habit ? props.habit.goal : ""}
+            placeholder="What is your goal?"
             ref={register}
           />
         </div>
@@ -126,7 +136,10 @@ const EditForm = props => {
             class="input"
             type="text"
             name="accountabilityPartner.name"
-            defaultValue={props.habit && props.habit.accountabilityPartner.name}
+            defaultValue={
+              props.habit ? props.habit.accountabilityPartner.name : ""
+            }
+            placeholder="Your accountability partner's name"
             ref={register({
               maxLength: { value: 40, message: "This name is too long" }
             })}
@@ -148,8 +161,9 @@ const EditForm = props => {
             type="text"
             name="accountabilityPartner.email"
             defaultValue={
-              props.habit && props.habit.accountabilityPartner.email
+              props.habit ? props.habit.accountabilityPartner.email : ""
             }
+            placeholder="Their email"
             ref={register({
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -179,4 +193,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(EditForm);
+export default connect(mapStateToProps)(Form);
