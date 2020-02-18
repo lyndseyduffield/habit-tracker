@@ -8,12 +8,12 @@ import { Provider } from "react-redux";
 
 const store = createStore(testReducer);
 
-it("renders the habit card correctly", () => {
+it("renders the habit card correctly when a habit hasn't started", () => {
   const tree = renderer
     .create(
       <Provider store={store}>
         <StaticRouter>
-          <HabitCard match={{ params: { id: "4" } }} />
+          <HabitCard match={{ params: { id: "0" } }} />
         </StaticRouter>
       </Provider>
     )

@@ -10,8 +10,8 @@ import {
 } from "../actions";
 
 const initialState = {
-  lastId: 0,
-  habits: {}
+  currentUser: null, // Null means no one is logged in, a string identifies a username
+  userStates: {}
 };
 
 const STATE_KEY = "state";
@@ -47,58 +47,144 @@ export function reduce(state, action) {
     case SET_STATE: {
       return action.value;
     }
+
     case ADD_HABIT: {
-      const uid = state.lastId + 1;
-      const newState = {
-        lastId: uid,
-        habits: { ...state.habits, [uid]: action.value }
-      };
-      writeState(newState);
-      return newState;
+      const user = state.currentUser;
+
+      if (user) {
+        const userState = state.userStates[user];
+
+        const uid = userState.lastId + 1;
+        const newUserState = {
+          lastId: uid,
+          habits: { ...userState.habits, [uid]: action.value }
+        };
+
+        const newState = {
+          ...state,
+          userStates: { ...state.userStates, [user]: newUserState }
+        };
+
+        writeState(newState);
+
+        return newState;
+      } else {
+        return state;
+      }
     }
+
     case EDIT_HABIT: {
-      const habit = action.value.habit;
-      const newState = {
-        ...state,
-        habits: { ...state.habits, [action.value.id]: habit }
-      };
-      writeState(newState);
-      return newState;
+      const user = state.currentUser;
+
+      if (user) {
+        const habit = action.value.habit;
+        const currentUserState = state.userStates[user];
+
+        const newUserState = {
+          ...currentUserState,
+          habits: {
+            ...currentUserState.habits,
+            [action.value.id]: habit
+          }
+        };
+
+        const newState = {
+          ...state,
+          userStates: { ...state.userStates, [user]: newUserState }
+        };
+
+        writeState(newState);
+
+        return newState;
+      } else {
+        return state;
+      }
     }
+
     case DELETE_HABIT: {
-      let id = action.value;
-      const newState = {
-        ...state,
-        habits: removeKey(state.habits, id)
-      };
-      writeState(newState);
-      return newState;
+      const user = state.currentUser;
+
+      if (user) {
+        const id = action.value;
+        const currentUserState = state.userStates[user];
+
+        const newUserState = {
+          ...currentUserState,
+          habits: removeKey(currentUserState.habits, id)
+        };
+
+        const newState = {
+          ...state,
+          userStates: { ...state.userStates, [user]: newUserState }
+        };
+
+        writeState(newState);
+
+        return newState;
+      } else {
+        return state;
+      }
     }
+
     case UPDATE_STREAK: {
-      const { id, check } = action.value;
-      const habit = state.habits[id];
+      const user = state.currentUser;
+      if (user) {
+        let currentUserState = state.userStates[user];
 
-      let streak = habit.streak;
-      streak[streak.length - 1] = check;
+        const { id, check } = action.value;
+        const habit = currentUserState.habits[id];
 
-      const newState = {
-        ...state,
-        habits: {
-          ...state.habits,
-          [id]: { ...habit, streak }
-        }
-      };
+        const streak = habit.streak;
+        streak[streak.length - 1] = check;
 
-      writeState(newState);
-      return newState;
+        const newUserState = {
+          ...currentUserState,
+          habits: {
+            ...currentUserState.habits,
+            [id]: { ...habit, streak }
+          }
+        };
+
+        const newState = {
+          ...state,
+          userStates: { ...state.userStates, [user]: newUserState }
+        };
+
+        writeState(newState);
+
+        return newState;
+      } else {
+        return state;
+      }
     }
+
     default: {
       return state;
     }
   }
 }
 
-export const decodeState = stateJson => {
+// Retrieve usable data for the app and redux
+// state. It takes a parsed JSON state object
+// and returns valid redux state.
+export const decodeState = parsedState => {
+  let userKeys = Object.keys(parsedState.userStates);
+
+  let decodedUserStates = userKeys.map(user => {
+    return { user, state: decodeUserState(parsedState.userStates[user]) };
+  });
+
+  let accumulatedUserState = decodedUserStates.reduce((acc, userState) => {
+    let { user, state } = userState;
+    return { ...acc, [user]: state };
+  }, {});
+
+  return { ...parsedState, userStates: accumulatedUserState };
+};
+
+// This decodes an individual users state (habits).
+// Expects an object with a lastId and habits key.
+export const decodeUserState = stateJson => {
   if (stateJson === {}) {
     return initialState;
   } else {

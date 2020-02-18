@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders the create form correctly 1`] = `
+exports[`renders the form in edit mode correctly 1`] = `
 <form
   class="form-container"
   onSubmit={[Function]}
@@ -18,8 +18,9 @@ exports[`renders the create form correctly 1`] = `
     >
       <input
         class="input"
+        defaultValue="go to the gym"
         name="title"
-        placeholder="Your new habit"
+        placeholder="Your new habit."
         type="text"
       />
     </div>
@@ -37,6 +38,7 @@ exports[`renders the create form correctly 1`] = `
     >
       <textarea
         class="textarea"
+        defaultValue="lose some weight"
         name="goal"
         placeholder="What is your goal?"
         type="text"
@@ -135,11 +137,17 @@ exports[`renders the create form correctly 1`] = `
     >
       <input
         class="input"
+        defaultValue="bob smith"
         name="accountabilityPartner.name"
         placeholder="Your accountability partner's name"
         type="text"
       />
     </div>
+    <p
+      class="help is-danger"
+    >
+      
+    </p>
   </div>
   <div
     class="field"
@@ -154,11 +162,17 @@ exports[`renders the create form correctly 1`] = `
     >
       <input
         class="input"
+        defaultValue="bob@gmail.com"
         name="accountabilityPartner.email"
         placeholder="Their email"
         type="text"
       />
     </div>
+    <p
+      class="help is-danger"
+    >
+      
+    </p>
   </div>
   <div
     class="control margin-top"

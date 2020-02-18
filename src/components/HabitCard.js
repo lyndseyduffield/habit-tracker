@@ -24,13 +24,8 @@ class HabitCard extends React.Component {
       case DISABLED_STREAK: {
         return streak.map((check, index) => {
           return (
-            <Checkbox disabled={true}>
-              <input
-                key={index}
-                type="checkbox"
-                disabled={true}
-                checked={check}
-              />
+            <Checkbox key={index} disabled={true}>
+              <input type="checkbox" disabled={true} checked={check} />
             </Checkbox>
           );
         });
@@ -40,9 +35,8 @@ class HabitCard extends React.Component {
         return streak.map((check, index) => {
           if (index === lastIndex) {
             return (
-              <Checkbox>
+              <Checkbox key={index}>
                 <input
-                  key={index}
                   type="checkbox"
                   onChange={event => this.handleStreakClick(event)}
                   checked={check}
@@ -51,13 +45,8 @@ class HabitCard extends React.Component {
             );
           } else {
             return (
-              <Checkbox disabled={true}>
-                <input
-                  key={index}
-                  type="checkbox"
-                  disabled={true}
-                  checked={check}
-                />
+              <Checkbox disabled={true} key={index}>
+                <input type="checkbox" disabled={true} checked={check} />
               </Checkbox>
             );
           }
@@ -162,8 +151,12 @@ class HabitCard extends React.Component {
   }
 
   render() {
-    const { collapsed } = this.props;
-    return collapsed ? this.renderCollapsed() : this.renderExpanded();
+    const { collapsed, habit } = this.props;
+    if (habit) {
+      return collapsed ? this.renderCollapsed() : this.renderExpanded();
+    } else {
+      return "";
+    }
   }
 }
 
@@ -176,9 +169,16 @@ const mapStateToProps = (state, ownProps) => {
     id = ownProps.id;
   }
 
-  return {
-    habit: state.habits[id]
-  };
+  const user = state.currentUser;
+  if (user) {
+    return {
+      habit: state.userStates[user].habits[id]
+    };
+  } else {
+    return {
+      habit: null
+    };
+  }
 };
 
 export default connect(mapStateToProps)(HabitCard);
