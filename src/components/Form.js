@@ -188,9 +188,16 @@ const Form = props => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    habit: state.habits[ownProps.match.params.id]
-  };
+  const user = state.currentUser;
+  if (user) {
+    return {
+      habit: state.userStates[user].habits[ownProps.match.params.id]
+    };
+  } else {
+    return {
+      habit: null
+    };
+  }
 };
 
 export default connect(mapStateToProps)(Form);

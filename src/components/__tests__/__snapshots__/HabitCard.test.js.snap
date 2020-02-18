@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders the habit card correctly 1`] = `
+exports[`renders the habit card correctly when a habit hasn't started 1`] = `
 <div
   class="section"
 >
@@ -13,7 +13,7 @@ exports[`renders the habit card correctly 1`] = `
       <p
         class="card-header-title header-font"
       >
-        ertwet
+        go to the gym
       </p>
     </header>
     <div
@@ -29,7 +29,7 @@ exports[`renders the habit card correctly 1`] = `
             Goal
           </h3>
           <p>
-            
+            lose some weight
           </p>
         </div>
         <div
@@ -40,11 +40,11 @@ exports[`renders the habit card correctly 1`] = `
           </h3>
           <p>
             name: 
-            
+            bob smith
           </p>
           <p>
             email: 
-            
+            bob@gmail.com
           </p>
         </div>
       </div>
@@ -55,9 +55,9 @@ exports[`renders the habit card correctly 1`] = `
       <div
         class="content"
       >
-        February 15th, 2020
+        January 28th, 2020
          - 
-        February 20th, 2020
+        February 1st, 2020
       </div>
     </div>
     <div
@@ -66,9 +66,66 @@ exports[`renders the habit card correctly 1`] = `
       <div
         class="content streak"
       >
-        <div>
-          This habit hasn't started yet!
-        </div>
+        <label
+          class="checkbox-label"
+        >
+          <input
+            checked={true}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            class="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
+        <label
+          class="checkbox-label"
+        >
+          <input
+            checked={false}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            class="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
+        <label
+          class="checkbox-label"
+        >
+          <input
+            checked={false}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            class="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
+        <label
+          class="checkbox-label"
+        >
+          <input
+            checked={false}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            class="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
+        <label
+          class="checkbox-label"
+        >
+          <input
+            checked={false}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            class="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
       </div>
     </div>
     <footer

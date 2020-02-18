@@ -48,9 +48,16 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    habitIds: getHabitIds(state.habits)
-  };
+  const user = state.currentUser;
+  if (user) {
+    return {
+      habitIds: getHabitIds(state.userStates[user].habits)
+    };
+  } else {
+    return {
+      habitIds: []
+    };
+  }
 };
 
 export const ConnectedNavBar = connect(mapStateToProps)(NavBar);
