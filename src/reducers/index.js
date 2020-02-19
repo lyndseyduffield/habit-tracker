@@ -6,7 +6,8 @@ import {
   EDIT_HABIT,
   SET_STATE,
   DELETE_HABIT,
-  UPDATE_STREAK
+  UPDATE_STREAK,
+  UPDATE_CURRENT_USER
 } from "../actions";
 
 const initialState = {
@@ -26,8 +27,9 @@ const writeState = ({ initialized, ...state }) => {
 // Retrieve Redux state from local storage
 export const readState = () => {
   try {
-    const stateJson = JSON.parse(window.localStorage.getItem(STATE_KEY));
-    return decodeState(stateJson);
+    const stateJson = window.localStorage.getItem(STATE_KEY);
+    const parsedState = JSON.parse(stateJson);
+    return decodeState(parsedState);
   } catch {
     /* eslint-disable-next-line no-console */
     console.log("Failed to read state from local storage");
@@ -157,6 +159,18 @@ export function reduce(state, action) {
       } else {
         return state;
       }
+    }
+
+    case UPDATE_CURRENT_USER: {
+      const currentUser = action.value;
+      const newState = {
+        ...state,
+        currentUser
+      };
+
+      writeState(newState);
+
+      return newState;
     }
 
     default: {

@@ -1,4 +1,4 @@
-const USERS_KEY = "users";
+export const USERS_KEY = "users";
 
 // Insert a new user into local storage when they sign up
 export const signupUser = user => {

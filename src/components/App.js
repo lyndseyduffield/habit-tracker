@@ -16,6 +16,11 @@ class App extends React.Component {
     collapsed: false
   };
 
+  componentDidMount() {
+    let state = readState();
+    this.props.dispatch(setState({ ...state, initialized: true }));
+  }
+
   toggleCollapse = event => {
     event.preventDefault();
     this.setState(prevState => ({
@@ -23,18 +28,19 @@ class App extends React.Component {
     }));
   };
 
-  componentDidMount() {
-    let state = readState();
-    this.props.dispatch(setState({ ...state, initialized: true }));
-  }
+  renderNavbar = () => {
+    return (
+      <NavBar
+        collapsed={this.state.collapsed}
+        toggleCollapse={this.toggleCollapse}
+      />
+    );
+  };
 
   render() {
     return (
       <Router basename="/habit-tracker">
-        <NavBar
-          collapsed={this.state.collapsed}
-          toggleCollapse={this.toggleCollapse}
-        />
+        {this.props.currentUser ? this.renderNavbar() : ""}
         <Switch>
           <Route path="/login" render={props => <LoginForm {...props} />} />
           <PrivateRoute
@@ -59,4 +65,10 @@ class App extends React.Component {
   }
 }
 
-export default connect()(App);
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
+export default connect(mapStateToProps)(App);

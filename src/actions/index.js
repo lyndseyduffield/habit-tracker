@@ -51,10 +51,10 @@ export const updateStreak = (id, check) => {
   return action;
 };
 
-export const updateCurrentUser = user => {
+export const updateCurrentUser = username => {
   const action = {
     type: UPDATE_CURRENT_USER,
-    value: user
+    value: username
   };
   return action;
 };
