@@ -10,6 +10,7 @@ import {
 } from "../actions";
 
 const initialState = {
+  initialized: false, // false means the state hasn't been read from localstorage yet
   currentUser: null, // Null means no one is logged in, a string identifies a username
   userStates: {}
 };
@@ -18,14 +19,14 @@ const STATE_KEY = "state";
 
 // Write redux state to local storage
 // TODO: Make this middleware to remove effects
-const writeState = state => {
+const writeState = ({ initialized, ...state }) => {
   window.localStorage.setItem(STATE_KEY, JSON.stringify(state));
 };
 
 // Retrieve Redux state from local storage
 export const readState = () => {
   try {
-    let stateJson = JSON.parse(window.localStorage.getItem(STATE_KEY));
+    const stateJson = JSON.parse(window.localStorage.getItem(STATE_KEY));
     return decodeState(stateJson);
   } catch {
     /* eslint-disable-next-line no-console */
