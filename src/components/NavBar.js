@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { updateCurrentUser } from "../actions";
 import { getHabitIds } from "../utils";
 
 class NavBar extends React.Component {
@@ -10,6 +11,11 @@ class NavBar extends React.Component {
     } else {
       return <strong>Collapse View</strong>;
     }
+  };
+
+  handleLogout = () => {
+    let username = null;
+    this.props.dispatch(updateCurrentUser(username));
   };
 
   render() {
@@ -36,9 +42,12 @@ class NavBar extends React.Component {
                   {this.buttonLabel()}
                 </div>
               )}
-              <Link to="/" class="button is-light">
-                Home
-              </Link>
+              <button
+                onClick={event => this.handleLogout(event)}
+                class="button is-light"
+              >
+                <strong>Logout</strong>
+              </button>
             </div>
           </div>
         </div>

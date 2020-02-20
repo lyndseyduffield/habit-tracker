@@ -6,13 +6,16 @@ import { updateCurrentUser } from "../actions";
 import { USERS_KEY, checkUser } from "../utils/users";
 
 const LoginForm = ({ currentUser, ...props }) => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, setError } = useForm();
 
   const onSubmit = data => {
     const users = JSON.parse(window.localStorage.getItem(USERS_KEY));
     if (checkUser(data, users)) {
       props.dispatch(updateCurrentUser(data.username));
       props.history.push("/");
+    } else {
+      setError("username", "notMatch", "invalid username");
+      setError("password", "notMatch", "invalid password");
     }
   };
 
@@ -27,23 +30,31 @@ const LoginForm = ({ currentUser, ...props }) => {
               type="text"
               name="username"
               placeholder="Your username here"
-              ref={register({ required: true })}
+              ref={register({
+                required: "A username is required"
+              })}
             />
           </div>
-          {errors.title && <p class="help is-danger">"A title is required"</p>}
+          {errors.username && (
+            <p class="help is-danger">{errors.username.message}</p>
+          )}
         </div>
         <div class="field">
           <label class="label is-large">Password</label>
           <div class="control">
             <input
               class="input"
-              type="text"
+              type="password"
               name="password"
               placeholder="Your password here"
-              ref={register({ required: true })}
+              ref={register({
+                required: "A password is required"
+              })}
             />
           </div>
-          {errors.title && <p class="help is-danger">"A title is required"</p>}
+          {errors.password && (
+            <p class="help is-danger">{errors.password.message}</p>
+          )}
         </div>
         <div class="control margin-top">
           <button class="button is-link">Submit</button>
