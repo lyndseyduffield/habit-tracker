@@ -15,6 +15,11 @@
   --color-myrtle: #216869;
 }
 
+.login-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 .form-container {
   max-width: var(--form-width);
   background-color: #fff;

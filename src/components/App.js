@@ -4,6 +4,7 @@ import Home from "./Home";
 import Form from "./Form";
 import HabitCard from "./HabitCard";
 import NavBar from "./NavBar";
+import SignupForm from "./SignupForm.js";
 import LoginForm from "./LoginForm";
 import { connect } from "react-redux";
 import { setState } from "../actions";
@@ -43,6 +44,7 @@ class App extends React.Component {
         {this.props.currentUser ? this.renderNavbar() : ""}
         <Switch>
           <Route path="/login" render={props => <LoginForm {...props} />} />
+          <Route path="/signup" render={props => <SignupForm {...props} />} />
           <PrivateRoute
             exact
             path="/"

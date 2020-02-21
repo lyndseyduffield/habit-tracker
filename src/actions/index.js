@@ -4,6 +4,7 @@ export const DELETE_HABIT = "DELETE_HABIT";
 export const SET_STATE = "SET_STATE";
 export const UPDATE_STREAK = "UPDATE_STREAK";
 export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER";
+export const REGISTER_USER = "REGISTER_USER";
 
 export const addHabit = habit => {
   const action = {
@@ -54,6 +55,14 @@ export const updateStreak = (id, check) => {
 export const updateCurrentUser = username => {
   const action = {
     type: UPDATE_CURRENT_USER,
+    value: username
+  };
+  return action;
+};
+
+export const registerUser = username => {
+  const action = {
+    type: REGISTER_USER,
     value: username
   };
   return action;

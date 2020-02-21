@@ -7,7 +7,8 @@ import {
   SET_STATE,
   DELETE_HABIT,
   UPDATE_STREAK,
-  UPDATE_CURRENT_USER
+  UPDATE_CURRENT_USER,
+  REGISTER_USER
 } from "../actions";
 
 const initialState = {
@@ -166,6 +167,23 @@ export function reduce(state, action) {
       const newState = {
         ...state,
         currentUser
+      };
+
+      writeState(newState);
+
+      return newState;
+    }
+
+    case REGISTER_USER: {
+      const user = action.value;
+      const habitObj = {
+        lastId: 0,
+        habits: {}
+      };
+
+      const newState = {
+        ...state,
+        userStates: { ...state.userState, [user]: habitObj }
       };
 
       writeState(newState);

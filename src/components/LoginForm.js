@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import useForm from "react-hook-form";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { updateCurrentUser } from "../actions";
 import { USERS_KEY, checkUser } from "../utils/users";
 
@@ -56,8 +56,15 @@ const LoginForm = ({ currentUser, ...props }) => {
             <p class="help is-danger">{errors.password.message}</p>
           )}
         </div>
-        <div class="control margin-top">
-          <button class="button is-link">Submit</button>
+        <div class="login-buttons">
+          <div class="control margin-top">
+            <button type="submit" class="button is-link">
+              Signin
+            </button>
+          </div>
+          <Link to="/signup" class="control margin-top">
+            <button class="button is-link">Sign Up</button>
+          </Link>
         </div>
       </form>
     );
