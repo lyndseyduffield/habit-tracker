@@ -42,15 +42,9 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   const user = state.currentUser;
-  if (user) {
-    return {
-      habitIds: getHabitIds(state.userStates[user].habits)
-    };
-  } else {
-    return {
-      habitIds: []
-    };
-  }
+  return user
+    ? { habitIds: getHabitIds(state.userStates[user].habits) }
+    : { habitIds: [] };
 };
 
 export default connect(mapStateToProps)(Home);

@@ -6,10 +6,13 @@ import {
   EDIT_HABIT,
   SET_STATE,
   DELETE_HABIT,
-  UPDATE_STREAK
+  UPDATE_STREAK,
+  UPDATE_CURRENT_USER,
+  REGISTER_USER
 } from "../actions";
 
 const initialState = {
+  initialized: false, // false means the state hasn't been read from localstorage yet
   currentUser: null, // Null means no one is logged in, a string identifies a username
   userStates: {}
 };
@@ -17,16 +20,19 @@ const initialState = {
 const STATE_KEY = "state";
 
 // Write redux state to local storage
-// TODO: Make this middleware to remove effects
-const writeState = state => {
+export const writeStateMiddleware = store => next => action => {
+  let result = next(action);
+  const { initialized, ...state } = store.getState();
   window.localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  return result;
 };
 
 // Retrieve Redux state from local storage
 export const readState = () => {
   try {
-    let stateJson = JSON.parse(window.localStorage.getItem(STATE_KEY));
-    return decodeState(stateJson);
+    const stateJson = window.localStorage.getItem(STATE_KEY);
+    const parsedState = JSON.parse(stateJson);
+    return decodeState(parsedState);
   } catch {
     /* eslint-disable-next-line no-console */
     console.log("Failed to read state from local storage");
@@ -65,8 +71,6 @@ export function reduce(state, action) {
           userStates: { ...state.userStates, [user]: newUserState }
         };
 
-        writeState(newState);
-
         return newState;
       } else {
         return state;
@@ -93,8 +97,6 @@ export function reduce(state, action) {
           userStates: { ...state.userStates, [user]: newUserState }
         };
 
-        writeState(newState);
-
         return newState;
       } else {
         return state;
@@ -117,8 +119,6 @@ export function reduce(state, action) {
           ...state,
           userStates: { ...state.userStates, [user]: newUserState }
         };
-
-        writeState(newState);
 
         return newState;
       } else {
@@ -150,12 +150,35 @@ export function reduce(state, action) {
           userStates: { ...state.userStates, [user]: newUserState }
         };
 
-        writeState(newState);
-
         return newState;
       } else {
         return state;
       }
+    }
+
+    case UPDATE_CURRENT_USER: {
+      const currentUser = action.value;
+      const newState = {
+        ...state,
+        currentUser
+      };
+
+      return newState;
+    }
+
+    case REGISTER_USER: {
+      const user = action.value;
+      const habitObj = {
+        lastId: 0,
+        habits: {}
+      };
+
+      const newState = {
+        ...state,
+        userStates: { ...state.userStates, [user]: habitObj }
+      };
+
+      return newState;
     }
 
     default: {
