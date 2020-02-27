@@ -84,7 +84,7 @@ const SignupForm = props => {
       </div>
       <div class="control margin-top">
         <button type="submit" class="button is-link">
-          Signin
+          Sign Up
         </button>
       </div>
     </form>

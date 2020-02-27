@@ -20,9 +20,11 @@ const initialState = {
 const STATE_KEY = "state";
 
 // Write redux state to local storage
-// TODO: Make this middleware to remove effects
-const writeState = ({ initialized, ...state }) => {
+export const writeStateMiddleware = store => next => action => {
+  let result = next(action);
+  const { initialized, ...state } = store.getState();
   window.localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  return result;
 };
 
 // Retrieve Redux state from local storage
@@ -69,8 +71,6 @@ export function reduce(state, action) {
           userStates: { ...state.userStates, [user]: newUserState }
         };
 
-        writeState(newState);
-
         return newState;
       } else {
         return state;
@@ -97,8 +97,6 @@ export function reduce(state, action) {
           userStates: { ...state.userStates, [user]: newUserState }
         };
 
-        writeState(newState);
-
         return newState;
       } else {
         return state;
@@ -121,8 +119,6 @@ export function reduce(state, action) {
           ...state,
           userStates: { ...state.userStates, [user]: newUserState }
         };
-
-        writeState(newState);
 
         return newState;
       } else {
@@ -154,8 +150,6 @@ export function reduce(state, action) {
           userStates: { ...state.userStates, [user]: newUserState }
         };
 
-        writeState(newState);
-
         return newState;
       } else {
         return state;
@@ -169,8 +163,6 @@ export function reduce(state, action) {
         currentUser
       };
 
-      writeState(newState);
-
       return newState;
     }
 
@@ -183,10 +175,8 @@ export function reduce(state, action) {
 
       const newState = {
         ...state,
-        userStates: { ...state.userState, [user]: habitObj }
+        userStates: { ...state.userStates, [user]: habitObj }
       };
-
-      writeState(newState);
 
       return newState;
     }

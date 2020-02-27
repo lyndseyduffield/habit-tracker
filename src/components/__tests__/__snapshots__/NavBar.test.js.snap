@@ -43,13 +43,14 @@ exports[`renders the navbar correctly 1`] = `
             Collapse View
           </strong>
         </div>
-        <a
+        <button
           class="button is-light"
-          href="/"
           onClick={[Function]}
         >
-          Home
-        </a>
+          <strong>
+            Logout
+          </strong>
+        </button>
       </div>
     </div>
   </div>
