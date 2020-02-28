@@ -25,7 +25,7 @@ const SignupForm = props => {
 
       props.dispatch(registerUser(user.username));
       props.dispatch(updateCurrentUser(user.username));
-      props.history.push("/");
+      props.history.push("/home");
     }
   };
 

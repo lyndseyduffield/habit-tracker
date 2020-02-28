@@ -12,7 +12,7 @@ const LoginForm = ({ currentUser, ...props }) => {
     const users = JSON.parse(window.localStorage.getItem(USERS_KEY));
     if (checkUser(data, users)) {
       props.dispatch(updateCurrentUser(data.username));
-      props.history.push("/");
+      props.history.push("/home");
     } else {
       setError("username", "notMatch", "invalid username");
       setError("password", "notMatch", "invalid password");
@@ -69,7 +69,7 @@ const LoginForm = ({ currentUser, ...props }) => {
       </form>
     );
   };
-  return currentUser ? <Redirect to={{ pathname: "/" }} /> : renderForm();
+  return currentUser ? <Redirect to={{ pathname: "/home" }} /> : renderForm();
 };
 
 const mapStateToProps = state => {
