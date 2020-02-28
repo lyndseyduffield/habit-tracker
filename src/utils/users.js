@@ -39,3 +39,9 @@ export const checkUser = (user, users) => {
     return false;
   }
 };
+
+export const findUsersKey = () => {
+  if (window.localStorage.getItem(USERS_KEY) === null) {
+    window.localStorage.setItem(USERS_KEY, JSON.stringify({}));
+  }
+};

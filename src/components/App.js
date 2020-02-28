@@ -11,6 +11,7 @@ import { setState } from "../actions";
 import { readState } from "../reducers";
 import "../css/main.css";
 import PrivateRoute from "./PrivateRoute";
+import { findUsersKey } from "../utils/users";
 
 class App extends React.Component {
   state = {
@@ -18,6 +19,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    findUsersKey();
     let state = readState();
     this.props.dispatch(setState({ ...state, initialized: true }));
   }
