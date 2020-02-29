@@ -1,25 +1,27 @@
 {
   "files": {
-    "main.css": "/habit-tracker/static/css/main.bbf8a5ed.chunk.css",
-    "main.js": "/habit-tracker/static/js/main.04a290b2.chunk.js",
-    "main.js.map": "/habit-tracker/static/js/main.04a290b2.chunk.js.map",
+    "main.css": "/habit-tracker/static/css/main.f0f7d145.chunk.css",
+    "main.js": "/habit-tracker/static/js/main.fc8532e6.chunk.js",
+    "main.js.map": "/habit-tracker/static/js/main.fc8532e6.chunk.js.map",
     "runtime-main.js": "/habit-tracker/static/js/runtime-main.a6c76754.js",
     "runtime-main.js.map": "/habit-tracker/static/js/runtime-main.a6c76754.js.map",
     "static/css/2.ff9ea1f9.chunk.css": "/habit-tracker/static/css/2.ff9ea1f9.chunk.css",
-    "static/js/2.ebe30f90.chunk.js": "/habit-tracker/static/js/2.ebe30f90.chunk.js",
-    "static/js/2.ebe30f90.chunk.js.map": "/habit-tracker/static/js/2.ebe30f90.chunk.js.map",
+    "static/js/2.d8991645.chunk.js": "/habit-tracker/static/js/2.d8991645.chunk.js",
+    "static/js/2.d8991645.chunk.js.map": "/habit-tracker/static/js/2.d8991645.chunk.js.map",
     "index.html": "/habit-tracker/index.html",
-    "precache-manifest.14a7a1a579344a886329927b640de090.js": "/habit-tracker/precache-manifest.14a7a1a579344a886329927b640de090.js",
+    "precache-manifest.519b6c30a6b83f67beea716e88f50b70.js": "/habit-tracker/precache-manifest.519b6c30a6b83f67beea716e88f50b70.js",
     "service-worker.js": "/habit-tracker/service-worker.js",
     "static/css/2.ff9ea1f9.chunk.css.map": "/habit-tracker/static/css/2.ff9ea1f9.chunk.css.map",
-    "static/css/main.bbf8a5ed.chunk.css.map": "/habit-tracker/static/css/main.bbf8a5ed.chunk.css.map",
-    "static/js/2.ebe30f90.chunk.js.LICENSE.txt": "/habit-tracker/static/js/2.ebe30f90.chunk.js.LICENSE.txt"
+    "static/css/main.f0f7d145.chunk.css.map": "/habit-tracker/static/css/main.f0f7d145.chunk.css.map",
+    "static/js/2.d8991645.chunk.js.LICENSE.txt": "/habit-tracker/static/js/2.d8991645.chunk.js.LICENSE.txt",
+    "static/media/cliplist.png": "/habit-tracker/static/media/cliplist.0b2906ab.png",
+    "static/media/clipshapes.png": "/habit-tracker/static/media/clipshapes.148cdd9b.png"
   },
   "entrypoints": [
     "static/js/runtime-main.a6c76754.js",
     "static/css/2.ff9ea1f9.chunk.css",
-    "static/js/2.ebe30f90.chunk.js",
-    "static/css/main.bbf8a5ed.chunk.css",
-    "static/js/main.04a290b2.chunk.js"
+    "static/js/2.d8991645.chunk.js",
+    "static/css/main.f0f7d145.chunk.css",
+    "static/js/main.fc8532e6.chunk.js"
   ]
 }
