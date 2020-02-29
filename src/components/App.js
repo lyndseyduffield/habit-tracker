@@ -12,6 +12,7 @@ import { readState } from "../reducers";
 import "../css/main.css";
 import PrivateRoute from "./PrivateRoute";
 import { findUsersKey } from "../utils/users";
+import LandingPage from "./LandingPage";
 
 class App extends React.Component {
   state = {
@@ -45,11 +46,11 @@ class App extends React.Component {
       <Router basename="/habit-tracker">
         {this.props.currentUser ? this.renderNavbar() : ""}
         <Switch>
+          <Route exact path="/" render={props => <LandingPage {...props} />} />
           <Route path="/login" render={props => <LoginForm {...props} />} />
           <Route path="/signup" render={props => <SignupForm {...props} />} />
           <PrivateRoute
-            exact
-            path="/"
+            path="/home"
             render={props => (
               <Home {...props} collapsed={this.state.collapsed} />
             )}

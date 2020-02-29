@@ -35,6 +35,56 @@ html {
   background: var(--color-blue);
 }
 
+/* Misc helper styles */
+
+.title.ht-title {
+  margin-bottom: 35px;
+  font-size: 3.2rem;
+  line-height: 1.2;
+}
+
+.subtitle.ht-subtitle {
+  line-height: 1.5;
+  font-size: 1.45rem;
+}
+
+.navbar {
+  background-color: #fff;
+  position: relative;
+  z-index: 30;
+}
+
+.navbar-guest {
+  border-top: 6px solid var(--color-blue);
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.ht-prop-title {
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 700;
+}
+
+.ht-prop-subtitle {
+  margin: 20px 0 0;
+  font-size: 23px;
+}
+
+.title.how-it-works-title {
+  margin-bottom: 50px;
+  font-size: 3.2rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.footer-title {
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
 /* this styles the text field for react datepicker with bulma's input styles
 because react datepicker doesn't provide a way to style the input field */
 

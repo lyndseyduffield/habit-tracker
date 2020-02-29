@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import useForm from "react-hook-form";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { updateCurrentUser } from "../actions";
 import { USERS_KEY, checkUser } from "../utils/users";
 
@@ -12,7 +12,7 @@ const LoginForm = ({ currentUser, ...props }) => {
     const users = JSON.parse(window.localStorage.getItem(USERS_KEY));
     if (checkUser(data, users)) {
       props.dispatch(updateCurrentUser(data.username));
-      props.history.push("/");
+      props.history.push("/home");
     } else {
       setError("username", "notMatch", "invalid username");
       setError("password", "notMatch", "invalid password");
@@ -59,17 +59,14 @@ const LoginForm = ({ currentUser, ...props }) => {
         <div class="login-buttons">
           <div class="control margin-top">
             <button type="submit" class="button is-link">
-              Signin
+              Sign In
             </button>
           </div>
-          <Link to="/signup" class="control margin-top">
-            <button class="button is-link">Sign Up</button>
-          </Link>
         </div>
       </form>
     );
   };
-  return currentUser ? <Redirect to={{ pathname: "/" }} /> : renderForm();
+  return currentUser ? <Redirect to={{ pathname: "/home" }} /> : renderForm();
 };
 
 const mapStateToProps = state => {

@@ -16,6 +16,7 @@ class NavBar extends React.Component {
   handleLogout = () => {
     let username = null;
     this.props.dispatch(updateCurrentUser(username));
+    this.props.history.push("/");
   };
 
   render() {

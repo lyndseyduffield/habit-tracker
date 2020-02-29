@@ -66,7 +66,7 @@ const Form = props => {
       });
       props.dispatch(addHabit(habit));
     }
-    props.history.push("/");
+    props.history.push("/home");
   };
 
   console.log(props);
