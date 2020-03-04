@@ -21,7 +21,8 @@ class NavBar extends React.Component {
 
   render() {
     const showView =
-      this.props.location.pathname === "/" && this.props.habitIds.length > 0;
+      this.props.location.pathname === "/home" &&
+      this.props.habitIds.length > 0;
     return (
       <nav class="navbar has-shadow">
         <div class="navbar-brand">

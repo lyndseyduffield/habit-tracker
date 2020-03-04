@@ -88,21 +88,21 @@ const LandingPage = props => {
           <div class="container">
             <div class="columns is-centered">
               <div class="column has-text-centered is-4">
-                <i class="far fa-check-square fa-7x"></i>
+                <i class="far fa-check-square fa-5x"></i>
                 <p class="ht-prop-subtitle">
                   Add all of the habits you want to make or break and check them
                   off by day as you complete them.
                 </p>
               </div>
               <div class="column has-text-centered is-4">
-                <i class="far fa-clock fa-7x"></i>
+                <i class="far fa-clock fa-5x"></i>
                 <p class="ht-prop-subtitle">
                   Watch your progress with the streaks feature that shows you
                   how many days in a row you've completed your habit.
                 </p>
               </div>
               <div class="column has-text-centered is-4">
-                <i class="far fa-bell fa-7x"></i>
+                <i class="far fa-bell fa-5x"></i>
                 <p class="ht-prop-subtitle">
                   Stay on track with an accountability partner who will be
                   alerted via email if you miss a habit three days in a row.
