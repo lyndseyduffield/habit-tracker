@@ -5,6 +5,10 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.2",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
     "bulma": "^0.8.0",
     "moment": "^2.24.0",
     "react": "^16.10.2",
@@ -14,7 +18,8 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.1",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "typescript": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

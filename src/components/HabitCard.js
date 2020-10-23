@@ -1,5 +1,5 @@
 import React from "react";
-import Checkbox from "./Checkbox.js";
+import Checkbox from "./Checkbox.tsx";
 import { connect } from "react-redux";
 import { updateStreak } from "../actions";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import {
   NO_STREAK,
   DISABLED_STREAK,
   ACTIVE_STREAK,
-  streakStatus
+  streakStatus,
 } from "../utils/streak";
 import { deleteHabit } from "../actions";
 import "../css/main.css";
@@ -38,7 +38,7 @@ class HabitCard extends React.Component {
               <Checkbox key={index}>
                 <input
                   type="checkbox"
-                  onChange={event => this.handleStreakClick(event)}
+                  onChange={(event) => this.handleStreakClick(event)}
                   checked={check}
                 />
               </Checkbox>
@@ -58,7 +58,7 @@ class HabitCard extends React.Component {
     }
   }
 
-  handleStreakClick = event => {
+  handleStreakClick = (event) => {
     const id = this.props.id || this.props.match.params.id;
     const check = event.target.checked;
     this.props.dispatch(updateStreak(id, check));
@@ -117,7 +117,7 @@ class HabitCard extends React.Component {
             <a
               href="/"
               class="card-footer-item is-dark"
-              onClick={event => {
+              onClick={(event) => {
                 this.handleDeleteClick(event, this.props.id);
               }}
             >
@@ -172,11 +172,11 @@ const mapStateToProps = (state, ownProps) => {
   const user = state.currentUser;
   if (user) {
     return {
-      habit: state.userStates[user].habits[id]
+      habit: state.userStates[user].habits[id],
     };
   } else {
     return {
-      habit: null
+      habit: null,
     };
   }
 };
