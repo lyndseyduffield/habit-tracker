@@ -67,7 +67,7 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
         class="content streak"
       >
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={true}
@@ -75,11 +75,11 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={false}
@@ -87,11 +87,11 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={false}
@@ -99,11 +99,11 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={false}
@@ -111,11 +111,11 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={false}
@@ -123,7 +123,7 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
       </div>

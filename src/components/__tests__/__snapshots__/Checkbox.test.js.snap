@@ -2,23 +2,23 @@
 
 exports[`Renders disabled correctly 1`] = `
 <label
-  class="checkbox-label"
+  className="checkbox-label"
 >
   <span>
     My child
   </span>
   <span
-    class="checkbox-custom checkbox-disabled rectangular"
+    className="checkbox-custom checkbox-disabled rectangular"
   />
 </label>
 `;
 
 exports[`Renders enabled correctly 1`] = `
 <label
-  class="checkbox-label"
+  className="checkbox-label"
 >
   <span
-    class="checkbox-custom rectangular"
+    className="checkbox-custom rectangular"
   />
 </label>
 `;
