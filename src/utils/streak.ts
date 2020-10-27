@@ -1,10 +1,18 @@
-import moment from "moment";
+import moment, { Moment } from "moment";
+import { Habit } from "../models/habit";
+import { Streak } from "../models/streak";
 
-export const NO_STREAK = "NO_STREAK";
-export const DISABLED_STREAK = "DISABLED_STREAK";
-export const ACTIVE_STREAK = "ACTIVE_STREAK";
+export type StreakStatus = "NO_STREAK" | "DISABLED_STREAK" | "ACTIVE_STREAK";
 
-export const streakStatus = (streak, endDate, now) => {
+export const NO_STREAK: StreakStatus = "NO_STREAK";
+export const DISABLED_STREAK: StreakStatus = "DISABLED_STREAK";
+export const ACTIVE_STREAK: StreakStatus = "ACTIVE_STREAK";
+
+export const streakStatus = (
+  streak: Streak,
+  endDate: Moment,
+  now: Moment
+): StreakStatus => {
   // If there is no streak then the habit has not yet begun
   if (streak.length === 0) {
     return NO_STREAK;
@@ -25,7 +33,7 @@ export const streakStatus = (streak, endDate, now) => {
 
 // Given a habit, returns a new habit with a verified streak, updated if
 // necessary.
-export const updateHabitStreak = habit => {
+export const updateHabitStreak = (habit: Habit): Habit => {
   const now = moment().startOf("day");
   let newStreak = updateStreak(
     habit.startDate.startOf("day"),
@@ -36,7 +44,12 @@ export const updateHabitStreak = habit => {
   return { ...habit, streak: newStreak };
 };
 
-export const updateStreak = (startDate, endDate, streak, now) => {
+export const updateStreak = (
+  startDate: Moment,
+  endDate: Moment,
+  streak: Streak,
+  now: Moment
+): Streak => {
   // We need to replace the old streak in case time has passed since the last
   // "user login" occurred
   let newStreak = streak;
@@ -65,7 +78,11 @@ export const updateStreak = (startDate, endDate, streak, now) => {
 
 // Given a date, will return number of days difference from that date and
 // today's date until it reached the end date (max difference)
-export const getStreakLength = (now, startDate, endDate) => {
+export const getStreakLength = (
+  now: Moment,
+  startDate: Moment,
+  endDate: Moment
+): number => {
   // check whether the end date is later or todays date is later and take
   // the earlier of the two
   if (startDate.isAfter(now, "days")) {
