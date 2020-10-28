@@ -1,6 +1,10 @@
 import { Moment } from "moment";
 import { Streak } from "./streak";
 
+export type HabitState = {
+  [index: number]: Habit;
+};
+
 export interface Habit {
   title: string;
   goal: string;
