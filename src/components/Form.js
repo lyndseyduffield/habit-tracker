@@ -2,15 +2,15 @@ import moment from "moment";
 import React, { useState } from "react";
 import useForm from "react-hook-form";
 import DatePicker from "react-datepicker";
-import { editHabit, addHabit } from "../actions";
+import { editHabit, addHabit } from "../store/actions";
 import { connect } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateHabitStreak } from "../utils/streak";
 
-const Form = props => {
+const Form = (props) => {
   const [state, setState] = useState({
     startDate: props.now,
-    endDate: props.now
+    endDate: props.now,
   });
   const { register, handleSubmit, setValue, errors } = useForm();
 
@@ -43,7 +43,7 @@ const Form = props => {
     }
   };
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     if (props.habit) {
       const id = props.match.params.id;
       const startDate = moment(data.startDate);
@@ -52,7 +52,7 @@ const Form = props => {
         ...props.habit,
         ...data,
         startDate,
-        endDate
+        endDate,
       });
       props.dispatch(editHabit(habit, id));
     } else {
@@ -62,7 +62,7 @@ const Form = props => {
         ...data,
         startDate,
         endDate,
-        streak: []
+        streak: [],
       });
       props.dispatch(addHabit(habit));
     }
@@ -108,7 +108,7 @@ const Form = props => {
               <DatePicker
                 minDate={props.now}
                 selected={state.startDate}
-                onChange={date => {
+                onChange={(date) => {
                   handleDatePickerChange("startDate", date);
                 }}
               />
@@ -120,7 +120,7 @@ const Form = props => {
               <DatePicker
                 minDate={state.startDate}
                 selected={state.endDate}
-                onChange={date => {
+                onChange={(date) => {
                   handleDatePickerChange("endDate", date);
                 }}
               />
@@ -141,7 +141,7 @@ const Form = props => {
             }
             placeholder="Your accountability partner's name"
             ref={register({
-              maxLength: { value: 40, message: "This name is too long" }
+              maxLength: { value: 40, message: "This name is too long" },
             })}
           />
         </div>
@@ -167,8 +167,8 @@ const Form = props => {
             ref={register({
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Please enter a valid email"
-              }
+                message: "Please enter a valid email",
+              },
             })}
           />
         </div>
@@ -191,11 +191,11 @@ const mapStateToProps = (state, ownProps) => {
   const user = state.currentUser;
   if (user) {
     return {
-      habit: state.userStates[user].habits[ownProps.match.params.id]
+      habit: state.userStates[user].habits[ownProps.match.params.id],
     };
   } else {
     return {
-      habit: null
+      habit: null,
     };
   }
 };

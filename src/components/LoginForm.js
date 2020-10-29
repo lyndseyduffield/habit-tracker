@@ -2,13 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import useForm from "react-hook-form";
 import { Redirect } from "react-router-dom";
-import { updateCurrentUser } from "../actions";
+import { updateCurrentUser } from "../store/actions";
 import { USERS_KEY, checkUser } from "../utils/users";
 
 const LoginForm = ({ currentUser, ...props }) => {
   const { register, handleSubmit, errors, setError } = useForm();
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const users = JSON.parse(window.localStorage.getItem(USERS_KEY));
     if (checkUser(data, users)) {
       props.dispatch(updateCurrentUser(data.username));
@@ -31,7 +31,7 @@ const LoginForm = ({ currentUser, ...props }) => {
               name="username"
               placeholder="Your username here"
               ref={register({
-                required: "A username is required"
+                required: "A username is required",
               })}
             />
           </div>
@@ -48,7 +48,7 @@ const LoginForm = ({ currentUser, ...props }) => {
               name="password"
               placeholder="Your password here"
               ref={register({
-                required: "A password is required"
+                required: "A password is required",
               })}
             />
           </div>
@@ -69,9 +69,9 @@ const LoginForm = ({ currentUser, ...props }) => {
   return currentUser ? <Redirect to={{ pathname: "/home" }} /> : renderForm();
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
   };
 };
 

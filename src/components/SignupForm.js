@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import useForm from "react-hook-form";
-import { updateCurrentUser, registerUser } from "../actions";
+import { updateCurrentUser, registerUser } from "../store/actions";
 import { USERS_KEY, signupUser } from "../utils/users";
 
-const SignupForm = props => {
+const SignupForm = (props) => {
   const { register, handleSubmit, errors, setError } = useForm();
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const users = JSON.parse(window.localStorage.getItem(USERS_KEY));
 
     if (users[data.username]) {
@@ -18,7 +18,7 @@ const SignupForm = props => {
     } else {
       let user = {
         username: data.username,
-        password: data.password
+        password: data.password,
       };
 
       signupUser(user);
@@ -40,7 +40,7 @@ const SignupForm = props => {
             name="username"
             placeholder="Your username here"
             ref={register({
-              required: "A username is required"
+              required: "A username is required",
             })}
           />
         </div>
@@ -57,7 +57,7 @@ const SignupForm = props => {
             name="password"
             placeholder="Your password here"
             ref={register({
-              required: "A password is required"
+              required: "A password is required",
             })}
           />
         </div>
@@ -74,7 +74,7 @@ const SignupForm = props => {
             name="verifypassword"
             placeholder="Your password here"
             ref={register({
-              required: "A password is required"
+              required: "A password is required",
             })}
           />
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { updateCurrentUser } from "../actions";
+import { updateCurrentUser } from "../store/actions";
 import { getHabitIds } from "../utils";
 
 class NavBar extends React.Component {
@@ -38,14 +38,14 @@ class NavBar extends React.Component {
               </Link>
               {showView && (
                 <div
-                  onClick={event => this.props.toggleCollapse(event)}
+                  onClick={(event) => this.props.toggleCollapse(event)}
                   class="button is-light"
                 >
                   {this.buttonLabel()}
                 </div>
               )}
               <button
-                onClick={event => this.handleLogout(event)}
+                onClick={(event) => this.handleLogout(event)}
                 class="button is-light"
               >
                 <strong>Logout</strong>
@@ -58,15 +58,15 @@ class NavBar extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const user = state.currentUser;
   if (user) {
     return {
-      habitIds: getHabitIds(state.userStates[user].habits)
+      habitIds: getHabitIds(state.userStates[user].habits),
     };
   } else {
     return {
-      habitIds: []
+      habitIds: [],
     };
   }
 };

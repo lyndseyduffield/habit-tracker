@@ -1,4 +1,4 @@
-import { Moment } from "moment";
+import moment from "moment";
 import { Streak } from "./streak";
 
 export type HabitState = {
@@ -8,8 +8,8 @@ export type HabitState = {
 export interface Habit {
   title: string;
   goal: string;
-  endDate: Moment;
-  startDate: Moment;
+  endDate: moment.Moment;
+  startDate: moment.Moment;
   streak: Streak;
   accountabilityPartner: AccountabilityPartner | null;
 }

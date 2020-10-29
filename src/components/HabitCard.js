@@ -1,7 +1,7 @@
 import React from "react";
 import Checkbox from "./Checkbox.tsx";
 import { connect } from "react-redux";
-import { updateStreak } from "../actions";
+import { updateStreak } from "../store/actions";
 import { Link } from "react-router-dom";
 import {
   NO_STREAK,
@@ -9,7 +9,7 @@ import {
   ACTIVE_STREAK,
   streakStatus,
 } from "../utils/streak";
-import { deleteHabit } from "../actions";
+import { deleteHabit } from "../store/actions";
 import "../css/main.css";
 import moment from "moment";
 

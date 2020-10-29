@@ -7,8 +7,8 @@ import NavBar from "./NavBar";
 import SignupForm from "./SignupForm.js";
 import LoginForm from "./LoginForm";
 import { connect } from "react-redux";
-import { setState } from "../actions";
-import { readState } from "../reducers";
+import { setState } from "../store/actions";
+import { readState } from "../store/reducers";
 import "../css/main.css";
 import PrivateRoute from "./PrivateRoute";
 import { findUsersKey } from "../utils/users";
@@ -16,7 +16,7 @@ import LandingPage from "./LandingPage";
 
 class App extends React.Component {
   state = {
-    collapsed: false
+    collapsed: false,
   };
 
   componentDidMount() {
@@ -25,10 +25,10 @@ class App extends React.Component {
     this.props.dispatch(setState({ ...state, initialized: true }));
   }
 
-  toggleCollapse = event => {
+  toggleCollapse = (event) => {
     event.preventDefault();
-    this.setState(prevState => ({
-      collapsed: !prevState.collapsed
+    this.setState((prevState) => ({
+      collapsed: !prevState.collapsed,
     }));
   };
 
@@ -46,22 +46,26 @@ class App extends React.Component {
       <Router basename="/habit-tracker">
         {this.props.currentUser ? this.renderNavbar() : ""}
         <Switch>
-          <Route exact path="/" render={props => <LandingPage {...props} />} />
-          <Route path="/login" render={props => <LoginForm {...props} />} />
-          <Route path="/signup" render={props => <SignupForm {...props} />} />
+          <Route
+            exact
+            path="/"
+            render={(props) => <LandingPage {...props} />}
+          />
+          <Route path="/login" render={(props) => <LoginForm {...props} />} />
+          <Route path="/signup" render={(props) => <SignupForm {...props} />} />
           <PrivateRoute
             path="/home"
-            render={props => (
+            render={(props) => (
               <Home {...props} collapsed={this.state.collapsed} />
             )}
           />
           <PrivateRoute
             path="/new"
-            render={props => <Form {...props} now={new Date()} />}
+            render={(props) => <Form {...props} now={new Date()} />}
           />
           <PrivateRoute
             path="/:id/edit"
-            render={props => <Form {...props} now={new Date()} />}
+            render={(props) => <Form {...props} now={new Date()} />}
           />
           <PrivateRoute path="/:id/show" component={HabitCard} />
         </Switch>
@@ -70,9 +74,9 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
   };
 };
 

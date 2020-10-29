@@ -1,4 +1,4 @@
-import { decodeState, reduce } from "../index";
+import { decodeState, reduce } from "../../store/reducers";
 import testState from "./testState.json";
 import moment from "moment";
 
@@ -14,6 +14,7 @@ export function testReducer(state = decodedState, action) {
 }
 
 const decodedState = {
+  initialized: true,
   currentUser: "lyndseyduffield",
   userStates: {
     lyndseyduffield: {
@@ -30,11 +31,11 @@ const decodedState = {
           endDate: moment("2020-02-01T08:00:00.000Z", moment.ISO_8601).startOf(
             "day"
           ),
-          streak: [true, false, false, false, false]
-        }
-      }
-    }
-  }
+          streak: [true, false, false, false, false],
+        },
+      },
+    },
+  },
 };
 
 it("decodes the `state` from local storage", () => {
