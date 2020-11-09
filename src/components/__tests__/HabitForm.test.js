@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../Form";
+import HabitForm from "../HabitForm";
 import renderer from "react-test-renderer";
 import { testReducer } from "../../reducers/__tests__/index.test";
 import { createStore } from "redux";
@@ -11,13 +11,13 @@ it("renders the form in edit mode correctly", () => {
   const tree = renderer
     .create(
       <Provider store={store}>
-        <Form
+        <HabitForm
           now={new Date("02/04/2020")}
           match={{
             path: "/:id/edit",
             url: "/0/edit",
             isExact: true,
-            params: { id: "0" }
+            params: { id: "0" },
           }}
         />
       </Provider>

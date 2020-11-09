@@ -6,7 +6,7 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 import Home from "./Home";
-import Form from "./Form";
+import HabitForm from "./HabitForm";
 import HabitCard from "./HabitCard";
 import NavBar from "./NavBar";
 import SignupForm from "./SignupForm.js";
@@ -82,13 +82,13 @@ class App extends React.Component<Props, MyState> {
           <PrivateRoute
             path="/new"
             render={(props: RouteComponentProps) => (
-              <Form {...props} now={new Date()} />
+              <HabitForm {...props} now={new Date()} />
             )}
           />
           <PrivateRoute
             path="/:id/edit"
             render={(props: RouteComponentProps<{ id: string }>) => (
-              <Form {...props} now={new Date()} />
+              <HabitForm {...props} now={new Date()} />
             )}
           />
           <PrivateRoute
