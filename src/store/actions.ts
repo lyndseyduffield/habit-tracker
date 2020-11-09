@@ -1,4 +1,5 @@
 import { Habit } from "../models/habit";
+import { Username } from "../models/user";
 import {
   ActionTypes,
   ADD_HABIT,
@@ -52,7 +53,7 @@ export const updateStreak = (id: number, check: boolean): ActionTypes => {
   };
 };
 
-export const updateCurrentUser = (username: string): ActionTypes => {
+export const updateCurrentUser = (username: Username | null): ActionTypes => {
   return {
     type: UPDATE_CURRENT_USER,
     payload: username,

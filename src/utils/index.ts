@@ -1,9 +1,7 @@
-import { Habit } from "../models/habit";
+import { HabitState } from "../models/habit";
 
 // Produces an array of habit ids as strings.
-export const getHabitIds = (habitsObj: {
-  [index: number]: Habit;
-}): string[] => {
+export const getHabitIds = (habitsObj: HabitState): string[] => {
   return habitsObj ? Object.keys(habitsObj) : [];
 };
 

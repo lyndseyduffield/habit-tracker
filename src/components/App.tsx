@@ -1,21 +1,41 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  RouteComponentProps,
+} from "react-router-dom";
 import Home from "./Home";
 import Form from "./Form";
 import HabitCard from "./HabitCard";
 import NavBar from "./NavBar";
 import SignupForm from "./SignupForm.js";
 import LoginForm from "./LoginForm";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { setState } from "../store/actions";
 import { readState } from "../store/reducers";
 import "../css/main.css";
 import PrivateRoute from "./PrivateRoute";
 import { findUsersKey } from "../utils/users";
 import LandingPage from "./LandingPage";
+import { State } from "../store/types";
 
-class App extends React.Component {
-  state = {
+const mapState = (state: State) => ({
+  currentUser: state.currentUser,
+});
+
+const connector = connect(mapState);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = PropsFromRedux;
+
+type MyState = {
+  collapsed: boolean;
+};
+
+class App extends React.Component<Props, MyState> {
+  state: MyState = {
     collapsed: false,
   };
 
@@ -25,7 +45,7 @@ class App extends React.Component {
     this.props.dispatch(setState({ ...state, initialized: true }));
   }
 
-  toggleCollapse = (event) => {
+  toggleCollapse = (event: React.MouseEvent) => {
     event.preventDefault();
     this.setState((prevState) => ({
       collapsed: !prevState.collapsed,
@@ -55,29 +75,32 @@ class App extends React.Component {
           <Route path="/signup" render={(props) => <SignupForm {...props} />} />
           <PrivateRoute
             path="/home"
-            render={(props) => (
+            render={(props: RouteComponentProps) => (
               <Home {...props} collapsed={this.state.collapsed} />
             )}
           />
           <PrivateRoute
             path="/new"
-            render={(props) => <Form {...props} now={new Date()} />}
+            render={(props: RouteComponentProps) => (
+              <Form {...props} now={new Date()} />
+            )}
           />
           <PrivateRoute
             path="/:id/edit"
-            render={(props) => <Form {...props} now={new Date()} />}
+            render={(props: RouteComponentProps<{ id: string }>) => (
+              <Form {...props} now={new Date()} />
+            )}
           />
-          <PrivateRoute path="/:id/show" component={HabitCard} />
+          <PrivateRoute
+            path="/:id/show"
+            render={(props: RouteComponentProps<{ id: string }>) => (
+              <HabitCard id={props.match.params.id} collapsed={false} />
+            )}
+          />
         </Switch>
       </Router>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.currentUser,
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default connector(App);

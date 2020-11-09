@@ -54,12 +54,12 @@ interface UpdateStreak {
 
 interface UpdateCurrentUser {
   type: typeof UPDATE_CURRENT_USER;
-  payload: string;
+  payload: Username | null;
 }
 
 interface RegisterUser {
   type: typeof REGISTER_USER;
-  payload: string;
+  payload: Username;
 }
 
 export type ActionTypes =

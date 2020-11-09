@@ -1,6 +1,7 @@
 import { decodeState, reduce } from "../../store/reducers";
 import testState from "./testState.json";
 import moment from "moment";
+import { ActionTypes, State } from "../../store/types";
 
 // Use to create mock stores for testing purposes. Use:
 //
@@ -9,11 +10,11 @@ import moment from "moment";
 // ...
 // <Provider store={store}><MyTestConnectedComponent /></Provider>
 // ```
-export function testReducer(state = decodedState, action) {
+export function testReducer(state = decodedState, action: ActionTypes) {
   return reduce(state, action);
 }
 
-const decodedState = {
+const decodedState: State = {
   initialized: true,
   currentUser: "lyndseyduffield",
   userStates: {
