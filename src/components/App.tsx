@@ -9,7 +9,7 @@ import Home from "./Home";
 import HabitForm from "./HabitForm";
 import HabitCard from "./HabitCard";
 import NavBar from "./NavBar";
-import SignupForm from "./SignupForm.js";
+import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import { connect, ConnectedProps } from "react-redux";
 import { setState } from "../store/actions";
