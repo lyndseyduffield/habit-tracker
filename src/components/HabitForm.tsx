@@ -108,8 +108,6 @@ const HabitForm: React.FC<Props> = (props) => {
     props.history.push("/home");
   };
 
-  console.log(props);
-
   return (
     <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
       <div className="field">
