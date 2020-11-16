@@ -22,11 +22,12 @@ const connector = connect(mapState);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type Props = PropsFromRedux &
-  RouteComponentProps & {
-    collapsed: boolean;
-    toggleCollapse: (event: React.MouseEvent) => void;
-  };
+type OwnProps = {
+  collapsed: boolean;
+  toggleCollapse: (event: React.MouseEvent) => void;
+};
+
+type Props = PropsFromRedux & RouteComponentProps & OwnProps;
 
 class NavBar extends React.Component<Props> {
   buttonLabel = () => {

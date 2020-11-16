@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders disabled correctly 1`] = `
+<label
+  className="checkbox-label"
+>
+  <span>
+    My child
+  </span>
+  <span
+    className="checkbox-custom checkbox-disabled rectangular"
+  />
+</label>
+`;
+
+exports[`Renders enabled correctly 1`] = `
+<label
+  className="checkbox-label"
+>
+  <span
+    className="checkbox-custom rectangular"
+  />
+</label>
+`;

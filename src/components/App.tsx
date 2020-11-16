@@ -88,7 +88,11 @@ class App extends React.Component<Props, MyState> {
           <PrivateRoute
             path="/:id/edit"
             render={(props: RouteComponentProps<{ id: string }>) => (
-              <HabitForm {...props} now={new Date()} />
+              <HabitForm
+                {...props}
+                now={new Date()}
+                id={props.match.params.id}
+              />
             )}
           />
           <PrivateRoute

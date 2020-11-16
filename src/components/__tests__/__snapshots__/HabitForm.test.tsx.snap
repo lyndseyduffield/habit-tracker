@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the form in edit mode correctly 1`] = `
+<form
+  className="form-container"
+  onSubmit={[Function]}
+>
+  <div
+    className="field"
+  >
+    <label
+      className="label is-large"
+    >
+      Habit
+    </label>
+    <div
+      className="control"
+    >
+      <input
+        className="input"
+        defaultValue="go to the gym"
+        name="title"
+        placeholder="Your new habit."
+        type="text"
+      />
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="label"
+    >
+      Goal
+    </label>
+    <div
+      className="control"
+    >
+      <textarea
+        className="textarea"
+        defaultValue="lose some weight"
+        name="goal"
+        placeholder="What is your goal?"
+      />
+    </div>
+  </div>
+  <div
+    className="field is-grouped is-horizontal"
+  >
+    <div
+      className="field-body"
+    >
+      <div
+        className="field"
+      >
+        <label
+          className="label"
+        >
+          Start Date
+        </label>
+        <div
+          className="control"
+        >
+          <div
+            className="react-datepicker-wrapper"
+          >
+            <div
+              className="react-datepicker__input-container"
+            >
+              <input
+                className=""
+                disabled={false}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                readOnly={false}
+                type="text"
+                value="02/04/2020"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="field"
+      >
+        <label
+          className="label"
+        >
+          End Date
+        </label>
+        <div
+          className="control"
+        >
+          <div
+            className="react-datepicker-wrapper"
+          >
+            <div
+              className="react-datepicker__input-container"
+            >
+              <input
+                className=""
+                disabled={false}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                readOnly={false}
+                type="text"
+                value="02/04/2020"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3
+    className="label is-large margin-top"
+  >
+    Accountability Partner
+  </h3>
+  <div
+    className="field"
+  >
+    <label
+      className="label"
+    >
+      Name
+    </label>
+    <div
+      className="control"
+    >
+      <input
+        className="input"
+        defaultValue="bob smith"
+        name="accountabilityPartner.name"
+        placeholder="Your accountability partner's name"
+        type="text"
+      />
+    </div>
+    <p
+      className="help is-danger"
+    >
+      
+    </p>
+  </div>
+  <div
+    className="field"
+  >
+    <label
+      className="label"
+    >
+      Email
+    </label>
+    <div
+      className="control"
+    >
+      <input
+        className="input"
+        defaultValue="bob@gmail.com"
+        name="accountabilityPartner.email"
+        placeholder="Their email"
+        type="text"
+      />
+    </div>
+    <p
+      className="help is-danger"
+    >
+      
+    </p>
+  </div>
+  <div
+    className="control margin-top"
+  >
+    <button
+      className="button is-link"
+    >
+      Submit
+    </button>
+  </div>
+</form>
+`;

@@ -13,7 +13,7 @@ it("renders the habit card correctly when a habit hasn't started", () => {
     .create(
       <Provider store={store}>
         <StaticRouter>
-          <HabitCard match={{ params: { id: "0" } }} />
+          <HabitCard id={"0"} collapsed={false} />
         </StaticRouter>
       </Provider>
     )

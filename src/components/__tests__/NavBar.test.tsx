@@ -1,25 +1,20 @@
 import React from "react";
-import HabitForm from "../HabitForm";
+import NavBar from "../NavBar";
 import renderer from "react-test-renderer";
+import { StaticRouter } from "react-router";
 import { testReducer } from "../../reducers/__tests__/index.test";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
 const store = createStore(testReducer);
 
-it("renders the form in edit mode correctly", () => {
+it("renders the navbar correctly", () => {
   const tree = renderer
     .create(
       <Provider store={store}>
-        <HabitForm
-          now={new Date("02/04/2020")}
-          match={{
-            path: "/:id/edit",
-            url: "/0/edit",
-            isExact: true,
-            params: { id: "0" },
-          }}
-        />
+        <StaticRouter>
+          <NavBar collapsed={true} toggleCollapse={() => {}} />
+        </StaticRouter>
       </Provider>
     )
     .toJSON();

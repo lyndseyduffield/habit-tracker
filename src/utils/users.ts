@@ -2,18 +2,21 @@ import { User } from "../models/user";
 
 type LocalStorageKey = "users";
 
-const usersKey: LocalStorageKey = "users";
+export const usersKey: LocalStorageKey = "users";
 
 // the index is a username and the value is a password
 type UsersObject = { [index: string]: string };
 
 // A safe alternative to localStorage.getItem which should always be used
 // instead of that function
-const getLocalStorageItem = (key: LocalStorageKey): string | null => {
+export const getLocalStorageItem = (key: LocalStorageKey): string | null => {
   return window.localStorage.getItem(key);
 };
 
-const setLocalStorageItem = (key: LocalStorageKey, value: string): void => {
+export const setLocalStorageItem = (
+  key: LocalStorageKey,
+  value: string
+): void => {
   return window.localStorage.setItem(key, value);
 };
 

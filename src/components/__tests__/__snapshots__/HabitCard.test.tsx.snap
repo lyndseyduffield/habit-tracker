@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the habit card correctly when a habit hasn't started 1`] = `
+<div
+  className="section"
+>
+  <div
+    className="card card-border"
+  >
+    <header
+      className="card-header card-element-background"
+    >
+      <p
+        className="card-header-title header-font"
+      >
+        go to the gym
+      </p>
+    </header>
+    <div
+      className="card-content"
+    >
+      <div
+        className="content flex-item"
+      >
+        <div
+          className="flex-element"
+        >
+          <h3>
+            Goal
+          </h3>
+          <p>
+            lose some weight
+          </p>
+        </div>
+        <div
+          className="flex-element"
+        >
+          <h3>
+            Accountability Partner
+          </h3>
+          <p>
+            name: 
+            bob smith
+          </p>
+          <p>
+            email: 
+            bob@gmail.com
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="card-content"
+    >
+      <div
+        className="content"
+      >
+        January 28th, 2020
+         - 
+        February 1st, 2020
+      </div>
+    </div>
+    <div
+      className="card-content"
+    >
+      <div
+        className="content streak"
+      >
+        <label
+          className="checkbox-label"
+        >
+          <input
+            checked={true}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            className="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
+        <label
+          className="checkbox-label"
+        >
+          <input
+            checked={false}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            className="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
+        <label
+          className="checkbox-label"
+        >
+          <input
+            checked={false}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            className="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
+        <label
+          className="checkbox-label"
+        >
+          <input
+            checked={false}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            className="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
+        <label
+          className="checkbox-label"
+        >
+          <input
+            checked={false}
+            disabled={true}
+            type="checkbox"
+          />
+          <span
+            className="checkbox-custom checkbox-disabled rectangular"
+          />
+        </label>
+      </div>
+    </div>
+    <footer
+      className="card-footer card-element-background"
+    >
+      <a
+        className="card-footer-item is-dark"
+        href="/0/edit"
+        onClick={[Function]}
+      >
+        <strong>
+          Edit
+        </strong>
+      </a>
+      <a
+        className="card-footer-item is-dark"
+        href="/"
+        onClick={[Function]}
+      >
+        <strong>
+          Delete
+        </strong>
+      </a>
+    </footer>
+  </div>
+</div>
+`;
