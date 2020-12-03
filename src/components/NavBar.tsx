@@ -83,6 +83,6 @@ class NavBar extends React.Component<Props> {
   }
 }
 
-export const ConnectedNavBar = connector(NavBar);
+const ConnectedNavBar = connector(NavBar);
 
 export default withRouter(ConnectedNavBar);
