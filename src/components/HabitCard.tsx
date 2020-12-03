@@ -17,7 +17,7 @@ import { Habit } from "../models/habit";
 import { Streak } from "../models/streak";
 
 const mapState = (state: State, ownProps: OwnProps) => {
-  let id = ownProps.id;
+  const id = ownProps.id;
 
   const user = state.currentUser;
   if (user) {
