@@ -1,8 +1,8 @@
 import { HabitState } from "../models/habit";
 
 // Produces an array of habit ids as strings.
-export const getHabitIds = (habitsObj: HabitState): string[] => {
-  return habitsObj ? Object.keys(habitsObj) : [];
+export const getHabitIds = (habitsObj: HabitState): number[] => {
+  return habitsObj ? Object.keys(habitsObj).map(Number) : [];
 };
 
 // Removes a top-level key from an object, if it exists.

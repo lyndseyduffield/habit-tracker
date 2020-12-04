@@ -2,14 +2,11 @@ import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Link } from "react-router-dom";
 import HabitCard from "./HabitCard";
-import { getHabitIds } from "../utils";
 import { State } from "../store/types";
 
 const mapState = (state: State) => {
   const user = state.currentUser;
-  return user
-    ? { habitIds: getHabitIds(state.userStates[user].habits) }
-    : { habitIds: [] };
+  return user ? { habits: state.userStates[user].habits } : { habits: [] };
 };
 
 const connector = connect(mapState);
@@ -22,10 +19,14 @@ type Props = PropsFromRedux & {
 
 class Home extends React.Component<Props> {
   habitList = () => {
-    return this.props.habitIds.map((id) => {
+    return Object.keys(this.props.habits).map((id) => {
       return (
         <div key={id}>
-          <HabitCard collapsed={this.props.collapsed} id={id} />
+          <HabitCard
+            collapsed={this.props.collapsed}
+            habit={this.props.habits[+id]}
+            id={+id}
+          />
         </div>
       );
     });
@@ -48,7 +49,7 @@ class Home extends React.Component<Props> {
   };
 
   render = () => {
-    if (this.props.habitIds.length === 0) {
+    if (Object.keys(this.props.habits).length === 0) {
       return <div className="container">{this.renderEmpty()}</div>;
     } else {
       return <div className="container">{this.habitList()}</div>;
