@@ -11,6 +11,7 @@ import HabitCard from "./HabitCard";
 import NavBar from "./NavBar";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import NotFound from "./NotFound";
 import { connect, ConnectedProps } from "react-redux";
 import { setState } from "../store/actions";
 import { readState } from "../store/reducers";
@@ -132,9 +133,5 @@ class App extends React.Component<Props, MyState> {
     );
   };
 }
-
-const NotFound = () => {
-  return <span>Not Found</span>;
-};
 
 export default connector(App);
