@@ -21,7 +21,7 @@ type Props = PropsFromRedux & {
 };
 
 class Home extends React.Component<Props> {
-  habitList() {
+  habitList = () => {
     return this.props.habitIds.map((id) => {
       return (
         <div key={id}>
@@ -29,7 +29,7 @@ class Home extends React.Component<Props> {
         </div>
       );
     });
-  }
+  };
 
   renderEmpty = () => {
     return (
@@ -47,13 +47,13 @@ class Home extends React.Component<Props> {
     );
   };
 
-  render() {
+  render = () => {
     if (this.props.habitIds.length === 0) {
       return <div className="container">{this.renderEmpty()}</div>;
     } else {
       return <div className="container">{this.habitList()}</div>;
     }
-  }
+  };
 }
 
 export default connector(Home);

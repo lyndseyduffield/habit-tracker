@@ -12,30 +12,14 @@ import {
 import { deleteHabit } from "../store/actions";
 import "../css/main.css";
 import moment, { Moment } from "moment";
-import { State } from "../store/types";
 import { Habit } from "../models/habit";
 import { Streak } from "../models/streak";
 
-const mapState = (state: State, ownProps: OwnProps) => {
-  let id = ownProps.id;
-
-  const user = state.currentUser;
-  if (user) {
-    return {
-      // Check for cases where id is not a number
-      habit: state.userStates[user].habits[+id],
-    };
-  } else {
-    return {
-      habit: null,
-    };
-  }
-};
-
-const connector = connect(mapState);
+const connector = connect();
 
 type OwnProps = {
-  id: string;
+  id: number;
+  habit?: Habit;
   collapsed: boolean;
 };
 
@@ -91,12 +75,12 @@ class HabitCard extends React.Component<Props> {
   handleStreakClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     const id = this.props.id;
     const check = event.target.checked;
-    this.props.dispatch(updateStreak(+id, check));
+    this.props.dispatch(updateStreak(id, check));
   };
 
-  handleDeleteClick = (event: React.MouseEvent, id: string) => {
+  handleDeleteClick = (event: React.MouseEvent, id: number) => {
     event.preventDefault();
-    this.props.dispatch(deleteHabit(+id));
+    this.props.dispatch(deleteHabit(id));
   };
 
   renderExpanded(habit: Habit) {
@@ -161,7 +145,7 @@ class HabitCard extends React.Component<Props> {
     );
   }
 
-  renderCollapsed(habit: Habit) {
+  renderCollapsed = (habit: Habit) => {
     const { streak: oldStreak, title, endDate } = habit;
 
     let newStreak = oldStreak;
@@ -180,9 +164,9 @@ class HabitCard extends React.Component<Props> {
         </div>
       </div>
     );
-  }
+  };
 
-  render() {
+  render = () => {
     const { collapsed, habit } = this.props;
     if (habit) {
       return collapsed
@@ -191,7 +175,7 @@ class HabitCard extends React.Component<Props> {
     } else {
       return "";
     }
-  }
+  };
 }
 
 export default connector(HabitCard);

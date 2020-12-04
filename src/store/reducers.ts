@@ -5,6 +5,11 @@ import { Streak } from "../models/streak";
 import { removeKey } from "../utils";
 import { updateHabitStreak } from "../utils/streak";
 import {
+  getLocalStorageItem,
+  stateKey,
+  setLocalStorageItem,
+} from "../utils/users";
+import {
   ADD_HABIT,
   EDIT_HABIT,
   SET_STATE,
@@ -23,22 +28,20 @@ const initialState: State = {
   userStates: {},
 };
 
-const STATE_KEY = "state";
-
 // Write redux state to local storage
 export const writeStateMiddleware: Middleware<{}, State> = (store) => (
   next
 ) => (action: ActionTypes) => {
   let result = next(action);
   const { initialized, ...state } = store.getState();
-  window.localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  setLocalStorageItem(stateKey, JSON.stringify(state));
   return result;
 };
 
 // Retrieve Redux state from local storage
 export const readState = (): State => {
   try {
-    const stateJson = window.localStorage.getItem(STATE_KEY);
+    const stateJson = getLocalStorageItem(stateKey);
     if (stateJson) {
       // TODO: verify that stateJSON parsing succeeded and is of type StateJSON
       const parsedState: StateJSON = JSON.parse(stateJson);
@@ -46,7 +49,7 @@ export const readState = (): State => {
     }
   } catch (error) {
     /* eslint-disable-next-line no-console */
-    console.log("Failed to read state from local storage", error);
+    console.error("Failed to read state from local storage", error);
     return initialState;
   }
   return initialState;
@@ -59,7 +62,7 @@ export function reducer(state = initialState, action: ActionTypes) {
 
 // Used to create the main and test reducers, but should not be
 // used on its own.
-export function reduce(state: State, action: ActionTypes) {
+export const reduce = (state: State, action: ActionTypes) => {
   switch (action.type) {
     // Use to load the state from local storage when the application
     // starts, but not to set individual habits
@@ -198,7 +201,7 @@ export function reduce(state: State, action: ActionTypes) {
       return state;
     }
   }
-}
+};
 
 type StateJSON = {
   currentUser: string | null;

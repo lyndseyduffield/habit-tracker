@@ -8,6 +8,8 @@ import { Route, RouteComponentProps, StaticRouter } from "react-router-dom";
 
 const store = createStore(testReducer);
 
+const now = new Date("02/04/2020");
+
 it("renders the form in edit mode correctly", () => {
   const tree = renderer
     .create(
@@ -15,7 +17,7 @@ it("renders the form in edit mode correctly", () => {
         <StaticRouter>
           <Route
             render={(props: RouteComponentProps) => (
-              <HabitForm {...props} now={new Date("02/04/2020")} id="0" />
+              <HabitForm {...props} now={now} id={0} />
             )}
           />
         </StaticRouter>

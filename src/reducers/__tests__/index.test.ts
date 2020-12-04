@@ -10,9 +10,9 @@ import { ActionTypes, State } from "../../store/types";
 // ...
 // <Provider store={store}><MyTestConnectedComponent /></Provider>
 // ```
-export function testReducer(state = decodedState, action: ActionTypes) {
+export const testReducer = (state = decodedState, action: ActionTypes) => {
   return reduce(state, action);
-}
+};
 
 const decodedState: State = {
   initialized: true,

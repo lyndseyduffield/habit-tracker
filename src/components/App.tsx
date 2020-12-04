@@ -20,9 +20,14 @@ import { findUsersKey } from "../utils/users";
 import LandingPage from "./LandingPage";
 import { State } from "../store/types";
 
-const mapState = (state: State) => ({
-  currentUser: state.currentUser,
-});
+const mapState = (state: State) => {
+  const user = state.currentUser;
+
+  return {
+    currentUser: user,
+    userHabits: user ? state.userStates[user].habits : {},
+  };
+};
 
 const connector = connect(mapState);
 
@@ -39,11 +44,11 @@ class App extends React.Component<Props, MyState> {
     collapsed: false,
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     findUsersKey();
     let state = readState();
     this.props.dispatch(setState({ ...state, initialized: true }));
-  }
+  };
 
   toggleCollapse = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -61,7 +66,7 @@ class App extends React.Component<Props, MyState> {
     );
   };
 
-  render() {
+  render = () => {
     return (
       <Router basename="/habit-tracker">
         {this.props.currentUser ? this.renderNavbar() : ""}
@@ -87,24 +92,49 @@ class App extends React.Component<Props, MyState> {
           />
           <PrivateRoute
             path="/:id/edit"
-            render={(props: RouteComponentProps<{ id: string }>) => (
-              <HabitForm
-                {...props}
-                now={new Date()}
-                id={props.match.params.id}
-              />
-            )}
+            render={(props: RouteComponentProps<{ id: string }>) => {
+              const parsedId = +props.match.params.id;
+              const habit = !isNaN(parsedId)
+                ? this.props.userHabits[parsedId]
+                : null;
+              if (habit) {
+                return (
+                  <HabitForm
+                    {...props}
+                    now={new Date()}
+                    id={parsedId}
+                    habit={habit}
+                  />
+                );
+              } else {
+                return <NotFound />;
+              }
+            }}
           />
           <PrivateRoute
             path="/:id/show"
-            render={(props: RouteComponentProps<{ id: string }>) => (
-              <HabitCard id={props.match.params.id} collapsed={false} />
-            )}
+            render={(props: RouteComponentProps<{ id: string }>) => {
+              const parsedId = +props.match.params.id;
+              const habit = !isNaN(parsedId)
+                ? this.props.userHabits[parsedId]
+                : null;
+              if (habit) {
+                return (
+                  <HabitCard id={parsedId} habit={habit} collapsed={false} />
+                );
+              } else {
+                return <NotFound />;
+              }
+            }}
           />
         </Switch>
       </Router>
     );
-  }
+  };
 }
+
+const NotFound = () => {
+  return <span>Not Found</span>;
+};
 
 export default connector(App);

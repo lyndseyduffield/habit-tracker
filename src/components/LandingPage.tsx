@@ -155,10 +155,10 @@ const LandingPage: React.FC<LandingPageProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state: State) => {
+const mapState = (state: State) => {
   return {
     currentUser: state.currentUser,
   };
 };
 
-export default connect(mapStateToProps)(LandingPage);
+export default connect(mapState)(LandingPage);

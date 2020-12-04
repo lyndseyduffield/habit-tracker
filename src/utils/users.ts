@@ -1,8 +1,9 @@
 import { User } from "../models/user";
 
-type LocalStorageKey = "users";
+export type LocalStorageKey = "users" | "state";
 
 export const usersKey: LocalStorageKey = "users";
+export const stateKey: LocalStorageKey = "state";
 
 // the index is a username and the value is a password
 type UsersObject = { [index: string]: string };
@@ -23,10 +24,10 @@ export const setLocalStorageItem = (
 // Insert a new user into local storage when they sign up
 export const signupUser = (user: User): void => {
   try {
-    let item = getLocalStorageItem(usersKey);
+    const item = getLocalStorageItem(usersKey);
     if (item) {
-      let oldUsers = JSON.parse(item);
-      let newUsers = insertUser(user, oldUsers);
+      const oldUsers = JSON.parse(item);
+      const newUsers = insertUser(user, oldUsers);
       setLocalStorageItem(usersKey, JSON.stringify(newUsers));
     }
   } catch {

@@ -6,28 +6,16 @@ import { editHabit, addHabit } from "../store/actions";
 import { connect, ConnectedProps } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateHabitStreak } from "../utils/streak";
-import { State } from "../store/types";
 import { RouteComponentProps } from "react-router-dom";
+import { Habit } from "../models/habit";
 
-const mapState = (state: State, ownProps: OwnProps) => {
-  const user = state.currentUser;
-  if (user && ownProps.id) {
-    return {
-      habit: state.userStates[user].habits[+ownProps.id],
-    };
-  } else {
-    return {
-      habit: null,
-    };
-  }
-};
-
-const connector = connect(mapState);
+const connector = connect();
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type OwnProps = RouteComponentProps & {
-  id?: string;
+  id?: number;
+  habit?: Habit;
   now: Date;
 };
 
@@ -92,7 +80,7 @@ const HabitForm: React.FC<Props> = (props) => {
         endDate,
       });
       if (id) {
-        props.dispatch(editHabit(habit, +id));
+        props.dispatch(editHabit(habit, id));
       }
     } else {
       const startDate = moment(data.startDate);

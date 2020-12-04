@@ -44,7 +44,7 @@ class NavBar extends React.Component<Props> {
     this.props.history.push("/");
   };
 
-  render() {
+  render = () => {
     const showView =
       this.props.location.pathname === "/home" &&
       this.props.habitIds.length > 0;
@@ -80,9 +80,9 @@ class NavBar extends React.Component<Props> {
         </div>
       </nav>
     );
-  }
+  };
 }
 
-export const ConnectedNavBar = connector(NavBar);
+const ConnectedNavBar = connector(NavBar);
 
 export default withRouter(ConnectedNavBar);

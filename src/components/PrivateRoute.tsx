@@ -43,11 +43,11 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   }
 };
 
-const mapStateToProps = (state: State) => {
+const mapState = (state: State) => {
   return {
     currentUser: state.currentUser,
     initialized: state.initialized,
   };
 };
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapState)(PrivateRoute);
