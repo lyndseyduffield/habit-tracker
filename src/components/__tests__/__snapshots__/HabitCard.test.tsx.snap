@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders the habit card correctly when a habit hasn't started 1`] = `
+exports[`renders the habit card correctly 1`] = `
 <div
   className="section"
 >

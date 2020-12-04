@@ -21,7 +21,7 @@ it("retrieves keys from a habits object", () => {
   };
 
   expect(getHabitIds({})).toEqual([]);
-  expect(getHabitIds(habits)).toEqual(["0", "1"]);
+  expect(getHabitIds(habits)).toEqual([0, 1]);
 });
 
 it("removes the key (habit) from the habit object", () => {

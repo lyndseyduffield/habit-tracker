@@ -18,7 +18,7 @@ exports[`renders the form in edit mode correctly 1`] = `
     >
       <input
         className="input"
-        defaultValue="go to the gym"
+        defaultValue=""
         name="title"
         placeholder="Your new habit."
         type="text"
@@ -38,7 +38,7 @@ exports[`renders the form in edit mode correctly 1`] = `
     >
       <textarea
         className="textarea"
-        defaultValue="lose some weight"
+        defaultValue=""
         name="goal"
         placeholder="What is your goal?"
       />
@@ -136,7 +136,7 @@ exports[`renders the form in edit mode correctly 1`] = `
     >
       <input
         className="input"
-        defaultValue="bob smith"
+        defaultValue=""
         name="accountabilityPartner.name"
         placeholder="Your accountability partner's name"
         type="text"
@@ -161,7 +161,7 @@ exports[`renders the form in edit mode correctly 1`] = `
     >
       <input
         className="input"
-        defaultValue="bob@gmail.com"
+        defaultValue=""
         name="accountabilityPartner.email"
         placeholder="Their email"
         type="text"
