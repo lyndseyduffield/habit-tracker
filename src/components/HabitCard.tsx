@@ -19,7 +19,7 @@ const connector = connect();
 
 type OwnProps = {
   id: number;
-  habit?: Habit;
+  habit: Habit;
   collapsed: boolean;
 };
 
