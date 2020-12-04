@@ -2,17 +2,42 @@ import moment from "moment";
 import React, { useState } from "react";
 import useForm from "react-hook-form";
 import DatePicker from "react-datepicker";
-import { editHabit, addHabit } from "../actions";
-import { connect } from "react-redux";
+import { editHabit, addHabit } from "../store/actions";
+import { connect, ConnectedProps } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateHabitStreak } from "../utils/streak";
+import { RouteComponentProps } from "react-router-dom";
+import { Habit } from "../models/habit";
 
-const Form = props => {
+const connector = connect();
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type OwnProps = RouteComponentProps & {
+  id?: number;
+  habit?: Habit;
+  now: Date;
+};
+
+type Props = PropsFromRedux & OwnProps;
+
+type FormData = {
+  title: string;
+  goal: string;
+  startDate: Date;
+  endDate: Date;
+  accountabilityPartner: {
+    name: string;
+    email: string;
+  };
+};
+
+const HabitForm: React.FC<Props> = (props) => {
   const [state, setState] = useState({
     startDate: props.now,
-    endDate: props.now
+    endDate: props.now,
   });
-  const { register, handleSubmit, setValue, errors } = useForm();
+  const { register, handleSubmit, setValue, errors } = useForm<FormData>();
 
   React.useEffect(() => {
     register({ name: "startDate" });
@@ -32,7 +57,7 @@ const Form = props => {
     }
   }, [setValue, props]);
 
-  const handleDatePickerChange = (key, date) => {
+  const handleDatePickerChange = (key: string, date: Date) => {
     if (key === "startDate" && date > state.endDate) {
       setValue("startDate", date);
       setValue("endDate", date);
@@ -43,18 +68,20 @@ const Form = props => {
     }
   };
 
-  const onSubmit = data => {
+  const onSubmit = (data: FormData) => {
     if (props.habit) {
-      const id = props.match.params.id;
+      const id = props.id;
       const startDate = moment(data.startDate);
       const endDate = moment(data.endDate);
       const habit = updateHabitStreak({
         ...props.habit,
         ...data,
         startDate,
-        endDate
+        endDate,
       });
-      props.dispatch(editHabit(habit, id));
+      if (id) {
+        props.dispatch(editHabit(habit, id));
+      }
     } else {
       const startDate = moment(data.startDate);
       const endDate = moment(data.endDate);
@@ -62,22 +89,20 @@ const Form = props => {
         ...data,
         startDate,
         endDate,
-        streak: []
+        streak: [],
       });
       props.dispatch(addHabit(habit));
     }
     props.history.push("/home");
   };
 
-  console.log(props);
-
   return (
-    <form class="form-container" onSubmit={handleSubmit(onSubmit)}>
-      <div class="field">
-        <label class="label is-large">Habit</label>
-        <div class="control">
+    <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
+      <div className="field">
+        <label className="label is-large">Habit</label>
+        <div className="control">
           <input
-            class="input"
+            className="input"
             type="text"
             name="title"
             defaultValue={props.habit ? props.habit.title : ""}
@@ -85,14 +110,15 @@ const Form = props => {
             ref={register({ required: true })}
           />
         </div>
-        {errors.title && <p class="help is-danger">"A title is required"</p>}
+        {errors.title && (
+          <p className="help is-danger">"A title is required"</p>
+        )}
       </div>
-      <div class="field">
-        <label class="label">Goal</label>
-        <div class="control">
+      <div className="field">
+        <label className="label">Goal</label>
+        <div className="control">
           <textarea
-            class="textarea"
-            type="text"
+            className="textarea"
             name="goal"
             defaultValue={props.habit ? props.habit.goal : ""}
             placeholder="What is your goal?"
@@ -100,27 +126,27 @@ const Form = props => {
           />
         </div>
       </div>
-      <div class="field is-grouped is-horizontal">
-        <div class="field-body">
-          <div class="field">
-            <label class="label">Start Date</label>
-            <div class="control">
+      <div className="field is-grouped is-horizontal">
+        <div className="field-body">
+          <div className="field">
+            <label className="label">Start Date</label>
+            <div className="control">
               <DatePicker
                 minDate={props.now}
                 selected={state.startDate}
-                onChange={date => {
+                onChange={(date: Date) => {
                   handleDatePickerChange("startDate", date);
                 }}
               />
             </div>
           </div>
-          <div class="field">
-            <label class="label">End Date</label>
-            <div class="control">
+          <div className="field">
+            <label className="label">End Date</label>
+            <div className="control">
               <DatePicker
                 minDate={state.startDate}
                 selected={state.endDate}
-                onChange={date => {
+                onChange={(date: Date) => {
                   handleDatePickerChange("endDate", date);
                 }}
               />
@@ -128,24 +154,26 @@ const Form = props => {
           </div>
         </div>
       </div>
-      <h3 class="label is-large margin-top">Accountability Partner</h3>
-      <div class="field">
-        <label class="label">Name</label>
-        <div class="control">
+      <h3 className="label is-large margin-top">Accountability Partner</h3>
+      <div className="field">
+        <label className="label">Name</label>
+        <div className="control">
           <input
-            class="input"
+            className="input"
             type="text"
             name="accountabilityPartner.name"
             defaultValue={
-              props.habit ? props.habit.accountabilityPartner.name : ""
+              props.habit?.accountabilityPartner
+                ? props.habit.accountabilityPartner.name
+                : ""
             }
             placeholder="Your accountability partner's name"
             ref={register({
-              maxLength: { value: 40, message: "This name is too long" }
+              maxLength: { value: 40, message: "This name is too long" },
             })}
           />
         </div>
-        <p class="help is-danger">
+        <p className="help is-danger">
           {errors["accountabilityPartner.name"] ? (
             <span>{errors["accountabilityPartner.name"].message}</span>
           ) : (
@@ -153,26 +181,28 @@ const Form = props => {
           )}
         </p>
       </div>
-      <div class="field">
-        <label class="label">Email</label>
-        <div class="control">
+      <div className="field">
+        <label className="label">Email</label>
+        <div className="control">
           <input
-            class="input"
+            className="input"
             type="text"
             name="accountabilityPartner.email"
             defaultValue={
-              props.habit ? props.habit.accountabilityPartner.email : ""
+              props.habit?.accountabilityPartner
+                ? props.habit.accountabilityPartner.email
+                : ""
             }
             placeholder="Their email"
             ref={register({
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Please enter a valid email"
-              }
+                message: "Please enter a valid email",
+              },
             })}
           />
         </div>
-        <p class="help is-danger">
+        <p className="help is-danger">
           {errors["accountabilityPartner.email"] ? (
             <span>{errors["accountabilityPartner.email"].message}</span>
           ) : (
@@ -180,24 +210,11 @@ const Form = props => {
           )}
         </p>
       </div>
-      <div class="control margin-top">
-        <button class="button is-link">Submit</button>
+      <div className="control margin-top">
+        <button className="button is-link">Submit</button>
       </div>
     </form>
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const user = state.currentUser;
-  if (user) {
-    return {
-      habit: state.userStates[user].habits[ownProps.match.params.id]
-    };
-  } else {
-    return {
-      habit: null
-    };
-  }
-};
-
-export default connect(mapStateToProps)(Form);
+export default connector(HabitForm);

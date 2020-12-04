@@ -2,23 +2,23 @@
 
 exports[`renders the form in edit mode correctly 1`] = `
 <form
-  class="form-container"
+  className="form-container"
   onSubmit={[Function]}
 >
   <div
-    class="field"
+    className="field"
   >
     <label
-      class="label is-large"
+      className="label is-large"
     >
       Habit
     </label>
     <div
-      class="control"
+      className="control"
     >
       <input
-        class="input"
-        defaultValue="go to the gym"
+        className="input"
+        defaultValue=""
         name="title"
         placeholder="Your new habit."
         type="text"
@@ -26,41 +26,40 @@ exports[`renders the form in edit mode correctly 1`] = `
     </div>
   </div>
   <div
-    class="field"
+    className="field"
   >
     <label
-      class="label"
+      className="label"
     >
       Goal
     </label>
     <div
-      class="control"
+      className="control"
     >
       <textarea
-        class="textarea"
-        defaultValue="lose some weight"
+        className="textarea"
+        defaultValue=""
         name="goal"
         placeholder="What is your goal?"
-        type="text"
       />
     </div>
   </div>
   <div
-    class="field is-grouped is-horizontal"
+    className="field is-grouped is-horizontal"
   >
     <div
-      class="field-body"
+      className="field-body"
     >
       <div
-        class="field"
+        className="field"
       >
         <label
-          class="label"
+          className="label"
         >
           Start Date
         </label>
         <div
-          class="control"
+          className="control"
         >
           <div
             className="react-datepicker-wrapper"
@@ -85,15 +84,15 @@ exports[`renders the form in edit mode correctly 1`] = `
         </div>
       </div>
       <div
-        class="field"
+        className="field"
       >
         <label
-          class="label"
+          className="label"
         >
           End Date
         </label>
         <div
-          class="control"
+          className="control"
         >
           <div
             className="react-datepicker-wrapper"
@@ -120,65 +119,65 @@ exports[`renders the form in edit mode correctly 1`] = `
     </div>
   </div>
   <h3
-    class="label is-large margin-top"
+    className="label is-large margin-top"
   >
     Accountability Partner
   </h3>
   <div
-    class="field"
+    className="field"
   >
     <label
-      class="label"
+      className="label"
     >
       Name
     </label>
     <div
-      class="control"
+      className="control"
     >
       <input
-        class="input"
-        defaultValue="bob smith"
+        className="input"
+        defaultValue=""
         name="accountabilityPartner.name"
         placeholder="Your accountability partner's name"
         type="text"
       />
     </div>
     <p
-      class="help is-danger"
+      className="help is-danger"
     >
       
     </p>
   </div>
   <div
-    class="field"
+    className="field"
   >
     <label
-      class="label"
+      className="label"
     >
       Email
     </label>
     <div
-      class="control"
+      className="control"
     >
       <input
-        class="input"
-        defaultValue="bob@gmail.com"
+        className="input"
+        defaultValue=""
         name="accountabilityPartner.email"
         placeholder="Their email"
         type="text"
       />
     </div>
     <p
-      class="help is-danger"
+      className="help is-danger"
     >
       
     </p>
   </div>
   <div
-    class="control margin-top"
+    className="control margin-top"
   >
     <button
-      class="button is-link"
+      className="button is-link"
     >
       Submit
     </button>

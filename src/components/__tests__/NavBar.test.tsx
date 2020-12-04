@@ -13,7 +13,7 @@ it("renders the navbar correctly", () => {
     .create(
       <Provider store={store}>
         <StaticRouter>
-          <NavBar location={{ pathname: "/" }} />
+          <NavBar collapsed={true} toggleCollapse={() => {}} />
         </StaticRouter>
       </Provider>
     )

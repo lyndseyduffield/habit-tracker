@@ -5,6 +5,9 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
+    "@types/node": "^14.14.2",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
     "bulma": "^0.8.0",
     "moment": "^2.24.0",
     "react": "^16.10.2",
@@ -14,7 +17,8 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.1",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "typescript": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -40,7 +44,13 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^26.0.15",
+    "@types/react-datepicker": "^3.1.1",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.6",
+    "@types/react-test-renderer": "^16.9.3",
     "gh-pages": "^2.1.1",
-    "react-test-renderer": "^16.12.0"
+    "react-test-renderer": "^16.12.0",
+    "ts-jest": "^26.4.4"
   }
 }

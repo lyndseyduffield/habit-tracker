@@ -1,23 +1,28 @@
 import {
+  StreakStatus,
   updateStreak,
   getStreakLength,
   streakStatus,
-  NO_STREAK,
-  DISABLED_STREAK,
-  ACTIVE_STREAK
 } from "../streak";
 import moment from "moment";
+import { Streak } from "../../models/streak";
 
 it("decides status of streak", () => {
   const now = moment("20200203").startOf("day");
-  const noStreak = [];
+  const noStreak: Streak = [];
   const streak = [true, true, false, true, false, true];
   const disabledEndDate = moment("20200115").startOf("day");
   const endDate = moment("20200218").startOf("day");
 
-  expect(streakStatus(noStreak, endDate, now)).toEqual(NO_STREAK);
-  expect(streakStatus(streak, disabledEndDate, now)).toEqual(DISABLED_STREAK);
-  expect(streakStatus(streak, endDate, now)).toEqual(ACTIVE_STREAK);
+  expect(streakStatus(noStreak, endDate, now)).toEqual<StreakStatus>(
+    "NO_STREAK"
+  );
+  expect(streakStatus(streak, disabledEndDate, now)).toEqual<StreakStatus>(
+    "DISABLED_STREAK"
+  );
+  expect(streakStatus(streak, endDate, now)).toEqual<StreakStatus>(
+    "ACTIVE_STREAK"
+  );
 });
 
 it("gets the correct streak length", () => {
@@ -38,7 +43,7 @@ it("updates the streak if the user hasn't logged in for a few days", () => {
   const endDate = moment("20200205").startOf("day");
   const endDatePast = moment("20200201").startOf("day");
   const streak = [true, true, true, false, true];
-  const futureStreak = [];
+  const futureStreak: Streak = [];
 
   expect(updateStreak(startDate, endDate, streak, now)).toEqual([
     true,
@@ -47,14 +52,14 @@ it("updates the streak if the user hasn't logged in for a few days", () => {
     false,
     true,
     false,
-    false
+    false,
   ]);
   expect(updateStreak(startDate, endDatePast, streak, now)).toEqual([
     true,
     true,
     true,
     false,
-    true
+    true,
   ]);
   expect(updateStreak(startDateFuture, endDate, futureStreak, now)).toEqual([]);
 });

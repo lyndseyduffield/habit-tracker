@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { reducer, writeStateMiddleware } from "./reducers";
+import { reducer, writeStateMiddleware } from "./store/reducers";
 import App from "./components/App";
 
 const store = createStore(reducer, applyMiddleware(writeStateMiddleware));

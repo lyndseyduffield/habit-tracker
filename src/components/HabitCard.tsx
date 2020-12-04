@@ -1,20 +1,34 @@
 import React from "react";
-import Checkbox from "./Checkbox.js";
-import { connect } from "react-redux";
-import { updateStreak } from "../actions";
+import Checkbox from "./Checkbox";
+import { connect, ConnectedProps } from "react-redux";
+import { updateStreak } from "../store/actions";
 import { Link } from "react-router-dom";
 import {
   NO_STREAK,
   DISABLED_STREAK,
   ACTIVE_STREAK,
-  streakStatus
+  streakStatus,
 } from "../utils/streak";
-import { deleteHabit } from "../actions";
+import { deleteHabit } from "../store/actions";
 import "../css/main.css";
-import moment from "moment";
+import moment, { Moment } from "moment";
+import { Habit } from "../models/habit";
+import { Streak } from "../models/streak";
 
-class HabitCard extends React.Component {
-  renderStreak(streak, endDate) {
+const connector = connect();
+
+type OwnProps = {
+  id: number;
+  habit: Habit;
+  collapsed: boolean;
+};
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = PropsFromRedux & OwnProps;
+
+class HabitCard extends React.Component<Props> {
+  renderStreak(streak: Streak, endDate: Moment) {
     const now = moment().startOf("day");
     const status = streakStatus(streak, endDate, now);
 
@@ -35,10 +49,10 @@ class HabitCard extends React.Component {
         return streak.map((check, index) => {
           if (index === lastIndex) {
             return (
-              <Checkbox key={index}>
+              <Checkbox disabled={false} key={index}>
                 <input
                   type="checkbox"
-                  onChange={event => this.handleStreakClick(event)}
+                  onChange={(event) => this.handleStreakClick(event)}
                   checked={check}
                 />
               </Checkbox>
@@ -58,20 +72,22 @@ class HabitCard extends React.Component {
     }
   }
 
-  handleStreakClick = event => {
-    const id = this.props.id || this.props.match.params.id;
+  handleStreakClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const id = this.props.id;
     const check = event.target.checked;
     this.props.dispatch(updateStreak(id, check));
   };
 
-  handleDeleteClick = (event, id) => {
+  handleDeleteClick = (event: React.MouseEvent, id: number) => {
     event.preventDefault();
     this.props.dispatch(deleteHabit(id));
   };
 
-  renderExpanded() {
-    const { title, goal, streak, startDate, endDate } = this.props.habit;
-    const { name, email } = this.props.habit.accountabilityPartner;
+  renderExpanded(habit: Habit) {
+    const { title, goal, streak, startDate, endDate } = habit;
+    const { name, email } = habit.accountabilityPartner
+      ? habit.accountabilityPartner
+      : { name: "", email: "" };
 
     const endDateToString = endDate ? endDate.format("MMMM Do, YYYY") : null;
     const startDateToString = startDate
@@ -79,45 +95,45 @@ class HabitCard extends React.Component {
       : null;
 
     return (
-      <div class="section">
-        <div class="card card-border">
-          <header class="card-header card-element-background">
-            <p class="card-header-title header-font">{title}</p>
+      <div className="section">
+        <div className="card card-border">
+          <header className="card-header card-element-background">
+            <p className="card-header-title header-font">{title}</p>
           </header>
-          <div class="card-content">
-            <div class="content flex-item">
-              <div class="flex-element">
+          <div className="card-content">
+            <div className="content flex-item">
+              <div className="flex-element">
                 <h3>Goal</h3>
                 <p>{goal}</p>
               </div>
-              <div class="flex-element">
+              <div className="flex-element">
                 <h3>Accountability Partner</h3>
                 <p>name: {name}</p>
                 <p>email: {email}</p>
               </div>
             </div>
           </div>
-          <div class="card-content">
-            <div class="content">
+          <div className="card-content">
+            <div className="content">
               {startDateToString} - {endDateToString}
             </div>
           </div>
-          <div class="card-content">
-            <div class="content streak">
+          <div className="card-content">
+            <div className="content streak">
               {this.renderStreak(streak, endDate)}
             </div>
           </div>
-          <footer class="card-footer card-element-background">
+          <footer className="card-footer card-element-background">
             <Link
-              class="card-footer-item is-dark"
+              className="card-footer-item is-dark"
               to={`/${this.props.id}/edit`}
             >
               <strong>Edit</strong>
             </Link>
             <a
               href="/"
-              class="card-footer-item is-dark"
-              onClick={event => {
+              className="card-footer-item is-dark"
+              onClick={(event) => {
                 this.handleDeleteClick(event, this.props.id);
               }}
             >
@@ -129,8 +145,8 @@ class HabitCard extends React.Component {
     );
   }
 
-  renderCollapsed() {
-    const { streak: oldStreak, title, endDate } = this.props.habit;
+  renderCollapsed = (habit: Habit) => {
+    const { streak: oldStreak, title, endDate } = habit;
 
     let newStreak = oldStreak;
 
@@ -142,43 +158,24 @@ class HabitCard extends React.Component {
 
     return (
       <div>
-        <div class="compact-card">
-          <div class="compact-card-header">{title}</div>
+        <div className="compact-card">
+          <div className="compact-card-header">{title}</div>
           <div>{this.renderStreak(newStreak, endDate)}</div>
         </div>
       </div>
     );
-  }
+  };
 
-  render() {
+  render = () => {
     const { collapsed, habit } = this.props;
     if (habit) {
-      return collapsed ? this.renderCollapsed() : this.renderExpanded();
+      return collapsed
+        ? this.renderCollapsed(habit)
+        : this.renderExpanded(habit);
     } else {
       return "";
     }
-  }
+  };
 }
 
-const mapStateToProps = (state, ownProps) => {
-  let id;
-
-  try {
-    id = ownProps.match.params.id;
-  } catch {
-    id = ownProps.id;
-  }
-
-  const user = state.currentUser;
-  if (user) {
-    return {
-      habit: state.userStates[user].habits[id]
-    };
-  } else {
-    return {
-      habit: null
-    };
-  }
-};
-
-export default connect(mapStateToProps)(HabitCard);
+export default connector(HabitCard);

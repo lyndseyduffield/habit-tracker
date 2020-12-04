@@ -2,13 +2,13 @@
 
 exports[`renders the navbar correctly 1`] = `
 <nav
-  class="navbar has-shadow"
+  className="navbar has-shadow"
 >
   <div
-    class="navbar-brand"
+    className="navbar-brand"
   >
     <a
-      class="navbar-item"
+      className="navbar-item"
       href="/"
       onClick={[Function]}
     >
@@ -18,16 +18,16 @@ exports[`renders the navbar correctly 1`] = `
     </a>
   </div>
   <div
-    class="navbar-end"
+    className="navbar-end"
   >
     <div
-      class="navbar-item"
+      className="navbar-item"
     >
       <div
-        class="buttons"
+        className="buttons"
       >
         <a
-          class="button is-light"
+          className="button is-light"
           href="/new"
           onClick={[Function]}
         >
@@ -36,7 +36,7 @@ exports[`renders the navbar correctly 1`] = `
           </strong>
         </a>
         <button
-          class="button is-light"
+          className="button is-light"
           onClick={[Function]}
         >
           <strong>

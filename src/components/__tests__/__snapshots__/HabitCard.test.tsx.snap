@@ -1,29 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders the habit card correctly when a habit hasn't started 1`] = `
+exports[`renders the habit card correctly 1`] = `
 <div
-  class="section"
+  className="section"
 >
   <div
-    class="card card-border"
+    className="card card-border"
   >
     <header
-      class="card-header card-element-background"
+      className="card-header card-element-background"
     >
       <p
-        class="card-header-title header-font"
+        className="card-header-title header-font"
       >
         go to the gym
       </p>
     </header>
     <div
-      class="card-content"
+      className="card-content"
     >
       <div
-        class="content flex-item"
+        className="content flex-item"
       >
         <div
-          class="flex-element"
+          className="flex-element"
         >
           <h3>
             Goal
@@ -33,7 +33,7 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
           </p>
         </div>
         <div
-          class="flex-element"
+          className="flex-element"
         >
           <h3>
             Accountability Partner
@@ -50,10 +50,10 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
       </div>
     </div>
     <div
-      class="card-content"
+      className="card-content"
     >
       <div
-        class="content"
+        className="content"
       >
         January 28th, 2020
          - 
@@ -61,13 +61,13 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
       </div>
     </div>
     <div
-      class="card-content"
+      className="card-content"
     >
       <div
-        class="content streak"
+        className="content streak"
       >
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={true}
@@ -75,11 +75,11 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={false}
@@ -87,11 +87,11 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={false}
@@ -99,11 +99,11 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={false}
@@ -111,11 +111,11 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
         <label
-          class="checkbox-label"
+          className="checkbox-label"
         >
           <input
             checked={false}
@@ -123,17 +123,17 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
             type="checkbox"
           />
           <span
-            class="checkbox-custom checkbox-disabled rectangular"
+            className="checkbox-custom checkbox-disabled rectangular"
           />
         </label>
       </div>
     </div>
     <footer
-      class="card-footer card-element-background"
+      className="card-footer card-element-background"
     >
       <a
-        class="card-footer-item is-dark"
-        href="/undefined/edit"
+        className="card-footer-item is-dark"
+        href="/0/edit"
         onClick={[Function]}
       >
         <strong>
@@ -141,7 +141,7 @@ exports[`renders the habit card correctly when a habit hasn't started 1`] = `
         </strong>
       </a>
       <a
-        class="card-footer-item is-dark"
+        className="card-footer-item is-dark"
         href="/"
         onClick={[Function]}
       >
