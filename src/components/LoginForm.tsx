@@ -45,49 +45,80 @@ const LoginForm: React.FC<Props> = ({ currentUser, ...props }) => {
 
   const renderForm = () => {
     return (
-      <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
-        <div className="field">
-          <label className="label is-large">Username</label>
-          <div className="control">
+      <div className="bg-gray-100 min-h-screen flex flex-col">
+        <div
+          className="
+            container
+            max-w-sm
+            mx-auto
+            flex-1 flex flex-col
+            items-center
+            justify-center
+            px-2
+          "
+        >
+          <form
+            className="bg-white px-6 py-8 rounded-lg shadow-md text-black w-full"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <h1 className="mb-8 text-3xl text-center">Welcome Back</h1>
             <input
-              className="input"
               type="text"
+              className="block border border-grey-light w-full
+            p-3 rounded mb-4"
               name="username"
-              placeholder="Your username here"
-              ref={register({
-                required: "A username is required",
-              })}
+              placeholder="Username"
+              ref={register({ required: "A username is required" })}
             />
-          </div>
-          {errors.username && (
-            <p className="help is-danger">{errors.username.message}</p>
-          )}
-        </div>
-        <div className="field">
-          <label className="label is-large">Password</label>
-          <div className="control">
+            {errors.username && (
+              <div
+                className="bg-red-100 border border-red-400 text-red-700 my-4 px-4 py-3 rounded relative"
+                role="alert"
+              >
+                <strong className="font-bold text-red-700">Whoops! </strong>
+                <span className="block sm:inline">
+                  {errors.username.message}
+                </span>
+              </div>
+            )}
             <input
-              className="input"
               type="password"
+              className="block border border-grey-light
+            w-full p-3 rounded mb-4"
               name="password"
-              placeholder="Your password here"
-              ref={register({
-                required: "A password is required",
-              })}
+              placeholder="Password"
+              ref={register({ required: "A password is required" })}
             />
-          </div>
-          {errors.password && (
-            <p className="help is-danger">{errors.password.message}</p>
-          )}
-        </div>
-        <div className="login-buttons">
-          <div className="control margin-top">
-            <button type="submit" className="button is-link">
+            {errors.password && (
+              <div
+                className="bg-red-100 border border-red-400 text-red-700 my-4 px-4 py-3 rounded relative"
+                role="alert"
+              >
+                <strong className="font-bold text-red-700">Whoops! </strong>
+                <span className="block sm:inline">
+                  {errors.password.message}
+                </span>
+              </div>
+            )}
+            <button
+              type="submit"
+              className="
+                w-full
+                text-center
+                py-3
+                rounded
+                bg-green-600
+                text-white
+                hover:bg-green-dark
+                focus:outline-none
+                my-1
+              "
+            >
               Sign In
             </button>
-          </div>
+          </form>
         </div>
-      </form>
+      </div>
     );
   };
   return currentUser ? <Redirect to={{ pathname: "/home" }} /> : renderForm();

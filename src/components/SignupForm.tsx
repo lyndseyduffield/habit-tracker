@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from "react-redux";
 import useForm from "react-hook-form";
 import { updateCurrentUser, registerUser } from "../store/actions";
 import { usersKey, signupUser, getLocalStorageItem } from "../utils/users";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, Link } from "react-router-dom";
 
 const connector = connect();
 
@@ -48,65 +48,109 @@ const SignupForm: React.FC<Props> = (props) => {
     }
   };
 
+  console.log(props);
+
   return (
-    <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
-      <div className="field">
-        <label className="label is-large">Username</label>
-        <div className="control">
+    <div className="bg-gray-100 min-h-screen flex flex-col">
+      <div
+        className="
+        container
+        max-w-sm
+        mx-auto
+        flex-1 flex flex-col
+        items-center
+        justify-center
+        px-2
+      "
+      >
+        <form
+          className="bg-white px-6 py-8 rounded-lg shadow-md text-black w-full"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <h1 className="mb-8 text-3xl text-center">Sign up</h1>
           <input
-            className="input"
             type="text"
+            className="block border border-grey-light w-full p-3
+        rounded mb-4"
             name="username"
-            placeholder="Your username here"
+            placeholder="Username"
             ref={register({
               required: "A username is required",
             })}
           />
-        </div>
-        {errors.username && (
-          <p className="help is-danger">{errors.username.message}</p>
-        )}
-      </div>
-      <div className="field">
-        <label className="label is-large">Password</label>
-        <div className="control">
+          {errors.username && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 my-4 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold text-red-700">Whoops! </strong>
+              <span className="block sm:inline">{errors.username.message}</span>
+            </div>
+          )}
           <input
-            className="input"
             type="password"
+            className="block border border-grey-light w-full
+        p-3 rounded mb-4"
             name="password"
-            placeholder="Your password here"
-            ref={register({
-              required: "A password is required",
-            })}
+            placeholder="Password"
+            ref={register({ required: "A password is required" })}
           />
-        </div>
-        {errors.password && (
-          <p className="help is-danger">{errors.password.message}</p>
-        )}
-      </div>
-      <div className="field">
-        <label className="label is-large">Password</label>
-        <div className="control">
+          {errors.password && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 my-4 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold text-red-700">Whoops! </strong>
+              <span className="block sm:inline">{errors.password.message}</span>
+            </div>
+          )}
           <input
-            className="input"
             type="password"
+            className="block border border-grey-light w-full
+        p-3 rounded mb-4"
             name="verifypassword"
-            placeholder="Your password here"
-            ref={register({
-              required: "A password is required",
-            })}
+            placeholder="Confirm Password"
+            ref={register({ required: "A password is required" })}
           />
+          {errors.password && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 my-4 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold text-red-700">Whoops! </strong>
+              <span className="block sm:inline">{errors.password.message}</span>
+            </div>
+          )}
+          <button
+            type="submit"
+            className="
+            w-full
+            text-center
+            py-3
+            rounded
+            bg-green-600
+            text-white
+            hover:bg-green-dark
+            focus:outline-none
+            my-1
+          "
+          >
+            Create Account
+          </button>
+        </form>
+
+        <div className="text-grey-dark mt-6">
+          Already have an account?{" "}
+          <Link
+            className="no-underline border-b border-blue text-blue"
+            to="/login"
+          >
+            Log in
+          </Link>
+          .
         </div>
-        {errors.password && (
-          <p className="help is-danger">{errors.password.message}</p>
-        )}
       </div>
-      <div className="control margin-top">
-        <button type="submit" className="button is-link">
-          Sign Up
-        </button>
-      </div>
-    </form>
+    </div>
   );
 };
 
